@@ -1,0 +1,11 @@
+# Agent-loop registry, pinned by the runner via
+#   actor_rollout_ref.rollout.agent.agent_loop_config_path=<this file>
+# sp_prefix_agent: the replay-prefix continuation loop, honoring the per-row
+#   sp_q_max_new_tokens cap (ready non-audit rows get the action chunk min(g, 50K - a_i)).
+# sp_q_agent: the critic-query loop -- raw context ids in, <=4 greedy tokens out, free
+#   decoding (no grid constraint).
+# Val rows fall back to default_agent_loop (single_turn_agent).
+- name: sp_prefix_agent
+  _target_: verl.experimental.agent_loop.prefix_agent_loop.PrefixAgentLoop
+- name: sp_q_agent
+  _target_: verl.experimental.agent_loop.sp_q_agent_loop.SPQAgentLoop
