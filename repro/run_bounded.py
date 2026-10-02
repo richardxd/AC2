@@ -92,7 +92,7 @@ def main():
     gpus = os.environ["CUDA_VISIBLE_DEVICES"].split(",")
     assert gpus and all(x in {"1", "2", "3", "4", "5", "6", "7"} for x in gpus)
     start = time.monotonic()
-    with (out / "stdout.log").open("x") as log, (out / "gpu.csv").open("x") as gpu_log:
+    with (out / "stdout.log").open("x") as log, (out / "gpu.csv").open("x") as gpu_log, (out / "gpu.stderr").open("x") as gpu_err:
         child = subprocess.Popen(cmd, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         # The child has not been reaped, so its PID cannot have been reused.
         root_identity = (child.pid, psutil.Process(child.pid).create_time())
@@ -100,22 +100,34 @@ def main():
             "command": cmd, "gpus": gpus, "seconds": args.seconds, "unix": time.time()}, indent=2))
         timed_out = False
         owned = {}
+        sampler = None
         try:
+            remember_tree(root_identity, owned)
+            # A blocked NVML query must not block deadline enforcement or abort
+            # training. This owned sampler is cleaned with the training tree.
+            sampler = subprocess.Popen(["nvidia-smi", "-i", ",".join(gpus),
+                "--query-gpu=timestamp,index,uuid,utilization.gpu,memory.used,power.draw",
+                "--format=csv,noheader,nounits", "--loop=1"], stdout=gpu_log,
+                stderr=gpu_err, start_new_session=True)
+            sampler_identity = (sampler.pid, psutil.Process(sampler.pid).create_time())
+            owned[sampler_identity] = os.pidfd_open(sampler.pid)
             while child.poll() is None:
                 remember_tree(root_identity, owned)
-                sample = subprocess.run(["nvidia-smi", "-i", ",".join(gpus),
-                    "--query-gpu=timestamp,index,uuid,utilization.gpu,memory.used,power.draw",
-                    "--format=csv,noheader,nounits"], capture_output=True, text=True, check=True, timeout=5)
-                gpu_log.write(sample.stdout)
-                gpu_log.flush()
+                assert sampler.poll() is None, "GPU sampler exited; inspect gpu.stderr"
                 if time.monotonic() - start >= args.seconds:
                     timed_out = True
                     break
                 time.sleep(1)
         finally:
+            error = sys.exc_info()[1]
             finish_children(child, root_identity, owned)
-        result = {"returncode": child.returncode, "timed_out": timed_out, "elapsed_s": time.monotonic() - start}
-        (out / "result.json").write_text(json.dumps(result, indent=2))
+            if sampler is not None:
+                sampler.wait(timeout=2)
+            result = {"returncode": child.returncode, "timed_out": timed_out,
+                      "elapsed_s": time.monotonic() - start,
+                      "telemetry": "independent sampler; inspect timestamps for gaps",
+                      "monitor_error": None if error is None else repr(error)}
+            (out / "result.json").write_text(json.dumps(result, indent=2))
         print(json.dumps(result), flush=True)
         sys.exit(124 if timed_out else child.returncode)
 

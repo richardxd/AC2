@@ -1,0 +1,159 @@
+{
+  "run": "runs/e6/grpo-1gpu-17b-sampler",
+  "world_size": 1,
+  "launches": [
+    {
+      "path": "runs/e6/grpo-1gpu-17b-attempt03",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 383.65130688995123,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "physical_gpus": {
+        "1": {
+          "samples": 312,
+          "active_samples_ge5pct": 35,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 36870.0,
+          "max_sampling_gap_s": 37.00999999046326
+        }
+      },
+      "rollout_placements": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "log_sha256": "32dafe09e988709e2715085c605f8c42ae974edb1f3a3f03b3228f441efe62e7"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "metrics": {
+        "actor/entropy": 0.12945830821990967,
+        "actor/aec_k": 0.08,
+        "actor/pg_clipfrac": 0.0,
+        "actor/ppo_kl": 0.0,
+        "actor/pg_clipfrac_lower": 0.0,
+        "actor/pg_loss": 0.0,
+        "actor/loss": 0.0,
+        "actor/grad_norm": 0.0,
+        "actor/perf/max_memory_allocated_gb": 32.06414794921875,
+        "actor/perf/max_memory_reserved_gb": 34.427734375,
+        "actor/perf/cpu_memory_used_gb": 152.40785217285156,
+        "actor/lr": 2e-06,
+        "timing_s/start_profile": 0.000291675329208374,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 8.441127602010965,
+        "timing_s/agent_loop/generate_sequences/max": 8.669139083474874,
+        "timing_s/agent_loop/generate_sequences/mean": 8.572111173765734,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.0031474120914936066,
+        "timing_s/agent_loop/compute_score/max": 0.014847710728645325,
+        "timing_s/agent_loop/compute_score/mean": 0.008088432950899005,
+        "timing_s/agent_loop/slowest/generate_sequences": 8.669139083474874,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 0.006478089839220047,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 145,
+        "timing_s/agent_loop/slowest/response_length": 256,
+        "timing_s/gen": 12.854171752929688,
+        "timing_s/reward": 0.007372237741947174,
+        "timing_s/old_log_prob": 2.9824384227395058,
+        "timing_s/adv": 0.005084969103336334,
+        "timing_s/update_actor": 18.74955615773797,
+        "timing_s/save_checkpoint": 144.1957764029503,
+        "timing_s/update_weights": 1.764752373099327,
+        "timing_s/dump_rollout_generations": 0.014215365052223206,
+        "timing_s/step": 180.59506156668067,
+        "timing_s/stop_profile": 7.212162017822266e-05
+      },
+      "checkpoint_shards": [
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_1/actor/model_world_size_1_rank_0.pt",
+          "bytes": 8127118819
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_1/actor/optim_world_size_1_rank_0.pt",
+          "bytes": 13764626512
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_1/actor/extra_state_world_size_1_rank_0.pt",
+          "bytes": 15141
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "metrics": {
+        "actor/entropy": 0.1129731684923172,
+        "actor/aec_k": 0.08,
+        "actor/pg_clipfrac": 0.0,
+        "actor/ppo_kl": 0.0,
+        "actor/pg_clipfrac_lower": 0.0,
+        "actor/pg_loss": 0.0,
+        "actor/loss": 0.0,
+        "actor/grad_norm": 0.0,
+        "actor/perf/max_memory_allocated_gb": 32.06416034698486,
+        "actor/perf/max_memory_reserved_gb": 34.427734375,
+        "actor/perf/cpu_memory_used_gb": 171.11063385009766,
+        "actor/lr": 2e-06,
+        "timing_s/start_profile": 3.469735383987427e-05,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 3.5976706743240356,
+        "timing_s/agent_loop/generate_sequences/max": 3.6598272286355495,
+        "timing_s/agent_loop/generate_sequences/mean": 3.632434625644237,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.004607055336236954,
+        "timing_s/agent_loop/compute_score/max": 0.03588384389877319,
+        "timing_s/agent_loop/compute_score/mean": 0.012356161838397384,
+        "timing_s/agent_loop/slowest/generate_sequences": 3.6598272286355495,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 0.004607055336236954,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 101,
+        "timing_s/agent_loop/slowest/response_length": 256,
+        "timing_s/gen": 3.891544621437788,
+        "timing_s/reward": 0.0075842030346393585,
+        "timing_s/old_log_prob": 1.6980698890984058,
+        "timing_s/adv": 0.001555606722831726,
+        "timing_s/update_actor": 3.8279348127543926,
+        "timing_s/save_checkpoint": 108.20466851443052,
+        "timing_s/update_weights": 1.833885908126831,
+        "timing_s/dump_rollout_generations": 0.005997985601425171,
+        "timing_s/step": 119.48450560867786,
+        "timing_s/stop_profile": 3.911927342414856e-05
+      },
+      "checkpoint_shards": [
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_2/actor/model_world_size_1_rank_0.pt",
+          "bytes": 8127118819
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_2/actor/optim_world_size_1_rank_0.pt",
+          "bytes": 13764626512
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_2/actor/extra_state_world_size_1_rank_0.pt",
+          "bytes": 15141
+        }
+      ]
+    }
+  ],
+  "zero_gradient_steps": [
+    1,
+    2
+  ],
+  "metrics_sha256": "76e9ecadb3a1fd57fb95c5214d0e1b00afa0bf43331e290c2e4e34685431a537"
+}

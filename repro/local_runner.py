@@ -55,10 +55,10 @@ def configure(args):
         "SP_ACTOR_GPU_MEM_UTIL": .45, "SP_ACTOR_MAX_NUM_SEQS": 16,
         "SP_MAX_NUM_BATCHED_TOKENS": 4096,
         "SP_USE_FUSED_KERNELS": "False", "SP_DP_PAD": 1,
-        "SP_TOTAL_STEPS": args.steps, "SP_SAVE_FREQ": 1,
+        "SP_TOTAL_STEPS": args.steps, "SP_SAVE_FREQ": args.save_freq,
         "SP_TEST_FREQ": -1 if args.smoke else 10,
-        "SP_VAL_N": 4, "SP_VAL_BEFORE_TRAIN": "False",
-        "SP_VAL_ONLY": "False", "SP_MAX_CKPT_KEEP": 100000,
+        "SP_VAL_N": args.val_n, "SP_VAL_BEFORE_TRAIN": str(args.val_only),
+        "SP_VAL_ONLY": str(args.val_only), "SP_MAX_CKPT_KEEP": 100000,
         "SP_KEEP_BEST_CKPT": 0, "SP_CKPT_KEEP_EVERY": 1,
         "SP_ROLLOUT_BACKFILL": 0, "SP_LENPEN_ENABLE": 0, "SP_DIFF_SAMPLING": 0,
         "SP_ADAPTIVE_ENTROPY": 1, "SP_AEC_TARGET_H": .28, "SP_AEC_DELTA": .02,
@@ -103,6 +103,11 @@ def configure(args):
             env["SP_Q_ENABLE"] = 0
     else:
         env.update({"SP_REPLAY_ENABLE": 0, "SP_Q_ENABLE": 0, "SP_SCRATCH_INFLOW_ONLY": 0})
+    if args.engineering_readiness:
+        assert args.smoke and args.method == "ac2", "permissive readiness is engineering-only"
+        env.update({"SP_Q_READY_THRESH_GLOBAL": 1.01, "SP_Q_READY_THRESH_PROBLEM": 1.01,
+                    "SP_Q_READY_REQUIRE_BANK": 0, "SP_Q_REQUIRE_NONZERO": 0})
+        print("ENGINEERING_READINESS_FIXTURE: permissive thresholds; no scientific readiness claim", flush=True)
     os.environ.update({k: str(v) for k, v in env.items()})
     return run
 
@@ -114,12 +119,16 @@ def main():
     p.add_argument("--gpus", type=int, default=7)
     p.add_argument("--tp", type=int, default=1)
     p.add_argument("--steps", type=int, default=2)
+    p.add_argument("--save-freq", type=int, default=1)
     p.add_argument("--batch", type=int, default=8)
     p.add_argument("--group", type=int, default=2)
     p.add_argument("--response", type=int, default=256)
     p.add_argument("--chunk", type=int, default=128)
     p.add_argument("--model", default="Qwen/Qwen3-4B-Thinking-2507")
     p.add_argument("--data", default="runs/e3/canonical")
+    p.add_argument("--val-n", type=int, default=4)
+    p.add_argument("--val-only", action="store_true")
+    p.add_argument("--engineering-readiness", action="store_true")
     p.add_argument("--smoke", action="store_true")
     p.add_argument("--compose-only", action="store_true")
     args = p.parse_args()
