@@ -1,0 +1,96 @@
+{
+  "status": "prepared_not_executed_auto_review_denied",
+  "external_destination": "https://api.deepseek.com/chat/completions",
+  "gateway": "http://127.0.0.1:18791/v1",
+  "model_alias": "deepseek-flash",
+  "judge_max_tokens": 65536,
+  "total_cap_usd": 5,
+  "completed_spend_usd": 2.699072352,
+  "remaining_cap_usd": 2.300927648,
+  "saved_attempts": 8,
+  "extractable_proofs": 4,
+  "template_sha256": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+  "payload_inventory": [
+    {
+      "qid": "c7fa4389cce783bc0382ef025f1963670228129d",
+      "completion_index": 0,
+      "source_file": "runs/r5-smoke/gen/gen.shard0.jsonl",
+      "problem_sha256": "7de37b4b1f0fadd1b255f03fbc16f515f62de883f1a96e55dd63d2eade971857",
+      "full_attempt_sha256": "1efeb1172310ee40dcc7c1d76518f70bb7614d6460e60313fc00af2e50b2df34",
+      "extractable_proof": true,
+      "extracted_proof_sha256": "da8e8e67a267022ca55cad53eb7b02d5c21998193d214b5292796ab709797a2c",
+      "intended_prompt_sha256": "4c5c411c629193bde19abb34c7802cf4c2460e1b5ef98b7c62bceed3496f71d9"
+    },
+    {
+      "qid": "c7fa4389cce783bc0382ef025f1963670228129d",
+      "completion_index": 1,
+      "source_file": "runs/r5-smoke/gen/gen.shard0.jsonl",
+      "problem_sha256": "7de37b4b1f0fadd1b255f03fbc16f515f62de883f1a96e55dd63d2eade971857",
+      "full_attempt_sha256": "b8df6dac079b8f1d412841c09785234afb96967648cac0d6b1ad35e938f03483",
+      "extractable_proof": true,
+      "extracted_proof_sha256": "8bc0f001dfeea654ef4a23f03edc30c9c25d8af84da538370c95216a992fd173",
+      "intended_prompt_sha256": "cecd6689f1c9bfd567143ebf3c55bb5f0ac3e94f3dc6ecd30e119811acc72ef9"
+    },
+    {
+      "qid": "c7fa4389cce783bc0382ef025f1963670228129d",
+      "completion_index": 2,
+      "source_file": "runs/r5-smoke/gen/gen.shard0.jsonl",
+      "problem_sha256": "7de37b4b1f0fadd1b255f03fbc16f515f62de883f1a96e55dd63d2eade971857",
+      "full_attempt_sha256": "62c08151f49634112bf20113698ca945b4f870f49eee8a17d75610e211a7e222",
+      "extractable_proof": true,
+      "extracted_proof_sha256": "63269b9a747f562063b5ac195fd9cb3f62f50938bee0bbd89f36f38bd748e3fc",
+      "intended_prompt_sha256": "da20f5d47a1fbd699c3bd1a8822ade3b0cbef585896d25124ba70d9a452f8447"
+    },
+    {
+      "qid": "c7fa4389cce783bc0382ef025f1963670228129d",
+      "completion_index": 3,
+      "source_file": "runs/r5-smoke/gen/gen.shard0.jsonl",
+      "problem_sha256": "7de37b4b1f0fadd1b255f03fbc16f515f62de883f1a96e55dd63d2eade971857",
+      "full_attempt_sha256": "3c3ad556c4f83fd2581de21b499c07e1d2e76f779dffcd9c13eaeefc621f5147",
+      "extractable_proof": true,
+      "extracted_proof_sha256": "27b9579bb183f8981f40ca95f4aa1f2d273ae00cd44c48f46b7f0929bba9e60e",
+      "intended_prompt_sha256": "03276e3cf0fd1cf9463d267b29869b5def70ace60733516c86dfac34999c1c9b"
+    },
+    {
+      "qid": "d701ab18dc90eb73d22d3133d6ce79377df10849",
+      "completion_index": 0,
+      "source_file": "runs/r5-smoke/gen/gen.shard1.jsonl",
+      "problem_sha256": "31fdeeb1cb7c1f17a24fb0a29b83710704792de3c37415df1609cbfc87883313",
+      "full_attempt_sha256": "191145ffca228da0c34266c07b081345020b1323c0ce255b2ff431f31de4bb18",
+      "extractable_proof": false,
+      "extracted_proof_sha256": null,
+      "intended_prompt_sha256": null
+    },
+    {
+      "qid": "d701ab18dc90eb73d22d3133d6ce79377df10849",
+      "completion_index": 1,
+      "source_file": "runs/r5-smoke/gen/gen.shard1.jsonl",
+      "problem_sha256": "31fdeeb1cb7c1f17a24fb0a29b83710704792de3c37415df1609cbfc87883313",
+      "full_attempt_sha256": "2cd0b3b67d4252a1d679828f54d9119625af17ae4123fdc816bd2f5146afed67",
+      "extractable_proof": false,
+      "extracted_proof_sha256": null,
+      "intended_prompt_sha256": null
+    },
+    {
+      "qid": "d701ab18dc90eb73d22d3133d6ce79377df10849",
+      "completion_index": 2,
+      "source_file": "runs/r5-smoke/gen/gen.shard1.jsonl",
+      "problem_sha256": "31fdeeb1cb7c1f17a24fb0a29b83710704792de3c37415df1609cbfc87883313",
+      "full_attempt_sha256": "d5e86c5a54154d60ae734487542ee474aa92fa3e2b6522c78c67e8280e62c913",
+      "extractable_proof": false,
+      "extracted_proof_sha256": null,
+      "intended_prompt_sha256": null
+    },
+    {
+      "qid": "d701ab18dc90eb73d22d3133d6ce79377df10849",
+      "completion_index": 3,
+      "source_file": "runs/r5-smoke/gen/gen.shard1.jsonl",
+      "problem_sha256": "31fdeeb1cb7c1f17a24fb0a29b83710704792de3c37415df1609cbfc87883313",
+      "full_attempt_sha256": "27ab1c63cfa9f48b7851ca19b578354a6936fbca7f85bd50a7950feff6962019",
+      "extractable_proof": false,
+      "extracted_proof_sha256": null,
+      "intended_prompt_sha256": null
+    }
+  ],
+  "note": "Original extractor used locally for a reviewable payload inventory only. No score assigned, no API call or credential access."
+}
