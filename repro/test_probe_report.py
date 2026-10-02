@@ -40,6 +40,9 @@ class ProbeReportTests(unittest.TestCase):
         self.assertEqual(result["no_substitution_groups"], ["q"])
         self.assertEqual(result["statistics"]["advantages"]["n"], 0)
         self.assertIsNone(stats([[0, 1]] * 4)["pearson"])
+        self.assertIsNone(stats([[.2, .2]] * 3)["pearson"])
+        self.assertIsNone(stats([[.2, 0], [.2, 1], [.2, .5]])["pearson"])
+        self.assertAlmostEqual(stats([[.2, .2], [.4, .4], [.8, .8]])["pearson"], 1)
 
 
 if __name__ == "__main__":

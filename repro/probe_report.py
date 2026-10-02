@@ -17,7 +17,8 @@ def stats(pairs):
     mx, my = mean(x), mean(y)
     xx = sum((a-mx)**2 for a in x)
     yy = sum((a-my)**2 for a in y)
-    corr = sum((a-mx)*(b-my) for a, b in pairs) / math.sqrt(xx*yy) if xx and yy and len(x) >= 3 else None
+    corr = (sum((a-mx)*(b-my) for a, b in pairs) / math.sqrt(xx*yy)
+            if min(x) != max(x) and min(y) != max(y) and xx and yy and len(x) >= 3 else None)
     return {"n": len(pairs), "bias": my-mx, "mae": mean([abs(b-a) for a, b in pairs]), "pearson": corr}
 
 
