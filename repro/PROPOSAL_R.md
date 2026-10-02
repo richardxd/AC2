@@ -2,6 +2,8 @@
 
 ## Purpose
 
+R preparation amendment (2026-10-02, before retry): judge max output65536, client timeout540s/gateway480s, strict failure checks and$5 cap unchanged. R1's first cold smoke failed before update on a40000-token reasoning-only judge response; preserve it and use `r_launch.py r1 smoke-cold --attempt 2`, followed by `smoke-resume --attempt 2`. Other tasks default attempt1. E4/E8 costs and timings below were measured at40000, so revised long-run tail cost/time is unmeasured; they are planning scenarios rather than guarantees.
+
 Fix the protocol supported by E8/E9 before bounded launch preparation. Richard must approve every long R launch and its judge budget. No long experiment has been started. Engineering smokes remain under the existing$5 cap and at most29minutes per launch, with bounded owned-process cleanup. This proposal is available for Richard's review while preparation continues.
 
 ## Model gate and its limits

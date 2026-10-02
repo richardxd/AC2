@@ -50,8 +50,8 @@ def configure(args):
         "SP_VAL_MAP": ROOT / "runs/e3/canonical/val_map.json",
         "SELF_PLAY_JUDGE_URL": "http://127.0.0.1:18791/v1",
         "SP_JUDGE_API_MODEL": "deepseek-flash", "SP_JUDGE_MODEL": "deepseek-flash",
-        "SP_JUDGE_STANDALONE": 0, "SP_JUDGE_MAX_TOKENS": 40000,
-        "SP_JUDGE_HTTP_TOTAL_TIMEOUT": 300, "SP_JUDGE_MAX_INFLIGHT": 4,
+        "SP_JUDGE_STANDALONE": 0, "SP_JUDGE_MAX_TOKENS": args.judge_max_tokens,
+        "SP_JUDGE_HTTP_TOTAL_TIMEOUT": 540, "SP_JUDGE_MAX_INFLIGHT": 4,
         "SP_REWARD_NUM_WORKERS": 2,
         "SP_ACTOR_MODEL": model, "SP_ROLLOUT_TP": args.tp,
         "SP_TRAIN_BATCH_SIZE": batch if args.method == "grpo" else batch * 2,
@@ -145,6 +145,7 @@ def main():
     p.add_argument("--data", default="runs/e3/canonical")
     p.add_argument("--val-n", type=int, default=4)
     p.add_argument("--val-freq", type=int, default=10)
+    p.add_argument("--judge-max-tokens", type=int, choices=[40000, 65536], default=40000)
     p.add_argument("--replay-bound", type=int, default=256)
     p.add_argument("--q-train-n", type=int)
     p.add_argument("--ablation", choices=["none", "correct-only", "no-audit"], default="none")

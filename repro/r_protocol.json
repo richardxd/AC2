@@ -22,5 +22,6 @@
   "smoke_validation_indices": [0],
   "smoke_steps": [1, 2],
   "smoke_seconds_per_launch": 1740,
-  "strict_judge": true
+  "strict_judge": true,
+  "judge_max_tokens": 65536
 }

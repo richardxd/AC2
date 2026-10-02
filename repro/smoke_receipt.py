@@ -33,12 +33,18 @@ def main():
         if "--run-dir" in command:
             launched_run = (root / command[command.index("--run-dir") + 1]).resolve()
         else:
-            assert len(command) == 4 and Path(command[1]).name == "r_launch.py"
+            assert len(command) in {4, 6} and Path(command[1]).name == "r_launch.py"
             assert (root / command[1]).resolve() == root / "repro/r_launch.py"
             assert command[3] in {"smoke-cold", "smoke-resume"}
             from r_launch import TASKS
             assert command[2] in TASKS
-            launched_run = root / "runs/r-smokes" / command[2]
+            attempt = 1
+            if len(command) == 6:
+                assert command[4] == "--attempt"
+                attempt = int(command[5])
+                assert attempt >= 1
+            name = command[2] if attempt == 1 else f"{command[2]}-attempt{attempt}"
+            launched_run = root / "runs/r-smokes" / name
         assert launched_run == args.run.resolve(), (launched_run, args.run)
         gpus = [int(x) for x in manifest["gpus"]]
         assert len(gpus) == args.world_size and len(set(gpus)) == len(gpus) and 0 not in gpus

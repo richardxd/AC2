@@ -119,6 +119,17 @@ def main():
              "--out", str(args.out / "probe_set.jsonl")], args.out / "selection.log")
         rows = [json.loads(x) for x in (args.out / "probe_set.jsonl").read_text().splitlines()]
         assert len(rows) == args.groups and len({r["qid"] for r in rows}) == args.groups
+        import pandas as pd
+        from transformers import AutoTokenizer
+        from verl.utils.chat_template import apply_chat_template
+        from verl.utils.tokenizer import normalize_token_ids
+        tokenizer = AutoTokenizer.from_pretrained(model, local_files_only=True)
+        training = pd.read_parquet(args.data / "train.parquet")
+        for row in rows:
+            expected = normalize_token_ids(apply_chat_template(tokenizer,
+                list(training.iloc[row["row_index"]]["prompt"]), tools=None,
+                add_generation_prompt=True, tokenize=True))
+            assert row["prompt_token_ids"] == expected, "source rollout and data row prompts differ"
         outputs = list(model.glob("*")) + [args.out / "probe_set.jsonl", checkpoint / "q_state.json"]
         outputs += sorted((checkpoint / "actor").glob("model_world_size_*_rank_*.pt"))
         outputs += [args.data / "train.parquet", args.run / "replay_buffer_deltas.jsonl",
@@ -164,8 +175,8 @@ def main():
         output = folder / "judged.shard0.jsonl"
         run([sys.executable, str(EXP / "probe_judge.py"), "--gen-dir", str(args.out / "gen"),
              "--data-dir", str(args.data), "--out", str(output), "--concurrency", "4",
-             "--judge-url", "http://127.0.0.1:18791/v1"], args.out / "judge.log",
-            dict(os.environ, SP_JUDGE_MAX_INFLIGHT="4"))
+             "--judge-url", "http://127.0.0.1:18791/v1", "--judge-max-tokens", "65536"], args.out / "judge.log",
+            dict(os.environ, SP_JUDGE_MAX_INFLIGHT="4", SP_JUDGE_HTTP_TOTAL_TIMEOUT="540"))
         with (args.out / "judge_after.json").open("x") as f:
             json.dump(judge_accounting(), f)
         outputs = [output, args.out / "judge_before.json", args.out / "judge_after.json"]

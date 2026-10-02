@@ -48,7 +48,7 @@ class Gateway:
         return self.db.execute("SELECT COALESCE(SUM(charged),0) FROM calls").fetchone()[0]
 
     async def lifecycle(self, app):
-        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=240, sock_connect=20)) as session:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=480, sock_connect=20)) as session:
             self.session = session
             yield
         self.db.close()
@@ -65,8 +65,8 @@ class Gateway:
         content = incoming["messages"][0]["content"]
         assert isinstance(content, str)
         max_tokens = int(incoming["max_tokens"])
-        if not 1 <= max_tokens <= 40000:
-            raise web.HTTPBadRequest(text="judge output budget outside 1..40000")
+        if not 1 <= max_tokens <= 65536:
+            raise web.HTTPBadRequest(text="judge output budget outside 1..65536")
         payload = {"model": MODEL, "messages": incoming["messages"],
                    "max_tokens": max_tokens, "stream": False,
                    "thinking": {"type": "enabled"},

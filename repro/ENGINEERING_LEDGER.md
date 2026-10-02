@@ -2,6 +2,10 @@
 
 ## Purpose
 
+### R preparation: strict judge truncation (2026-10-02)
+
+R1 cold01 passed step-zero validation but stopped before its first policy update: one DeepSeek call consumed40000 reasoning tokens and returned finish_reason=length. The strict reward adapter raised as intended. Preserve `runs/r-smoke-launches/r1-cold01` and `runs/r-smokes/r1`; ledger194 complete calls totals$1.064428284. New R configuration uses65536 judge output tokens and540s client/480s gateway timeout, within the [official API limit](https://api-docs.deepseek.com/api/create-chat-completion/). The gateway still reserves the full requested upper cost and enforces$5 globally. Retry directories are explicit numbered attempts; no training/score fallback. E4/E8 projections remain historical40k measurements. Scratch checked26GB with68GiB free on shared volume, below45GB project budget; all new outputs remain under repository `runs/`.
+
 Record g16 environment facts, changes, verification and deviations from the paper. Findings require receipts; configuration success does not establish training success. Links: [checklist](CHECKLIST.md), [paper results](RESULTS_LEDGER.md).
 
 ## Environment and changes
