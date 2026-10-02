@@ -14,6 +14,8 @@ Research-engineer assessment: failed grades are missing measurements, not valid 
 
 ## Evidence checks
 
+R4 2k preparation passes cold1660.768545s/resume1364.107390s. Policy gradients0.0487780385/0.0549356751, critic update2 with gradient231.2376251 and allrank optimizer counter1;16 valid probes, normal readiness0, bank17. [Save/resume](../../../repro/receipts/r4-2k-save-resume.json), [critic](../../../repro/receipts/r4-2k-critic.json), [fixture curve](../../../repro/receipts/r4-2k-smoke-curve.json), [template](../../../repro/receipts/r4-2k-judge-template.json).49calls/$0.252502320. Cold checkpoint write299.518s contributed to the longer bounded launch. This verifies operational preparation and does not measure ablation efficacy.
+
 R3 save/resume passes cold1519.352530s/resume1134.637079s, nonzero gradients0.0530211534/0.0360431131, all7rank restore, checkpoint2 and reconstructed replay state. [Acceptance](../../../repro/receipts/r3-save-resume.json), [fixture curve](../../../repro/receipts/r3-smoke-curve.json). Cost61calls/$0.308108124; only initial fixture validation is present, so no learning or replay-gain claim follows.
 
 The training-template warning prompted an explicit R preflight: assert live default bytes against the judge module's pin before launching. Archived R1–R3 templates independently match pin `474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6`; per-task `*-judge-template.json` receipts bind the archived module/template/config. The original loader actually checks the first explicit-default call, then can misleadingly warn on its second call; a direct negative-pin test confirms rejection. Retrospective source verification is distinguished from the newly recorded preflight. No prompt or score changed.
