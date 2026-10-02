@@ -1,0 +1,518 @@
+{
+  "run": "runs/r-smokes/r3",
+  "world_size": 7,
+  "launches": [
+    {
+      "path": "runs/r-smoke-launches/r3-cold01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1519.3525299206376,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "physical_gpus": {
+        "1": {
+          "samples": 1456,
+          "active_samples_ge5pct": 1228,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29242.0,
+          "max_sampling_gap_s": 20.33299994468689
+        },
+        "2": {
+          "samples": 1456,
+          "active_samples_ge5pct": 1167,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 28441.0,
+          "max_sampling_gap_s": 20.33400011062622
+        },
+        "3": {
+          "samples": 1456,
+          "active_samples_ge5pct": 1167,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 28822.0,
+          "max_sampling_gap_s": 20.33400011062622
+        },
+        "4": {
+          "samples": 1456,
+          "active_samples_ge5pct": 1068,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 28442.0,
+          "max_sampling_gap_s": 20.33400011062622
+        },
+        "5": {
+          "samples": 1456,
+          "active_samples_ge5pct": 822,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 26521.0,
+          "max_sampling_gap_s": 20.33400011062622
+        },
+        "6": {
+          "samples": 1456,
+          "active_samples_ge5pct": 836,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 27601.0,
+          "max_sampling_gap_s": 20.33400011062622
+        },
+        "7": {
+          "samples": 1456,
+          "active_samples_ge5pct": 909,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 23961.0,
+          "max_sampling_gap_s": 20.33400011062622
+        }
+      },
+      "rollout_placements": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "3",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "5",
+          "1"
+        ],
+        [
+          "4",
+          "1"
+        ],
+        [
+          "6",
+          "1"
+        ]
+      ],
+      "logged_checkpoint_steps": [
+        1
+      ],
+      "captured_metric_steps": [
+        1
+      ],
+      "loaded_checkpoint_step": null,
+      "log_sha256": "6450b7e0137e346f9c48d4fc5590297e60e2a9af6a2ced516f4ddda32524103e"
+    },
+    {
+      "path": "runs/r-smoke-launches/r3-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1134.6370785161853,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "physical_gpus": {
+        "1": {
+          "samples": 1051,
+          "active_samples_ge5pct": 816,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29332.0,
+          "max_sampling_gap_s": 44.57800006866455
+        },
+        "2": {
+          "samples": 1051,
+          "active_samples_ge5pct": 781,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29311.0,
+          "max_sampling_gap_s": 44.57599997520447
+        },
+        "3": {
+          "samples": 1051,
+          "active_samples_ge5pct": 792,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 28652.0,
+          "max_sampling_gap_s": 44.57699990272522
+        },
+        "4": {
+          "samples": 1051,
+          "active_samples_ge5pct": 767,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29334.0,
+          "max_sampling_gap_s": 44.57699990272522
+        },
+        "5": {
+          "samples": 1051,
+          "active_samples_ge5pct": 752,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29331.0,
+          "max_sampling_gap_s": 44.57799983024597
+        },
+        "6": {
+          "samples": 1051,
+          "active_samples_ge5pct": 728,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 29311.0,
+          "max_sampling_gap_s": 44.57799983024597
+        },
+        "7": {
+          "samples": 1051,
+          "active_samples_ge5pct": 767,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 23217.0,
+          "max_sampling_gap_s": 44.5789999961853
+        }
+      },
+      "rollout_placements": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "1"
+        ],
+        [
+          "6",
+          "1"
+        ],
+        [
+          "4",
+          "1"
+        ],
+        [
+          "5",
+          "1"
+        ]
+      ],
+      "logged_checkpoint_steps": [
+        2
+      ],
+      "captured_metric_steps": [
+        2
+      ],
+      "loaded_checkpoint_step": 1,
+      "log_sha256": "18c3aa99196640813d6f85c4c785a5e32ae120423e621a0573e356602d7138fd"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "metrics": {
+        "actor/entropy_full_batch": 0.15114013850688934,
+        "actor/entropy": 0.15114013850688934,
+        "actor/aec_k": 0.08,
+        "actor/pg_clipfrac": 0.0005809944393279563,
+        "actor/ppo_kl": -2.7221675601313543e-05,
+        "actor/pg_clipfrac_lower": 0.0,
+        "actor/pg_loss": 0.0027437455220414055,
+        "actor/loss": 0.002743745921179652,
+        "actor/grad_norm": 0.053021153435111046,
+        "actor/perf/max_memory_allocated_gb": 22.73422384262085,
+        "actor/perf/max_memory_reserved_gb": 27.33203125,
+        "actor/perf/cpu_memory_used_gb": 180.38237762451172,
+        "actor/lr": 2e-06,
+        "timing_s/start_profile": 4.964694380760193e-05,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 99.1905508376658,
+        "timing_s/agent_loop/generate_sequences/max": 584.3111140020192,
+        "timing_s/agent_loop/generate_sequences/mean": 404.6759181628469,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.00901820883154869,
+        "timing_s/agent_loop/compute_score/max": 55.38487287983298,
+        "timing_s/agent_loop/compute_score/mean": 6.1770509832073,
+        "timing_s/agent_loop/slowest/generate_sequences": 584.3111140020192,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 0.020679567009210587,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 235,
+        "timing_s/agent_loop/slowest/response_length": 16384,
+        "timing_s/gen": 585.1026007197797,
+        "timing_s/reward": 0.2582033723592758,
+        "timing_s/old_log_prob": 83.14917937666178,
+        "timing_s/adv": 0.1833307184278965,
+        "timing_s/update_actor": 231.38897123932838,
+        "timing_s/save_checkpoint": 154.40531096234918,
+        "timing_s/update_weights": 17.48538815230131,
+        "timing_s/dump_rollout_generations": 0.25038203597068787,
+        "timing_s/step": 1100.4502112343907,
+        "timing_s/stop_profile": 6.0580670833587646e-05
+      },
+      "checkpoint_shards": [
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_0.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_0.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_0.pt",
+          "bytes": 15077
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_1.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_1.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_1.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_2.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_2.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_2.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_3.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_3.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_3.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_4.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_4.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_4.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_5.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_5.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_5.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/model_world_size_7_rank_6.pt",
+          "bytes": 2511208811
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/optim_world_size_7_rank_6.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_1/actor/extra_state_world_size_7_rank_6.pt",
+          "bytes": 15141
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "metrics": {
+        "actor/entropy_full_batch": 0.1457630693912506,
+        "actor/entropy_replay": 0.13465891778469086,
+        "actor/entropy": 0.1565040647983551,
+        "actor/aec_k": 0.08,
+        "actor/pg_clipfrac": 0.0003734701174488734,
+        "actor/ppo_kl": 0.00011707707950509281,
+        "actor/pg_clipfrac_lower": 0.0,
+        "actor/pg_loss": 0.0016467875934072906,
+        "actor/loss": 0.0016467873938381672,
+        "actor/grad_norm": 0.036043113097548485,
+        "actor/perf/max_memory_allocated_gb": 22.78702974319458,
+        "actor/perf/max_memory_reserved_gb": 27.41015625,
+        "actor/perf/cpu_memory_used_gb": 222.3015537261963,
+        "actor/lr": 2e-06,
+        "timing_s/start_profile": 0.0002764686942100525,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 35.74830351397395,
+        "timing_s/agent_loop/generate_sequences/max": 408.2651481591165,
+        "timing_s/agent_loop/generate_sequences/mean": 239.66766287623904,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.008185140788555145,
+        "timing_s/agent_loop/compute_score/max": 65.15302166342735,
+        "timing_s/agent_loop/compute_score/mean": 7.945223007304594,
+        "timing_s/agent_loop/slowest/generate_sequences": 355.86647140979767,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 65.15302166342735,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 113,
+        "timing_s/agent_loop/slowest/response_length": 16143,
+        "timing_s/gen": 421.86337212845683,
+        "timing_s/reward": 11.397640947252512,
+        "timing_s/old_log_prob": 85.01251892745495,
+        "timing_s/adv": 0.11755350232124329,
+        "timing_s/update_actor": 218.06807012856007,
+        "timing_s/save_checkpoint": 152.91995734348893,
+        "timing_s/update_weights": 19.874024514108896,
+        "timing_s/dump_rollout_generations": 0.24826811999082565,
+        "timing_s/step": 930.6649429760873,
+        "timing_s/stop_profile": 4.2829662561416626e-05
+      },
+      "checkpoint_shards": [
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_0.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_0.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_0.pt",
+          "bytes": 15077
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_1.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_1.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_1.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_2.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_2.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_2.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_3.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_3.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_3.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_4.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_4.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_4.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_5.pt",
+          "bytes": 2522685803
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_5.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_5.pt",
+          "bytes": 15141
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/model_world_size_7_rank_6.pt",
+          "bytes": 2511208811
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/optim_world_size_7_rank_6.pt",
+          "bytes": 4597139215
+        },
+        {
+          "path": "runs/r-smokes/r3/checkpoints/global_step_2/actor/extra_state_world_size_7_rank_6.pt",
+          "bytes": 15141
+        }
+      ]
+    }
+  ],
+  "zero_gradient_steps": [],
+  "nonzero_update_demonstrated": true,
+  "metrics_sha256": "8aadd5a788a4cdd79a2de28dad02487c6ca42a59a3f3455e21416a99ad5c5228",
+  "replay": {
+    "states": [
+      {
+        "step": 1,
+        "ema_entries": 32,
+        "buffer_seq_next": 16,
+        "replay_policy": {
+          "bucketing": "global",
+          "admission": "ungated",
+          "rotation": "global_fifo",
+          "capacity": 3,
+          "bound": 256,
+          "stale_steps": 0,
+          "cold_bootstrap": true,
+          "global_sampling": "question"
+        },
+        "state_sha256": "bbaf8c5bc8a88993663ee64ee452d60529222103f3b1e8cf5e0279b780819578"
+      },
+      {
+        "step": 2,
+        "ema_entries": 48,
+        "buffer_seq_next": 32,
+        "replay_policy": {
+          "bucketing": "global",
+          "admission": "ungated",
+          "rotation": "global_fifo",
+          "capacity": 3,
+          "bound": 256,
+          "stale_steps": 0,
+          "cold_bootstrap": true,
+          "global_sampling": "question"
+        },
+        "state_sha256": "54d7b80bb6e8f6cba999c61b073bc2d6ff6e5a037b71e7879b54ae6adf808fb4"
+      }
+    ],
+    "seed_sha256": "bd0456308a73be85f651f7ef822f8b7738f7db3f46e10270c69d8f9d2b544820",
+    "delta_sha256": "704048adadc6fd5e25571558fa5c75a331acd94aff893700bf88f03c9d9c6bce",
+    "added_entries_per_step": [
+      16,
+      16
+    ]
+  }
+}

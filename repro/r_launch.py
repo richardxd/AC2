@@ -66,6 +66,8 @@ def main():
     args = p.parse_args()
     assert Path.cwd().resolve() == ROOT
     assert os.environ["CUDA_VISIBLE_DEVICES"] == "1,2,3,4,5,6,7"
+    from judge_template_receipt import current_template
+    print("JUDGE_TEMPLATE_PIN " + json.dumps(current_template(), sort_keys=True), flush=True)
     cmd = command(args.task, args.mode, args.attempt)
     print(shlex.join(cmd), flush=True)
     if args.print_only:
