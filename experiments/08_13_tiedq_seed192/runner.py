@@ -424,12 +424,12 @@ def _pin_judge_snapshot(resolved: str) -> str:
             was = json.loads(pin_path.read_text())
         except (OSError, ValueError):
             was = None
-        if was and was.get("resolved") != resolved:
+        if was and any(was.get(key) != payload.get(key) for key in ("resolved", "api_url", "model")):
             if not _truthy("SP_ALLOW_JUDGE_DRIFT"):
                 raise ValueError(
                     "JUDGE DRIFT: this run was launched against\n"
-                    f"    {was.get('resolved')}\n"
-                    f"but the cache now resolves {_JUDGE_REPO} to\n    {resolved}\n"
+                    f"    {was}\n"
+                    f"but the current judge identity is\n    {payload}\n"
                     "The judge is the reward function, so continuing would change the reward "
                     "mid-run and make the metrics before and after incomparable. Restore the "
                     "pinned snapshot, pass SP_JUDGE_MODEL=<that path>, or set "

@@ -21,6 +21,7 @@ export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export VENV_DIR="$AC2_SCRATCH/venv"
 export FA_BUILD_DIR="$AC2_SCRATCH/fa_build"
 export CUDA_HOME="$AC2_SCRATCH/cuda-12.9/toolkit" CUDA_PATH="$AC2_SCRATCH/cuda-12.9/toolkit"
+export CUDACXX="$CUDA_HOME/bin/nvcc"
 export PATH="$VENV_DIR/bin:$CUDA_HOME/bin:$PATH"
 export TIKTOKEN_CACHE_DIR="$XDG_CACHE_HOME/tiktoken"
 export TILELANG_CACHE_DIR="$XDG_CACHE_HOME/tilelang" TILELANG_TMP_DIR="$TMPDIR/tilelang"

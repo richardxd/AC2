@@ -55,6 +55,8 @@ E3 commit `982a4c9`: independent review by `review_e3` verified all ten raw/deri
 
 ## E5 local adaptation
 
+Independent review of E4 `9562723` clean: all 20 raw hashes, 40-call SQLite total, parser/token claims and projection arithmetic reproduced. E5 review of `8a4d6b2` found the API pin compared model only; fixed to compare model and URL as well as resolved identity, preventing silent endpoint drift on resume. Also pinned inherited `CUDACXX` to project CUDA 12.9 (the parent had CUDA 12.1 despite CUDA_HOME 12.9).
+
 `repro/local_runner.py` composes the three original entry points with explicit GPU count, TP/DP, project data/output/cache paths, offline logging, external API judge and short smoke settings. Minimal runner changes disable the local reward model when `SELF_PLAY_JUDGE_URL` is supplied and record API identity without downloading the local judge. `compose_dryrun.sh` passes GRPO/AC2/Prefix GRPO; local Ray preflight exposed one alive node, seven GPUs, 24 CPUs, then shut down its own cluster (`runs/e5/`). Composition is not training acceptance.
 
 Model snapshots are pinned to 4B `768f209d9ea81521153ed38c47d515654e938aea` and 1.7B `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`. First E6 GPU1 attempt initialized FSDP then vLLM's offline repository completeness check rejected absent README/LICENSE/.gitattributes despite weights loading. The runner now supplies the pinned local snapshot directory and verifies all weight shards rather than requesting repository metadata. No alternate model or core exception fallback.
