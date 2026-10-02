@@ -20,12 +20,66 @@ def digest(path):
         return hashlib.file_digest(f, "sha256").hexdigest()
 
 
+def expected_artifacts(directory, cfg, stage):
+    """Derive required coverage from the protocol, never the supplied hash map."""
+    directory = directory.resolve()
+    paths = {directory / "configuration.json"}
+    if stage == "prepare":
+        run, data = Path(cfg["run"]), Path(cfg["data"])
+        checkpoint = run / f"checkpoints/global_step_{cfg['step']}"
+        model = directory / "model_hf"
+        paths.update(model.iterdir())
+        paths.update(model / name for name in (
+            "config.json", "generation_config.json", "tokenizer_config.json",
+            "tokenizer.json", "chat_template.jinja"))
+        weights = set(model.glob("*.safetensors"))
+        assert weights, "missing merged weights"
+        paths.update(weights)
+        paths.update(checkpoint / "actor" / f"model_world_size_7_rank_{rank}.pt" for rank in range(7))
+        paths.update([checkpoint / "q_state.json", data / "train.parquet",
+                      run / "replay_buffer_deltas.jsonl", run / "q_state_deltas.jsonl",
+                      directory / "probe_set.jsonl", directory / "merge-verify.log", directory / "verify.log",
+                      run / f"q_wave/{cfg['verify_step']-1}.jsonl",
+                      run / f"rollouts/{cfg['verify_step']}.jsonl"])
+        launches = set((run / "launches").glob("*/arguments.json"))
+        assert launches, "missing source launches"
+        paths.update(launches)
+        for base, kind in ((run / "cold", "reference_bank"),
+                           (run / "cold/replay_seed_cold", "replay_buffer")):
+            manifest = base / f"{kind}_manifest.json"
+            paths.add(manifest)
+            shards = {base / name for name in read(manifest)["shards"]}
+            assert shards and shards == set((base / kind).glob("shard_*.jsonl")), "seed shard inventory changed"
+            paths.update(shards)
+        rows = [json.loads(line) for line in (directory / "probe_set.jsonl").read_text().splitlines()]
+        paths.update(run / f"rollouts/{row['src_step']}.jsonl" for row in rows)
+    elif stage in {"generate", "critic"}:
+        kind = "gen" if stage == "generate" else "q"
+        shards = {directory / kind / f"{kind}.shard{i}.jsonl" for i in range(cfg["shards"])}
+        assert shards == set((directory / kind).glob("*.jsonl")), "output shard inventory changed"
+        paths.update(shards)
+    elif stage == "judge":
+        paths.update(directory / name for name in (
+            "judged/judged.shard0.jsonl", "judge_before.json", "judge_after.json"))
+    else:
+        assert stage == "analyze"
+        paths.add(directory / "report.json")
+    return {str(path) for path in paths}
+
+
 def collect(directory, launches, completed_only=False):
     from probe_report import analyze
     from transformers import AutoTokenizer
     cfg = read(directory / "configuration.json")
     assert cfg["engineering_fixture"] and cfg["groups"] == cfg["shards"] == 2
     assert cfg["response"] == 16384 and cfg["chunk"] == 4096 and cfg["samples"] == 4
+    from judge_template_receipt import MODULE, TEMPLATE, current_template
+    code = {ROOT / "repro/r5_launch.py", ROOT / "repro/probe_report.py",
+            ROOT / "repro/judge_template_receipt.py", ROOT / MODULE, ROOT / TEMPLATE}
+    code.update(ROOT / "experiments/08_15_q_probe_step40" / name for name in
+                ("build_probe_set.py", "probe_gen.py", "probe_q.py", "probe_judge.py"))
+    assert set(cfg["pipeline_code_sha256"]) == {str(path) for path in code}, "pipeline source inventory incomplete"
+    assert cfg["judge_template_pin"] == current_template(), "judge template pin changed"
     for name, sha in cfg["pipeline_code_sha256"].items():
         assert digest(Path(name)) == sha, f"pipeline source changed: {name}"
     identities = {r["physical_gpu"]: r["uuid"] for r in read(ROOT / "repro/receipts/e1-acceptance-uuid.json")["kernel_checks"]}
@@ -59,6 +113,7 @@ def collect(directory, launches, completed_only=False):
         else:
             done = read(directory / f"{stage}.done.json")
             assert done["stage"] == stage and done["engineering_fixture"]
+            assert set(done["sha256"]) == expected_artifacts(directory, cfg, stage), f"{stage} artifact inventory incomplete"
             for name, sha in done["sha256"].items():
                 assert name not in hashes or hashes[name] == sha
                 hashes[name] = sha
