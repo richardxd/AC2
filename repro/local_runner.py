@@ -3,6 +3,7 @@ import argparse
 import importlib.util
 import json
 import os
+import sqlite3
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -13,6 +14,13 @@ EXPERIMENTS = {"grpo": "07_15_handoff", "ac2": "08_13_tiedq_seed192",
                "prefix": "08_11_ablation1_replay_noq"}
 REVISIONS = {"Qwen/Qwen3-4B-Thinking-2507": "768f209d9ea81521153ed38c47d515654e938aea",
              "Qwen/Qwen3-1.7B": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"}
+
+
+def judge_accounting():
+    db = sqlite3.connect(f"file:{ROOT / 'runs/judge/spend.sqlite'}?mode=ro", uri=True)
+    rows = db.execute("SELECT id,state,charged,receipt FROM calls ORDER BY id").fetchall()
+    db.close()
+    return [{"id": row[0], "state": row[1], "charged_upper_usd": row[2], "receipt": row[3]} for row in rows]
 
 
 def configure(args):
@@ -172,10 +180,12 @@ def main():
     metrics_path = run / "metrics.jsonl"
     before = metrics_path.read_bytes() if metrics_path.exists() else b""
     (manifest / "metrics_before.jsonl").write_bytes(before)
+    (manifest / "judge_before.json").write_text(json.dumps(judge_accounting(), indent=2))
     runner.main_ppo.run_ppo(cfg)
     after = metrics_path.read_bytes()
     assert after.startswith(before), "metrics history was rewritten during launch"
     (manifest / "metrics_added.jsonl").write_bytes(after[len(before):])
+    (manifest / "judge_after.json").write_text(json.dumps(judge_accounting(), indent=2))
     print(f"RUN_COMPLETED metrics_added={manifest / 'metrics_added.jsonl'}", flush=True)
     import ray
     ray.shutdown()

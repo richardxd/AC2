@@ -27,8 +27,8 @@ DEFAULT_RUNS = {
 }
 ALIASES = {'07_15_rerun_baseline': ['07_15_rerun_baseline_handoff']}
 STEP_FILE = re.compile(r'(?:step[_-]?)?(\d+)\.jsonl(?:\.gz)?$')
-TRAIN_DIRS = ['run_data/rollouts', 'run_data/rollouts/train', 'rollouts/train']
-VAL_DIRS = ['run_data/val_rollouts', 'run_data/rollouts/val', 'rollouts/val']
+TRAIN_DIRS = ['run_data/rollouts', 'run_data/rollouts/train', 'rollouts/train', 'rollouts']
+VAL_DIRS = ['run_data/val_rollouts', 'run_data/rollouts/val', 'rollouts/val', 'val_rollouts']
 METRIC_FILES = ['run_data/metrics.jsonl', 'summaries/metrics.jsonl', 'metrics.jsonl']
 MOMENTS = ['prompt_tokens_sum', 'replay_prefix_tokens_sum', 'prefix_tokens_sum',
            'prefix_tokens_squared_sum', 'generated_tokens_sum',
