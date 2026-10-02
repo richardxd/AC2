@@ -37,7 +37,8 @@ def analyze(groups, qrows, jrows, n):
         assert r["score"] is not None and math.isfinite(r["score"]) and 0 <= r["score"] <= 1
     for r in qrows:
         assert r["q"] is None or (math.isfinite(r["q"]) and 0 <= r["q"] <= 1)
-    pairs = {name: [] for name in ("prefix_vs_reward", "hybrid_vs_reward", "matched_cut_vs_reward", "advantages")}
+    pairs = {name: [] for name in ("prefix_vs_reward", "hybrid_all_vs_reward", "hybrid_vs_reward",
+                                   "matched_cut_vs_reward", "individual_cut_vs_reward", "advantages")}
     records, excluded, no_substitution = [], [], []
     for g in groups:
         qid = g["qid"]
@@ -52,6 +53,8 @@ def analyze(groups, qrows, jrows, n):
         rbar, vbar = mean(rewards), mean(values)
         prefix = qmap[qid, -1]["q"]
         pairs["prefix_vs_reward"].append([rbar, prefix])
+        pairs["hybrid_all_vs_reward"].append([rbar, vbar])
+        pairs["individual_cut_vs_reward"].extend([[rewards[i], values[i]] for i in cut_indices])
         if cut_indices:
             pairs["hybrid_vs_reward"].append([rbar, vbar])
             pairs["advantages"].extend([[r-rbar, v-vbar] for r, v in zip(rewards, values)])

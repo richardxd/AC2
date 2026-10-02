@@ -14,6 +14,7 @@ class ProbeReportTests(unittest.TestCase):
         result = analyze(*self.fixture(), n=4)
         self.assertEqual(result["groups_complete_valid"], 1)
         self.assertEqual(result["pairs"]["matched_cut_vs_reward"], [[.5, .5]])
+        self.assertEqual(result["pairs"]["individual_cut_vs_reward"], [[0, .2], [1, .8]])
         self.assertEqual(result["pairs"]["advantages"], [[-.5, -.3], [.5, .30000000000000004], [0, 0], [0, 0]])
         self.assertAlmostEqual(result["statistics"]["advantages"]["mae"], .1)
         self.assertIsNone(result["statistics"]["prefix_vs_reward"]["pearson"])
@@ -25,6 +26,7 @@ class ProbeReportTests(unittest.TestCase):
         self.assertEqual(result["groups_complete_valid"], 0)
         self.assertEqual(result["excluded_invalid_q_groups"], [{"qid": "q", "invalid_q_indices": [0]}])
         self.assertEqual(result["statistics"]["advantages"]["n"], 0)
+        self.assertEqual(result["pairs"]["hybrid_all_vs_reward"], [])
 
     def test_missing_duplicate_and_failed_grades_rejected(self):
         g, q, j = self.fixture()
@@ -38,6 +40,7 @@ class ProbeReportTests(unittest.TestCase):
             c["exceeds_g"] = False
         result = analyze(g, q[:1], j, 4)
         self.assertEqual(result["no_substitution_groups"], ["q"])
+        self.assertEqual(result["pairs"]["hybrid_all_vs_reward"], [[.5, .5]])
         self.assertEqual(result["statistics"]["advantages"]["n"], 0)
         self.assertIsNone(stats([[0, 1]] * 4)["pearson"])
         self.assertIsNone(stats([[.2, .2]] * 3)["pearson"])
