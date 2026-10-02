@@ -159,7 +159,7 @@ def main():
         import matplotlib
         matplotlib.use("Agg")
         import matplotlib.pyplot as plt
-        fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
+        fig, ax = plt.subplots(figsize=(7, 4.5))
         series = [(report, "Current run")]
         if args.baseline:
             series.insert(0, (baseline, "GRPO baseline"))
@@ -172,6 +172,7 @@ def main():
                title="Engineering fixture — no efficacy claim" if report["engineering_smoke"] else "Observed validation checkpoints")
         ax.grid(alpha=.25)
         ax.legend()
+        fig.tight_layout(rect=(0, .065, 1, 1))
         fig.text(.01, .01, "Point estimates; separate uncertainty bounds and provenance are in the JSON receipt.", fontsize=7)
         with args.figure.open("xb") as f:
             fig.savefig(f, format="png", dpi=180)
