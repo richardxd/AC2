@@ -40,6 +40,8 @@ S1 independent review confirmed actual20 prompt identities/parse/cost evidence, 
 
 Capacity decision: four concurrent high-effort requests are too slow for a comfortable S3 margin. Default tune only batching (server/gateway16, unchanged0.55 GPU budget and2048 batched tokens), extend local HTTP ceiling to1800s so allowed long reasoning is not misclassified by the old API timeout; S3 launches still hard-bound1740s. Preserve partial S2, drain pending work, and restart only independently reviewed owned process identities. Revalidate all20 E4 cases before complete S2 repeat. Never signal protected sglang processes or remove pending ledger entries.
 
+Detached-launch review default: require completed S2 coverage without an agreement threshold; verify S3 profile and zero API calls; pin regular source bytes and symlink targets, including protocol/exporter. Require all200 R1 steps,21 full validation events,10 complete seven-rank checkpoints and frozen API accounting before R2. R2 reports readiness and descriptive first crossing of observed R1 peak; no crossing remains null. Sampler-startup failure cleans the owned training tree; failures stop the sequence without retry.
+
 ## Preflight
 
 Read kickoff, roadmap, paper text, root README, install script, metric exporter documentation, and README/runner/launch scripts for all three main arms. Rendered the local PDF with PyMuPDF 1.28.2; inspected pages 8–10, 18–19, 26–27 for Figures 2–4, 7–9 and Tables 3–4. Images and independent text extraction: `runs/paper/`.

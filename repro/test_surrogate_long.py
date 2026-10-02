@@ -10,6 +10,7 @@ import r_curves
 import surrogate_long_acceptance as accept
 from surrogate_common import ROOT, profile
 from surrogate_smoke_receipt import union_seconds
+from surrogate_chain import source_identity
 
 
 class LongAdmissionTests(unittest.TestCase):
@@ -64,6 +65,14 @@ class LongAdmissionTests(unittest.TestCase):
     def test_union_overlap_not_summed_latency(self):
         self.assertEqual(union_seconds([(1, 4), (2, 3), (3, 8), (10, 12)]), 9)
         self.assertEqual(union_seconds([]), 0)
+
+    def test_directory_symlink_inventory(self):
+        link = self.base / "directory-link"
+        link.symlink_to(self.run_dir, target_is_directory=True)
+        self.assertEqual(source_identity(link), {"kind": "symlink", "target": str(self.run_dir)})
+        self.assertEqual(source_identity(self.launch / "stdout.log")["kind"], "file")
+        with self.assertRaises(AssertionError):
+            source_identity(self.base / "absent")
 
 
 if __name__ == "__main__":

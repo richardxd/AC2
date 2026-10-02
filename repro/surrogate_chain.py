@@ -23,6 +23,13 @@ def write(path, value):
         json.dump(value, f, indent=2)
 
 
+def source_identity(path):
+    if path.is_symlink():
+        return {"kind": "symlink", "target": os.readlink(path)}
+    assert path.is_file(), f"missing source file: {path}"
+    return {"kind": "file", "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--directory", type=Path, required=True)
@@ -35,7 +42,8 @@ def main():
     assert os.environ["CUDA_VISIBLE_DEVICES"] == "1,2,3,4,5,6,7"
     base_api = judge_accounting()
     assert len(base_api) == 547 and all(r["state"] == "complete" for r in base_api)
-    assert json.loads((ROOT / "repro/receipts/s3-surrogate-r1.json").read_text())["accepted"] is True
+    smoke = json.loads((ROOT / "repro/receipts/s3-surrogate-r1.json").read_text())
+    assert smoke["accepted"] is True and smoke["profile"] == profile() and smoke["api_calls_added"] == 0
     agreement = json.loads((ROOT / "repro/receipts/s2-surrogate-agreement.json").read_text())
     assert agreement["coverage_verified"] and agreement["summary"]["count"] == len(base_api)
     assert agreement["summary"]["profile"] == profile() and agreement["summary"]["api_calls_added"] == 0
@@ -48,13 +56,14 @@ def main():
         "surrogate_common.py", "surrogate_reward.py", "strict_reward.py", "r_curves.py", "run_bounded.py")]
     tracked = subprocess.check_output(["git", "ls-files", "-z", "src", "experiments", "repro/r_protocol.json"], cwd=ROOT)
     source += [ROOT / os.fsdecode(name) for name in tracked.split(b"\0") if name]
-    hashes = {str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in source}
+    source.append(ROOT / "scripts/export_paper_metrics.py")
+    hashes = {str(path): source_identity(path) for path in source}
     write(out / "plan.json", {"authorization": "Richard approved 2026-10-02: R1 then R2 only; surrogate GPU0, training GPUs1-7",
                              "pid": os.getpid(), "create_time": psutil.Process().create_time(),
-                             "profile": profile(), "source_sha256": hashes,
+                             "profile": profile(), "source_inventory": hashes,
                              "failure_default": "Stop without retry or R2 launch; preserve every artifact."})
     for task in ("r1", "r2"):
-        assert all(hashlib.sha256(Path(path).read_bytes()).hexdigest() == sha for path, sha in hashes.items())
+        assert all(source_identity(Path(path)) == identity for path, identity in hashes.items())
         assert judge_accounting() == base_api
         for entry in (service["server"], service["gateway"]):
             process = psutil.Process(entry["pid"])
