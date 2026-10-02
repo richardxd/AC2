@@ -10,6 +10,10 @@ Record g16 environment facts, changes, verification and deviations from the pape
 
 ## Environment and changes
 
+All R4 launch preparations complete. No-audit cold1493.371863s/resume1446.113495s, policy gradients0.0538697224/0.1811223496, critic gradient202.1350708 with update2/allrank optimizer counter1;16 valid probes, readiness0, bank17. [Save/resume](receipts/r4-no-audit-save-resume.json), [critic](receipts/r4-no-audit-critic.json), [curve](receipts/r4-no-audit-smoke-curve.json), [template](receipts/r4-no-audit-judge-template.json) pass. Resolved audit denominator0/cut0 and Q seed831001 verified; normal two-step readiness stays closed, so no mature audit-ablation efficacy is claimed.53calls/$0.270234384; cumulative543complete/$2.699072352, no reservations. Root host cleanup shows only preexisting GPU0 processes. Before R5 merge: scratch27GB/45GB, shared68GB free; shared-data81TB free. All bulky probe outputs will remain in repository `runs/`.
+
+Independent `9b1c513` review clean:27checks confirm stored pin/all9hashes, unchanged resume across6modes and rejection of changed template/module bytes or module pin before stage execution. Existing3-test source suite passes (`runs/reviews/9b1c513-independent-xgh6gsc7/review.json`). Actual R5 remains to be exercised.
+
 Before R5's first stage, extended its configuration to assert/store the same live training-template module pin and include the pin helper, original judge module and template in its existing source hashes. All subsequent stages/resume must reproduce that configuration. No R5 outputs yet existed; no prior artifacts are reinterpreted. This brings the staged probe under the explicit R prompt-identity preflight as well as the original loader's pin check.
 
 R5 pin CPU checks: existing source suite3tests/4subtests passes; a fresh incomplete-pipeline fixture records the pin and9source hashes, rejects changed live pin and changed judge-source hash before any model/judge execution (`runs/r-preflight/r5-pin-preflight/checks.json`).

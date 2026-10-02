@@ -1,0 +1,70 @@
+{
+  "run": "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit",
+  "engineering_smoke": true,
+  "match_fields": {
+    "model": "Qwen/Qwen3-4B-Thinking-2507",
+    "response": 16384,
+    "groups": 16,
+    "samples": 4,
+    "train_sha256": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "val_sha256": "3173aba7afca575f27e50f6877a6dc9f62382b37d78f6bc5ea895d7ab421d5fe"
+  },
+  "curve": [
+    {
+      "mean_score": 0.75,
+      "n_problems": 1,
+      "samples_per_problem": 4,
+      "nonzero_fraction": 0.75,
+      "separate_95pct_hoeffding": [
+        0,
+        1
+      ],
+      "problem_means": {
+        "0a6fe6aca354dbabd152900c479db754adb6f3e91b62529cd0ca6d355ff38be5": 0.75
+      },
+      "step": 0,
+      "cumulative_decoding_flops": 0
+    }
+  ],
+  "training": [
+    {
+      "step": 1,
+      "decoding_flops": 15883350014951424,
+      "cumulative_decoding_flops": 15883350014951424,
+      "logged_policy_token_sum_available": false,
+      "ready_problems": 0,
+      "unique_train_problems": 5227,
+      "ready_fraction": 0.0,
+      "global_gate_open_at_end": 0
+    },
+    {
+      "step": 2,
+      "decoding_flops": 11062868509458432,
+      "cumulative_decoding_flops": 26946218524409856,
+      "logged_policy_token_sum_available": false,
+      "ready_problems": 0,
+      "unique_train_problems": 5227,
+      "ready_fraction": 0.0,
+      "global_gate_open_at_end": 0
+    }
+  ],
+  "first_global_gate_open_end_step": null,
+  "scope": "Eq.6 policy decoding only; excludes prefill, Q, judge, optimization and validation. Separate per-point bounds assume independent problem-level draw groups, not simultaneous coverage across checkpoints. Scientific peak crossings are point-estimate descriptions, not resolved effects. Smoke validation is only the fixed one-problem fixture.",
+  "sha256": {
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/launches/20261002T121153.753788Z/config.yaml": "38b8e93c947e5b724c1b30b4dbbe4e625fce05be7fe8ff44eefe116d9460c434",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/launches/20261002T123742.254139Z/config.yaml": "7256a584c4f54c8ac67fae718e46183c0f1f5751097d88306d4c4eec58cb6d99",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/metrics.jsonl": "79b175c62c5b728a846587ddd368a08289a61eaa7dffe8e1fd2028e01c6a62b1",
+    "/share/data/pals/richard1xur/ac2/runs/e3/canonical/train.parquet": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "/share/data/pals/richard1xur/ac2/runs/r-preflight/test-first.parquet": "3173aba7afca575f27e50f6877a6dc9f62382b37d78f6bc5ea895d7ab421d5fe",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/rollouts/1.jsonl": "e3e108a7d4ae3fc87759b24353f7cd2d371a2ef946a40cd8dc4326e13295c901",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/rollouts/2.jsonl": "41f5c512704c672524253190643c09b07cfcfb58721539fb967a4e4f9e90c226",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/val_rollouts/0.jsonl": "1259b82426543dccc7aa8ad0bdcf31b70ac7f09bb3d864fe86194aa2fdf8b3cd",
+    "repro/receipts/r1-smoke-curve.json": "c1b7feffffc7ea54ebaca1114388fd1823dadb9a2361edeec328a0ca16981496"
+  },
+  "baseline_comparison": {
+    "baseline": "repro/receipts/r1-smoke-curve.json",
+    "observed_peak": 0.75,
+    "first_point_exceeding_observed_peak": null,
+    "scope": "Observed checkpoint grid only; no interpolation or statistical superiority claim."
+  }
+}

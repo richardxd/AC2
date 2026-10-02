@@ -1,0 +1,196 @@
+{
+  "run": "runs/r-smokes/r4-no-audit",
+  "launches": [
+    {
+      "path": "runs/r-smoke-launches/r4-no-audit-cold01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1493.3718634098768,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        1
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1381,
+          "active_samples_ge5pct": 1202,
+          "max_memory_mib": 29222.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "2": {
+          "samples": 1381,
+          "active_samples_ge5pct": 1113,
+          "max_memory_mib": 29241.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "3": {
+          "samples": 1381,
+          "active_samples_ge5pct": 1130,
+          "max_memory_mib": 29302.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "4": {
+          "samples": 1381,
+          "active_samples_ge5pct": 1028,
+          "max_memory_mib": 29282.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "5": {
+          "samples": 1381,
+          "active_samples_ge5pct": 850,
+          "max_memory_mib": 28881.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "6": {
+          "samples": 1381,
+          "active_samples_ge5pct": 888,
+          "max_memory_mib": 28641.0,
+          "max_sampling_gap_s": 28.88599991798401
+        },
+        "7": {
+          "samples": 1381,
+          "active_samples_ge5pct": 873,
+          "max_memory_mib": 24801.0,
+          "max_sampling_gap_s": 28.88599991798401
+        }
+      },
+      "engineering_readiness": false
+    },
+    {
+      "path": "runs/r-smoke-launches/r4-no-audit-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1446.1134950183332,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        2
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1388,
+          "active_samples_ge5pct": 828,
+          "max_memory_mib": 28932.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "2": {
+          "samples": 1388,
+          "active_samples_ge5pct": 963,
+          "max_memory_mib": 29409.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "3": {
+          "samples": 1388,
+          "active_samples_ge5pct": 789,
+          "max_memory_mib": 29332.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "4": {
+          "samples": 1388,
+          "active_samples_ge5pct": 773,
+          "max_memory_mib": 29372.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "5": {
+          "samples": 1388,
+          "active_samples_ge5pct": 769,
+          "max_memory_mib": 29369.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "6": {
+          "samples": 1388,
+          "active_samples_ge5pct": 771,
+          "max_memory_mib": 28793.0,
+          "max_sampling_gap_s": 29.855000019073486
+        },
+        "7": {
+          "samples": 1388,
+          "active_samples_ge5pct": 798,
+          "max_memory_mib": 23711.0,
+          "max_sampling_gap_s": 29.855000019073486
+        }
+      },
+      "engineering_readiness": false
+    }
+  ],
+  "checkpoint": 2,
+  "critic_update_steps": [
+    2
+  ],
+  "q_optimizer_steps": {
+    "0": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "1": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "2": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "3": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "4": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "5": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "6": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    }
+  },
+  "ready_problems": 0,
+  "wave_counts": {
+    "probe": 16
+  },
+  "valid_waves": {
+    "probe": 16
+  },
+  "routes": {
+    "full": 160
+  },
+  "consumed_chunks": 0,
+  "max_consumed_chunk": null,
+  "chunk_limit": 4096,
+  "branch_checks_required": false,
+  "scope": "engineering branch coverage; permissive readiness is not a scientific result",
+  "sha256": {
+    "runs/r-smokes/r4-no-audit/metrics.jsonl": "79b175c62c5b728a846587ddd368a08289a61eaa7dffe8e1fd2028e01c6a62b1",
+    "runs/r-smoke-launches/r4-no-audit-cold01/stdout.log": "715d3f02d1d9e0cc60ed55bd311c105f8dfa9dce33fe5062251f655b09e01106",
+    "runs/r-smoke-launches/r4-no-audit-cold01/launch.json": "c8e9013cb1c6a49009c7aabee21ebb32d084e6f7b725eb58fde101d3b64f635f",
+    "runs/r-smoke-launches/r4-no-audit-cold01/result.json": "37a4f375cebb4ffc110f02f23d0adfbd98a4d212cfce83faa7fda918cafb3589",
+    "runs/r-smoke-launches/r4-no-audit-cold01/gpu.csv": "14b345a6b810576e5898034bb47ce35546be2d4ea3ab94e9248ed4b59c8caf34",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/launches/20261002T121153.753788Z/metrics_added.jsonl": "6d712f5819ba4959f35bee13a5a2ea9b3e2e64015b36ad9b907cf74555ddc57f",
+    "runs/r-smoke-launches/r4-no-audit-resume01/stdout.log": "7f4958905769aea87901181fa3dceac08383c6f3e93466284c5f3b700f97e0a7",
+    "runs/r-smoke-launches/r4-no-audit-resume01/launch.json": "ede44872187962418007a7a96ee4aed049b9657c76f8e2d0520e4a443a1bb188",
+    "runs/r-smoke-launches/r4-no-audit-resume01/result.json": "252151a745cf97e6acf7771ad750c8079127454af148afeb934182372b83506e",
+    "runs/r-smoke-launches/r4-no-audit-resume01/gpu.csv": "8255ceab043d01a030be871f067bbc496200fdc5bd0c110ea0be529a39dedd71",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-no-audit/launches/20261002T123742.254139Z/metrics_added.jsonl": "f0cdc3b25089b58759ade0b1af0e06b16bdb6d3378b4fee8aa273cc1144ca016",
+    "runs/r-smokes/r4-no-audit/checkpoints/global_step_2/q_state.json": "136b49626130ccca6f709ebbb52a9da081460d2461ea86057ecc85557363d36b",
+    "runs/r-smokes/r4-no-audit/checkpoints/global_step_2/sp_q_optim/_complete.json": "990e4fade771503b26cdf7137992b79ffdd8756a0602bbfa5143168fe6975ca6",
+    "runs/r-smokes/r4-no-audit/q_wave/0.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/r-smokes/r4-no-audit/q_wave/1.jsonl": "f388408fc1afbe021a00fdefcf2cdb56548234e0dbe27aae7e5363b02e454fe2",
+    "runs/r-smokes/r4-no-audit/rollouts/1.jsonl": "e3e108a7d4ae3fc87759b24353f7cd2d371a2ef946a40cd8dc4326e13295c901",
+    "runs/r-smokes/r4-no-audit/rollouts/2.jsonl": "41f5c512704c672524253190643c09b07cfcfb58721539fb967a4e4f9e90c226"
+  }
+}
