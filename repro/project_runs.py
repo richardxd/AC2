@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 
 
@@ -24,6 +25,19 @@ def main():
     val_tokens = gate["generated_tokens"]
     val_s = val_tokens / (7 * rate) + problems * raw["e4"]["stats"]["val"]["mean_latency_s"] / 4
     measured = {}
+    cold, replay = raw["ac2_cold"], raw["ac2_replay"]
+    assert Path(cold["run"]).resolve() == Path(replay["run"]).resolve(), "AC2 states must share a run"
+    assert Path(cold["manifest"]).resolve() != Path(replay["manifest"]).resolve(), "distinct AC2 launches required"
+    assert [r["step"] for r in cold["steps"]] == [1], "cold AC2 must be step1"
+    assert [r["step"] for r in replay["steps"]] == [2], "populated AC2 must be resumed step2"
+    cq, rq = cold["steps"][0]["q_metrics"], replay["steps"][0]["q_metrics"]
+    assert cq["q/fifo_size"] == 0 and cq["q/q_phase_skipped"] == 1
+    assert rq["q/fifo_size"] > 0 and rq["q/q_records_trained"] > 0
+    assert rq["q/q_phase_skipped"] == 0
+    assert rq["q/delta_q_applied"] > 0 and math.isfinite(rq["q/grad_norm"]) and rq["q/grad_norm"] > 0
+    for q in [cq, rq]:
+        assert all(q[k] == 0 for k in ["q/global_gate_open", "q/global_ready_effective",
+                                      "q/ready_problems", "q/consumed_calls", "q/audit_cut_calls"]), "unready calibration required"
     for name in ["grpo", "ac2_cold", "ac2_replay", "prefix"]:
         receipt = raw[name]
         manifest = Path(receipt["manifest"])
