@@ -94,6 +94,9 @@ class SPQAgentLoop(AgentLoopBase):
             response_ids=generated_ids,
             response_mask=[1] * len(generated_ids),
             response_logprobs=None,
+            # Q-wave rows are parse-only, not proofs. Mark scoring complete so
+            # the async reward loop does not send them to the external judge.
+            reward_score=0.0,
             routed_experts=None,
             multi_modal_data={},
             mm_processor_kwargs=None,
