@@ -8,6 +8,7 @@ from pathlib import Path
 
 def verify(run, steps):
     from omegaconf import OmegaConf
+    from verl.trainer.ppo.difficulty import qid_from_text
     files = [run / "replay_buffer_deltas.jsonl"]
     configs = sorted((run / "launches").glob("*/config.yaml"))
     assert configs
@@ -38,6 +39,9 @@ def verify(run, steps):
             assert kind == "online" and int(step) == d["dataset_step"] and int(index) >= 0
             assert uid in inflow
             r = inflow[uid]
+            assert e["qid"] == qid_from_text(r["input"]), "entry belongs to another problem"
+            assert e["meta"]["dataset_step"] == d["dataset_step"]
+            assert e["meta"]["prefix_len"] == 0 and e["meta"]["source_entry_id"] == ""
             assert e["response_token_ids"] == r["response_token_ids"]
             assert e["meta"]["judge_pass"] == e["meta"]["judge_score"] == r["prover_judge_score"] == 1
             admitted.append(uid)
