@@ -12,13 +12,12 @@ verl.trainer.ppo.sp_q_readiness itself. A local copy of any of them would be a s
 of truth that can silently drift from the trained format, and the format IS the trained
 behaviour -- there is no prompt hash in q_state.json that would catch a swap.
 
-THE REFERENCE PROOF, and why it is rebuilt rather than assumed. The Q prompt has two forms,
-with-ref and no-ref, and which one a call gets changes what is being asked. This run is COLD:
-its reference_bank is empty (covered: 0), so tier 2 contributes nothing and every reference
-comes from tier 1 -- the source buffer entry's own extracted proof, gated on meta.judge_pass.
-We replay replay_buffer_deltas.jsonl to rebuild exactly that map. Measured over the run's own
-q_wave at steps 37-39, the consumed site is 68.1% ref / 31.9% no-ref; --verify reports the
-share this reconstruction reproduces, and a large gap is a red flag, not a rounding detail.
+THE REFERENCE PROOF is reconstructed at the requested state boundary: active tier1 replay
+proofs (gated on meta.judge_pass), then the actual add-once tier2 bank from its seed and
+q_state_deltas. The original historical run had an empty bank; current AC2 does not.
+Verification tries all candidate live proofs because rollout dumps omit source entry IDs.
+Generation selects the newest eligible tier1 proof, then the bank, and records that choice.
+This establishes context assembly, not exact historical source-entry selection parity.
 
 --verify IS NOT OPTIONAL BEFORE A REAL RUN. q_wave rows store `ctx_token_ids`: the exact
 token ids the trainer sent for every historical Q call. Verify mode rebuilds the context for
@@ -84,7 +83,7 @@ def build_ref_map(run_dir, tokenizer, require_pass=True, upto_step=None):
         qid = e.get("qid")
         if not qid:
             continue
-        text = tokenizer.decode(e.get("response_token_ids") or [], skip_special_tokens=False)
+        text = tokenizer.decode(e.get("response_token_ids") or [], skip_special_tokens=True)
         proof = _extract_proof_text(text)
         if proof:
             refs.setdefault(qid, []).append(proof)
@@ -118,7 +117,7 @@ def build_ref_map_rollouts(run_dir, data_dir, tokenizer, prompt_key="prompt", st
     refs = {}
     files = sorted(glob.glob(os.path.join(run_dir, "rollouts", "*.jsonl")),
                    key=lambda p: -int(os.path.basename(p).split(".")[0]))
-    if steps:
+    if steps is not None:
         files = [f for f in files if int(os.path.basename(f).split(".")[0]) in steps]
     n_seen = 0
     for path in files:
@@ -136,17 +135,44 @@ def build_ref_map_rollouts(run_dir, data_dir, tokenizer, prompt_key="prompt", st
                 if qid in refs:
                     continue
                 pts = r.get("rubric_points")
-                ok = bool(r.get("acc")) or (pts is not None and float(pts) >= 6.0)
+                passed = r.get("prover_judge_score")
+                ok = (float(passed) >= 1 if passed is not None else
+                      float(pts) >= 6 if pts is not None else float(r.get("acc") or 0) >= 6 / 7)
                 if not ok:
                     continue
                 text = tokenizer.decode(r.get("response_token_ids") or [],
-                                        skip_special_tokens=False)
+                                        skip_special_tokens=True)
                 proof = _extract_proof_text(text)
                 if proof:
                     refs[qid] = proof
     print("[ref-rollouts] scanned %d rows over %d files -> %d qids with a passed proof"
           % (n_seen, len(files), len(refs)), flush=True)
     return refs
+
+
+def build_bank_map(run_dir, bank_dir, upto_step):
+    """Replay the actual add-once tier2 bank, never future rollout substitutes."""
+    from pathlib import Path
+    from verl.trainer.ppo.sp_q_readiness import verify_manifest_shards
+    base = Path(bank_dir)
+    manifest = json.loads((base / "reference_bank_manifest.json").read_text())
+    shards = sorted(str(p) for p in base.glob("reference_bank/shard_*.jsonl"))
+    verify_manifest_shards(str(base), manifest["shards"], shards, "probe reference bank")
+    bank = {}
+    for path in shards:
+        for line in Path(path).read_text().splitlines():
+            row = json.loads(line)
+            assert row["qid"] not in bank and row["proof"]
+            bank[row["qid"]] = row["proof"]
+    with (Path(run_dir) / "q_state_deltas.jsonl").open() as f:
+        for line in f:
+            delta = json.loads(line)
+            if int(delta["dataset_step"]) > upto_step:
+                break
+            for row in delta.get("bank_added", []):
+                assert row["proof"]
+                bank.setdefault(row["qid"], row["proof"])
+    return bank
 
 
 def make_ctx_builder(tokenizer, variant="reward_horizon"):
@@ -202,12 +228,11 @@ def do_verify(args):
     """Rebuild the context for historical q_wave rows and diff against what was really sent."""
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
-    # q_wave/<N> is sp_dataset_step N, so the buffer state that fed it is the state after
-    # delta N-1 was applied... but the wave is built from the SAME step's dataset rows, so
-    # deltas up to and including N are the ones live. Reconstruct at N = verify_step - 1.
-    upto = args.verify_upto if args.verify_upto is not None else args.verify_step - 1
+    # Global step S uses dataset step S-1; its Q wave precedes that step's deltas.
+    upto = args.verify_upto if args.verify_upto is not None else args.verify_step - 2
     refs = build_ref_map(args.run_dir, tok, require_pass=not args.no_require_pass,
                          upto_step=upto)
+    bank = build_bank_map(args.run_dir, args.bank_dir, upto)
     build = make_ctx_builder(tok, args.variant)
 
     # the run's own rollout rows supply prompt+attempt ids for the step being checked
@@ -242,6 +267,8 @@ def do_verify(args):
             # ASSEMBLY is right, which is what this check exists to establish
             cands = ([None] if w.get("variant") != "ref"
                      else list(refs.get(w.get("qid")) or [])[:args.ref_try])
+            if w.get("variant") == "ref" and w.get("qid") in bank:
+                cands.append(bank[w["qid"]])
             for r in rows:
                 prompt_ids = r.get("prompt_token_ids") or []
                 resp = r.get("response_token_ids") or []
@@ -286,6 +313,7 @@ def main():
     ap.add_argument("--run-dir", default=os.path.expandvars("${AC2_CLUSTER_A_ROOT}/self-play/"
                                          "experiments/08_13_tiedq_seed192/run_data"))
     ap.add_argument("--model", required=True)
+    ap.add_argument("--bank-dir", required=True, help="actual seed reference-bank directory")
     ap.add_argument("--variant", default="reward_horizon")
     ap.add_argument("--budget-g", type=int, default=10000)
     ap.add_argument("--no-require-pass", action="store_true")
@@ -293,7 +321,7 @@ def main():
     ap.add_argument("--verify-step", type=int, default=40)
     ap.add_argument("--verify-n", type=int, default=200)
     ap.add_argument("--verify-upto", type=int, default=None,
-                    help="buffer state offset to reconstruct at; default verify_step-1")
+                    help="buffer state offset to reconstruct at; default verify_step-2")
     ap.add_argument("--ref-try", type=int, default=8,
                     help="candidate live proofs per qid to try in verify mode")
     # generation-mode args
@@ -305,6 +333,7 @@ def main():
     ap.add_argument("--gpu-mem-util", type=float, default=0.85)
     ap.add_argument("--max-model-len", type=int, default=65536)
     ap.add_argument("--max-num-seqs", type=int, default=64)
+    ap.add_argument("--enforce-eager", action="store_true")
     ap.add_argument("--temperature", type=float, default=0.8)   # rollout temperature
     ap.add_argument("--gen-reserve", type=int, default=4)       # QHarness.gen_reserve
     ap.add_argument("--data-dir", default=os.path.join(os.environ.get("HOME", ""),
@@ -312,7 +341,7 @@ def main():
     ap.add_argument("--prompt-key", default="prompt")
     ap.add_argument("--no-prefix-site", action="store_true",
                     help="skip the per-group Q at the shared prefix")
-    ap.add_argument("--upto-step", type=int, default=40,
+    ap.add_argument("--upto-step", type=int, default=39,
                     help="buffer state to reconstruct refs at; 39 = dataset step of ckpt 40")
     args = ap.parse_args()
 
@@ -326,9 +355,7 @@ def main():
     tok = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
     refs = build_ref_map(args.run_dir, tok, require_pass=not args.no_require_pass,
                          upto_step=args.upto_step)
-    # buffer first (closest to tier 1), rollout harvest to fill the coverage hole
-    roll_refs = build_ref_map_rollouts(args.run_dir, args.data_dir, tok,
-                                       prompt_key=args.prompt_key)
+    bank = build_bank_map(args.run_dir, args.bank_dir, args.upto_step)
     build = make_ctx_builder(tok, args.variant)
 
     groups = []
@@ -352,18 +379,18 @@ def main():
     if not args.no_prefix_site:
         for g in mine:
             _rl = refs.get(g["qid"]) or []
-            ref = _rl[0] if _rl else roll_refs.get(g["qid"])
+            ref = _rl[0] if _rl else bank.get(g["qid"])
             ctx = build(g["prompt_token_ids"], list(g["prefix_token_ids"]), ref)
             if len(ctx) + args.gen_reserve > args.max_model_len:
                 n_skip_len += 1
                 continue
             prompts.append(TokensPrompt(prompt_token_ids=ctx))
-            keys.append((g["qid"], -1, ref is not None, len(ctx)))
+            keys.append((g["qid"], -1, ref, "tier1-newest" if _rl else "bank" if ref else "none", len(ctx)))
 
     # ---- SITE 2: Q at prefix+g, one call per rollout that reached the cut ----------------
     for g in mine:
         _rl = refs.get(g["qid"]) or []
-        ref = _rl[0] if _rl else roll_refs.get(g["qid"])
+        ref = _rl[0] if _rl else bank.get(g["qid"])
         for j, c in enumerate(g["completions"]):
             if not c["exceeds_g"]:
                 continue                      # never reached the cut: no Q value is defined
@@ -373,7 +400,7 @@ def main():
                 n_skip_len += 1               # QHarness.fits() would drop these too
                 continue
             prompts.append(TokensPrompt(prompt_token_ids=ctx))
-            keys.append((g["qid"], j, ref is not None, len(ctx)))
+            keys.append((g["qid"], j, ref, "tier1-newest" if _rl else "bank" if ref else "none", len(ctx)))
     n_pfx = sum(1 for k in keys if k[1] == -1)
     print("[q %d] %d Q calls (%d prefix-site, %d consumed-site; %d dropped for length)"
           % (args.shard, len(prompts), n_pfx, len(prompts) - n_pfx, n_skip_len))
@@ -386,19 +413,20 @@ def main():
     llm = LLM(model=args.model, tensor_parallel_size=args.tp,
               gpu_memory_utilization=args.gpu_mem_util, max_model_len=args.max_model_len,
               max_num_seqs=args.max_num_seqs, dtype="bfloat16", enable_prefix_caching=True,
-              enforce_eager=False, trust_remote_code=True, seed=args.shard)
+              enforce_eager=args.enforce_eager, trust_remote_code=True, seed=args.shard)
     sp = SamplingParams(temperature=args.temperature, top_p=1.0, top_k=-1,
                         max_tokens=args.gen_reserve, n=1)
     outs = llm.generate(prompts, sp)
 
     n_valid = 0
     with open(args.out, "w", encoding="utf-8") as fh:
-        for (qid, j, used_ref, ctx_len), o in zip(keys, outs):
+        for (qid, j, ref, ref_source, ctx_len), o in zip(keys, outs):
             text = o.outputs[0].text
             v = parse_grid_value(text)
             n_valid += int(v is not None)
             fh.write(json.dumps({"qid": qid, "completion_index": j, "q": v,
-                                 "gen_text": text, "used_ref": used_ref,
+                                 "gen_text": text, "used_ref": ref is not None,
+                                 "reference_proof": ref, "reference_source": ref_source,
                                  "ctx_len": ctx_len}) + "\n")
     print("[q %d] DONE %d calls, %d parsed to grid (%.1f%% invalid)"
           % (args.shard, len(keys), n_valid,

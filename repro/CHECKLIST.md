@@ -19,7 +19,7 @@ Track every fixed [ROADMAP](ROADMAP.md) acceptance check using first-hand receip
 | R2 AC2 | todo | Requires Richard's launch approval; score/FLOPs, readiness and crossing | Not launched |
 | R3 Prefix GRPO | todo | Requires Richard's launch approval; score/FLOPs | Not launched |
 | R4 ablations | todo | Requires Richard's launch approval and budget | Not launched |
-| R5 value probe | todo | Requires Richard's launch approval and R2 checkpoint | Not launched |
+| R5 value probe | in progress | Source correctness fixes and CPU reference/grade tests; full pipeline smoke pending E8/E9 proposal. Scientific run requires approved R2 checkpoint | `repro/test_probe_references.py`, `runs/probe-tests/`; not launched |
 
 ## Preflight
 

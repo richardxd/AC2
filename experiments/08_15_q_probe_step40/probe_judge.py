@@ -66,7 +66,7 @@ async def main_async(args):
         for j, c in enumerate(g["completions"]):
             if args.only_exceeds and not c["exceeds_g"]:
                 continue
-            tasks.append((g["qid"], j, c["text"], ei))
+            tasks.append((g["qid"], j, c["full_attempt_text"], ei))
 
     print("[judge %d] %d rollouts to score (of %d groups)"
           % (args.shard, len(tasks), len(mine)), flush=True)
@@ -80,15 +80,13 @@ async def main_async(args):
 
     async def one(qid, j, text, ei):
         async with sem:
-            try:
-                r = await compute_score(
-                    data_source=args.data_source, solution_str=text, ground_truth="",
-                    extra_info=ei, judge_url=args.judge_url,
-                    judge_max_tokens=args.judge_max_tokens, judge_temperature=1.0,
-                    judge_top_p=1.0, judge_top_k=-1, judge_reasoning_effort="high",
-                )
-            except Exception as e:                       # one bad row must not kill the shard
-                r = {"score": None, "_error": repr(e)[:200]}
+            r = await compute_score(
+                data_source=args.data_source, solution_str=text, ground_truth="",
+                extra_info=ei, judge_url=args.judge_url,
+                judge_max_tokens=args.judge_max_tokens, judge_temperature=1.0,
+                judge_top_p=1.0, judge_top_k=-1, judge_reasoning_effort="high",
+            )
+            assert all(r[k] == 0 for k in ("judge_http_error", "judge_parse_failed", "judge_truncated")), "judge failed"
             done[0] += 1
             if done[0] % 50 == 0:
                 el = time.time() - t0
@@ -99,11 +97,13 @@ async def main_async(args):
                     "score": d.get("score"), "rubric_points": d.get("rubric_points"),
                     "prover_judge_score": d.get("prover_judge_score"),
                     "judge_parse_failed": d.get("judge_parse_failed"),
+                    "judge_http_error": d["judge_http_error"],
+                    "judge_truncated": d["judge_truncated"],
                     "error": d.get("_error")}
 
     out = await asyncio.gather(*[one(*t) for t in tasks])
     n_ok = sum(1 for r in out if r["score"] is not None)
-    with open(args.out, "w", encoding="utf-8") as fh:
+    with open(args.out, "x", encoding="utf-8") as fh:
         for r in out:
             fh.write(json.dumps(r) + "\n")
     print("[judge %d] DONE %d rows, %d scored (%.1f%% failed) in %.1f min"

@@ -48,6 +48,7 @@ def main():
     ap.add_argument("--gpu-mem-util", type=float, default=0.85)
     ap.add_argument("--max-model-len", type=int, default=65536)
     ap.add_argument("--max-num-seqs", type=int, default=32)
+    ap.add_argument("--enforce-eager", action="store_true")
     ap.add_argument("--keep-ids", type=int, default=10500,
                     help="continuation ids retained per rollout; must exceed budget-g so the "
                          "Q cut is always inside what was kept")
@@ -83,27 +84,29 @@ def main():
         max_num_seqs=args.max_num_seqs,
         dtype="bfloat16",
         enable_prefix_caching=True,      # 16 siblings share the whole prompt+prefix
-        enforce_eager=False,
+        enforce_eager=args.enforce_eager,
         trust_remote_code=True,
         seed=args.seed,
     )
     print("[replica %d] engine up in %.1fs" % (args.shard, time.time() - t0), flush=True)
+    tokenizer = llm.get_tokenizer()
 
     prompts, sps = [], []
     for r in mine:
         ids = list(r["prompt_token_ids"]) + list(r["prefix_token_ids"])
         # never let prompt+prefix+budget exceed the engine window
-        budget = min(int(r["max_new_tokens"]), args.max_model_len - len(ids) - 8)
+        budget = int(r["max_new_tokens"])
+        assert budget > 0 and len(ids) + budget <= args.max_model_len, "context would alter response budget"
         prompts.append(TokensPrompt(prompt_token_ids=ids))
         sps.append(SamplingParams(temperature=args.temperature, top_p=1.0, top_k=-1,
-                                  max_tokens=max(1, budget), n=args.n, seed=None))
+                                  max_tokens=budget, n=args.n, seed=None))
 
     t1 = time.time()
     outs = llm.generate(prompts, sps)
     wall = time.time() - t1
 
     n_seq = n_over = 0
-    with open(args.out, "w", encoding="utf-8") as fh:
+    with open(args.out, "x", encoding="utf-8") as fh:
         for r, o in zip(mine, outs):
             comps = []
             for c in o.outputs:
@@ -113,6 +116,8 @@ def main():
                 n_over += int(over)
                 comps.append({
                     "text": c.text,
+                    "full_attempt_text": tokenizer.decode(list(r["prefix_token_ids"]) + tid,
+                                                          skip_special_tokens=True),
                     "n_tokens": len(tid),
                     "exceeds_g": over,
                     "finish_reason": getattr(c, "finish_reason", None),

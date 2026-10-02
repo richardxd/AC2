@@ -25,4 +25,8 @@ The research role requires correct proof labels, references available at the che
 
 ## Next acceptance
 
+Preparation corrections now implemented in the original probe stages: tier1 decode matches the live special-token rule; historical default cutoff isS−2; actual seed/delta bank is required and used instead of rollout-harvest fallback; generated Q rows record selected proof and tier. Retained harvest utility now rejects fractional failed proofs and obeys an explicit empty step set. Policy generation offers eager execution, refuses context-induced budget shrinkage, and stores decoded prefix+continuation for grading. Judge errors now abort and all three flags are retained. These changes alter erroneous measurement behavior, not training.
+
+Four CPU tests in `repro/test_probe_references.py` cover passed/failed/future references, add-once bank state, pre/post eviction boundaries, valid bank-context verification, wrong/missing/empty context rejection, full-attempt grading, and all three judge errors. Fixtures remain under `runs/probe-tests/`. Updated verifier also reproduces all6 E7 consumed no-reference contexts with its default pre-wave boundary; this still is not a real with-reference empirical check. Actual GPU probe and the scaled complete-group analysis remain pending.
+
 After E8/E9 and the R proposal: implement only the needed local adaptations; test failed/passed/future references, pre-wave/post-checkpoint state boundaries, and empty/mismatched verification; then execute the complete bounded probe pipeline on a clearly labeled engineering checkpoint. A real R5 result still requires an approved R2 checkpoint with normal readiness. See [AC2 smoke](ac2-smoke.md) for the permissive fixture's limitations.
