@@ -5,6 +5,8 @@ import json
 import math
 from pathlib import Path
 
+from local_runner import REVISIONS
+
 
 def bound(mean, n, low=0., high=1.):
     margin = (high - low) * math.sqrt(math.log(40) / (2 * n))
@@ -16,6 +18,17 @@ def summarize(directory):
     files += [directory / "grades.jsonl", directory / "judge_before.json", directory / "judge_after.json"]
     parts = [json.loads(path.read_text()) for path in files[:7]]
     assert len({p["model"] for p in parts}) == 1 and len({p["data_sha256"] for p in parts}) == 1
+    assert all(p["revision"] == REVISIONS[p["model"]] for p in parts)
+    assert len({p["gpu_uuid"] for p in parts}) == 7
+    expected_config = {"engine_seed": 192, "request_seed": "192 + canonical problem index",
+                       "temperature": .8, "top_p": 1., "top_k": -1,
+                       "response_budget": 16384, "max_num_seqs": 4, "tp": 1}
+    for shard, part in enumerate(parts):
+        assert part["configuration"] == expected_config
+        assert math.isfinite(part["generation_wall_s"]) and part["generation_wall_s"] > 0
+        assert sorted(row["index"] for row in part["rows"]) == list(range(shard, 60, 7))
+        assert part["generated_tokens"] == sum(len(row["response_token_ids"]) for row in part["rows"])
+        assert all(row["finish_reason"] in {"stop", "length"} for row in part["rows"])
     generated = {row["index"]: row for part in parts for row in part["rows"]}
     grades = [json.loads(line) for line in (directory / "grades.jsonl").read_text().splitlines()]
     assert len(grades) == 60 and len(generated) == 60
@@ -35,6 +48,7 @@ def summarize(directory):
     after = {r["id"]: r for r in json.loads((directory / "judge_after.json").read_text())}
     assert all(after[k] == v for k, v in before.items()), "overlapping judge activity"
     calls = [v for k, v in after.items() if k not in before]
+    assert all(r["state"] == "complete" for r in calls), "incomplete judge accounting"
     return {"model": parts[0]["model"], "revision": parts[0]["revision"], "data_sha256": parts[0]["data_sha256"],
             "n_problems": 60, "samples_per_problem": 1, "mean_score": mean,
             "mean_score_95pct_hoeffding": bound(mean, 60), "nonzero_fraction": nonzero,
