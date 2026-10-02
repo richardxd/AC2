@@ -33,4 +33,12 @@ No judge calls made yet. Spend by this reproduction: $0. Cap: $5. The kickoff's 
 
 ## Commit and review receipts
 
-Pending first completed task. Every commit needs an independent review; only push `origin repro-g16`.
+E2 commit `7d52571`: independent review by `review_e2` verified all 120 test-list entries against XML, all six diagnoses, experiment enumeration and shell syntax; clean within E2 scope. Paper/host facts not included in that review. Only push `origin repro-g16`.
+
+## E3 data preparation
+
+Raw generation ran both requested modules unmodified: 5,227 train rows and 60 val rows. Training rubrics collapse to 5,225 keys; no empty rubric. The raw val map matches 59/60. Row 51 has a mirror transcription discrepancy (excluded triangle vertices swapped); the official DeepMind CSV supplies the corrected statement and its reference. `repro/prepare_eval_data.py` creates a separate canonical dataset, asserts exactly this change, retains all 60 problems and checks nonempty reference/guidelines coverage. Both raw and derived hashes are tracked in `repro/receipts/e3-*.json`; originals preserved. This is an explicit evaluation-input deviation. See [data finding](../docs/findings/repro/data-preparation.md).
+
+## Interrupted build / sandbox restart
+
+Supervisor interrupted first flash-attn build and reported uv terminated. On resume no nvcc/cicc/ninja/ptxas processes remained in the user process listing. Reran FA-only build into the same project venv, with log `runs/e1/flash-attn-build-02.log`. Toolkit components were downloaded from NVIDIA CUDA 12.9.1 redistributables and checked against published SHA256 metadata; receipt `/scratch/richard1xur/ac2/cuda-12.9/receipt.json`. Initial extraction with shell-default Python failed because that interpreter lacked `tarfile`'s `filter` argument; reran using project Python 3.12.14. No system toolkit modified. `FLASH_ATTN_CUDA_ARCHS=80` builds the Ampere cubins compatible with Ada; actual kernel execution remains to be verified.

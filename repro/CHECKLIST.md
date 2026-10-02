@@ -8,7 +8,7 @@ Track every fixed [ROADMAP](ROADMAP.md) acceptance check using first-hand receip
 |---|---|---|---|
 | E1 pinned environment | in progress | Base install started; imports and flash-attn not yet verified | `runs/e1/host.txt`, `runs/e1/install-base.log`; [environment](env.sh) |
 | E2 CPU tests | done | 114 passed, 6 failed; complete pass/fail list recorded. One documented expected failure; five additional stale test assumptions, not suppressed | `runs/e2/pytest-02.log`, `runs/e2/results-02.xml`, [test list](receipts/e2-test-list.json), [finding](../docs/findings/repro/cpu-tests.md) |
-| E3 data | todo | Both splits, rubric/val maps, counts and all output hashes | Pending |
+| E3 data | done | 5,227 train / 60 val rows; raw maps 5,284 rubrics / 59 val references. Derived canonical set has 60/60 references after one explicit mirror correction | [raw receipt](receipts/e3-raw.json), [canonical receipt](receipts/e3-canonical.json), `runs/e3/`, [finding](../docs/findings/repro/data-preparation.md) |
 | E4 judge | todo | 20 proofs, train and val prompts, parse rate, latency, tokens, USD and projections; cap $5 | Pending |
 | E5 local adaptation | todo | Local Ray, g16 `.env`, GRPO and AC2 config composition | Pending |
 | E6 multi-GPU | todo | 1 then 7 GPUs, 2 steps, save/resume; world size, TP/DP, per-GPU load, continued step/loss | Pending |

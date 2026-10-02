@@ -1,0 +1,15 @@
+{
+  "rows": {
+    "train.parquet": 5227,
+    "test.parquet": 60
+  },
+  "hashes": {
+    "provenance.json": "e8edd609de1edfdb8478d08b1c872e56ec5dfe6c349793287ea3c10efadab3f5",
+    "rubric_map.json": "7d481c98c231b259bc55d0e62f3974689efdcd93cafdc96e2e7463c6b530b92d",
+    "test.parquet": "5a7c97bb52b9f2d2386cb438f949caf1ad0bbdfd9e595e1a734fe2218e714595",
+    "train.parquet": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "val_map.json": "318dbf010f72f07518a0aad378db4c9b527b4ba970203fe5fbfcb7567a44a4b0"
+  },
+  "rubric_entries": 5284,
+  "val_entries": 59
+}

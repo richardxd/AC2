@@ -1,0 +1,20 @@
+{
+  "source_url": "https://raw.githubusercontent.com/google-deepmind/superhuman/main/imobench/proofbench_v2.csv",
+  "changes": [
+    {
+      "row": 51,
+      "before": "Given a triangle $ABC$ with $AB<AC<BC$, let $I$ be the incenter\n of triangle $ABC$, and let $M$ and $N$ be the midpoints of sides\n $CA$ and $AB$, respectively. Let $K$ be the midpoint of the arc\n $BC$ of the circumcircle of triangle $ABC$ which does not contain\n $A$. Let $B'\\neq B$ be the point where the line parallel to $AC$\n and tangent to the incircle of triangle $ABC$ intersects side $BC$,\n and similarly, let $C'\\neq C$ be the point where the line parallel\n to $AB$ and tangent to the incircle of triangle $ABC$ intersects\n side $BC$. Find the value of $\\angle NIM+\\angle B'KC'$ in terms\n of degree.",
+      "after": "Given a triangle $ABC$ with $AB<AC<BC$, let $I$ be the incenter\n of triangle $ABC$, and let $M$ and $N$ be the midpoints of sides\n $CA$ and $AB$, respectively. Let $K$ be the midpoint of the arc\n $BC$ of the circumcircle of triangle $ABC$ which does not contain\n $A$. Let $B'\\neq C$ be the point where the line parallel to $AC$\n and tangent to the incircle of triangle $ABC$ intersects side $BC$,\n and similarly, let $C'\\neq B$ be the point where the line parallel\n to $AB$ and tangent to the incircle of triangle $ABC$ intersects\n side $BC$. Find the value of $\\angle NIM+\\angle B'KC'$ in terms\n of degree."
+    }
+  ],
+  "train_rows": 5227,
+  "val_rows": 60,
+  "val_map_entries": 60,
+  "sha256": {
+    "proofbench_v2.csv": "aa8b813dbd4068137e3d165e5da228f6e0e1cc85a91c37883e1791b954e43af0",
+    "rubric_map.json": "7d481c98c231b259bc55d0e62f3974689efdcd93cafdc96e2e7463c6b530b92d",
+    "test.parquet": "d558f86d11d3cae570cb0bc873ee78aa5151c648b0f25ffe48ebab234579343b",
+    "train.parquet": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "val_map.json": "48459bd9ebe9555273d823015e266c5497272ceff033826df1109408fb9ca82a"
+  }
+}
