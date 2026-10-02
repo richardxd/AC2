@@ -76,7 +76,11 @@ def main():
     source_launches = validate_source(args)
     config = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items() if k != "stage"}
     config.update(response=16384, chunk=4096, samples=4, q_temperature=0,
-                  policy_temperature=.8, top_p=1, top_k=-1, prefix_seed=192)
+                  policy_temperature=.8, top_p=1, top_k=-1, prefix_seed=192,
+                  judge_max_tokens=65536, judge_http_timeout=540)
+    code = [Path(__file__).resolve(), ROOT / "repro/probe_report.py",
+            EXP / "build_probe_set.py", EXP / "probe_gen.py", EXP / "probe_q.py", EXP / "probe_judge.py"]
+    config["pipeline_code_sha256"] = {str(path): digest(path) for path in code}
     configuration = args.out / "configuration.json"
     if configuration.exists():
         assert json.loads(configuration.read_text()) == config, "resume configuration changed"

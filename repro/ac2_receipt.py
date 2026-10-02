@@ -26,6 +26,10 @@ def main():
         (root / "repro/receipts/e1-acceptance-uuid.json").read_text())["kernel_checks"]}
     metrics_path = args.run / "metrics.jsonl"
     metric_rows = list(map(json.loads, metrics_path.read_text().splitlines()))
+    for row in metric_rows:
+        if row["step"] == 0:
+            assert "actor/grad_norm" not in row["data"] and any(k.startswith("val-") for k in row["data"])
+    metric_rows = [row for row in metric_rows if row["step"] > 0]
     metrics = {r["step"]: r["data"] for r in metric_rows}
     assert len(metrics) == len(metric_rows) and sorted(metrics) == list(range(1, args.checkpoint + 1))
     launches, files = [], [metrics_path]
@@ -35,7 +39,21 @@ def main():
         assert result["returncode"] == 0 and not result["timed_out"] and result["monitor_error"] is None
         launch = json.loads((path / "launch.json").read_text())
         cmd = launch["command"]
-        assert (root / cmd[cmd.index("--run-dir") + 1]).resolve() == args.run.resolve()
+        if "--run-dir" in cmd:
+            launched_run = (root / cmd[cmd.index("--run-dir") + 1]).resolve()
+        else:
+            from r_launch import TASKS
+            assert len(cmd) in {4, 6} and (root / cmd[1]).resolve() == root / "repro/r_launch.py"
+            assert cmd[2] in TASKS and TASKS[cmd[2]][0] == "ac2"
+            assert cmd[3] in {"smoke-cold", "smoke-resume"}
+            attempt = 1
+            if len(cmd) == 6:
+                assert cmd[4] == "--attempt"
+                attempt = int(cmd[5])
+                assert attempt >= 1
+            name = cmd[2] if attempt == 1 else f"{cmd[2]}-attempt{attempt}"
+            launched_run = root / "runs/r-smokes" / name
+        assert launched_run == args.run.resolve()
         assert launch["gpus"] == list("1234567")
         samples = {i: [] for i in range(1, 8)}
         with (path / "gpu.csv").open() as f:
@@ -60,6 +78,10 @@ def main():
         added_path = Path(completed[0])
         assert added_path.resolve().is_relative_to(args.run.resolve() / "launches")
         added = [json.loads(line) for line in added_path.read_text().splitlines()]
+        for row in added:
+            if row["step"] == 0:
+                assert "actor/grad_norm" not in row["data"] and any(k.startswith("val-") for k in row["data"])
+        added = [row for row in added if row["step"] > 0]
         steps = [r["step"] for r in added]
         if phase_steps:
             assert steps[0] == phase_steps[-1] + 1

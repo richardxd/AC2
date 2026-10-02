@@ -75,6 +75,8 @@ python repro/run_bounded.py --seconds 1740 --receipt-dir runs/r-smoke-launches/T
 
 After separate approval, the prepared long command is `python repro/r_launch.py TASK long`; it has not been executed. Preparation results and remaining blockers are maintained in [CHECKLIST](CHECKLIST.md).
 
+After complete checkpoints, `python repro/r_curves.py --run runs/research/TASK --output runs/research/TASK/curve.json --figure runs/research/TASK/curve.png` validates every raw population, prompt set and logged mean before exporting the curve. For R2/R3/R4, add `--baseline runs/research/r1/curve.json` to record the first observed point above R1's observed peak; this is a descriptive grid crossing, not a statistical superiority claim. Outputs must be new paths. Bounded runs use their smoke paths and are visibly labeled engineering fixtures. `smoke_receipt.py` independently checks physical GPU UUID activity, distributed world size and all-rank checkpoint restoration; `ac2_receipt.py` additionally checks critic optimizer counters and Q state on R2/R4.
+
 ## R5 value probe
 
 Use an approved normal-readiness R2 checkpoint with at least32 ready problems,32 distinct prefixes×4 full continuations,16384 response cap,4096 Q cut, prefix fraction5–95%, at least6144 tokens remaining, selection seed192. Policy sampling0.8/1/unrestricted; Q sampling greedy0, matching live Q/Table4 rather than the old probe script's0.8 default. Select latest eligible attempts at or before checkpoint, never by observed probe quality. If32 ready problems are unavailable, report the actual count and defer/revise before scientific generation; the wrapper refuses silent count reduction.

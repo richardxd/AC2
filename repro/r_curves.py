@@ -142,6 +142,7 @@ def main():
     p.add_argument("--run", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--baseline", type=Path)
+    p.add_argument("--figure", type=Path, help="Optional PNG of verified score/FLOPs points")
     args = p.parse_args()
     report = collect(args.run.resolve())
     if args.baseline:
@@ -154,6 +155,27 @@ def main():
         report["sha256"][str(args.baseline)] = sha(args.baseline)
     with args.output.open("x") as f:
         json.dump(report, f, indent=2, allow_nan=False)
+    if args.figure:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(figsize=(7, 4.5), layout="constrained")
+        series = [(report, "Current run")]
+        if args.baseline:
+            series.insert(0, (baseline, "GRPO baseline"))
+        for data, label in series:
+            points = data["curve"]
+            ax.plot([p["cumulative_decoding_flops"]/1e18 for p in points],
+                    [100*p["mean_score"] for p in points], "o-", label=label)
+        ax.set(xlabel="Cumulative policy decoding FLOPs (×10¹⁸)",
+               ylabel="Validation mean score (%)", ylim=(0, 100),
+               title="Engineering fixture — no efficacy claim" if report["engineering_smoke"] else "Observed validation checkpoints")
+        ax.grid(alpha=.25)
+        ax.legend()
+        fig.text(.01, .01, "Point estimates; separate uncertainty bounds and provenance are in the JSON receipt.", fontsize=7)
+        with args.figure.open("xb") as f:
+            fig.savefig(f, format="png", dpi=180)
+        plt.close(fig)
     print(f"CURVE_VERIFIED points={len(report['curve'])} steps={len(report['training'])}")
 
 

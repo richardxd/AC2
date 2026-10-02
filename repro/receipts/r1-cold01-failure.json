@@ -1,0 +1,581 @@
+{
+  "result": {
+    "returncode": 1,
+    "timed_out": false,
+    "elapsed_s": 870.9254207201302,
+    "telemetry": "independent sampler; inspect timestamps for gaps",
+    "monitor_error": null
+  },
+  "scope": "Failed before first policy update; initial validation retained. All27judge calls charged,26stop/1length. No scientific inference.",
+  "calls": [
+    {
+      "rowid": 168,
+      "state": "complete",
+      "usd": 0.0021199079999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/61abe1f63bd7483cb3593a0288448748.json",
+      "sha256": "b479b2bd12b2bc0de284e1e5408847ed81c6a366cc10d089c7faaaae0e12dca4",
+      "usage": {
+        "prompt_tokens": 2843,
+        "completion_tokens": 1244,
+        "total_tokens": 4087,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 952
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 2075
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 169,
+      "state": "complete",
+      "usd": 0.002205708,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/66c30863fc9f4829ba8dd5fa838777b2.json",
+      "sha256": "24e8d473c11e81842d8f208675426c7176c75420de3611aa308d28da06d27191",
+      "usage": {
+        "prompt_tokens": 2489,
+        "completion_tokens": 1404,
+        "total_tokens": 3893,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1007
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1721
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 170,
+      "state": "complete",
+      "usd": 0.004571508,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/0951c58bdecc4845bf4d328ce24bf076.json",
+      "sha256": "8431a3f5050b1764cd14c313652b2358957357d98aaa8058f649ce5caf750425",
+      "usage": {
+        "prompt_tokens": 2983,
+        "completion_tokens": 3252,
+        "total_tokens": 6235,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3000
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 2215
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 171,
+      "state": "complete",
+      "usd": 0.000880872,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/f1e9993b907e443ea1181544f0bb685a.json",
+      "sha256": "64cc38c5d670d71c3b570876ddad30b383725780268bddd59c78eef914961adf",
+      "usage": {
+        "prompt_tokens": 994,
+        "completion_tokens": 611,
+        "total_tokens": 1605,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 393
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 482
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 172,
+      "state": "complete",
+      "usd": 0.000708372,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/6cf4dd9e36504c84b9a20f981d7cbd07.json",
+      "sha256": "b61262849c144ad476194b59effb2d4f2d09bfe3cde6db33a59630d778ece868",
+      "usage": {
+        "prompt_tokens": 963,
+        "completion_tokens": 475,
+        "total_tokens": 1438,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 275
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 451
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 173,
+      "state": "complete",
+      "usd": 0.000832572,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/580b68e5684e443d80730175035a27d6.json",
+      "sha256": "e95299621d106d6cc9b4b4247c33615ada2e0c9bb307f95dacf9d19949dbb93b",
+      "usage": {
+        "prompt_tokens": 1445,
+        "completion_tokens": 458,
+        "total_tokens": 1903,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 933
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 174,
+      "state": "complete",
+      "usd": 0.002089272,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/bd12059dffaf470798a8375d61e02dc8.json",
+      "sha256": "ea1a948a3d0664532accb40c0f1f0db78f3cef217bd923fdcbcfaa82d47622fd",
+      "usage": {
+        "prompt_tokens": 1358,
+        "completion_tokens": 1527,
+        "total_tokens": 2885,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1262
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 846
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 175,
+      "state": "complete",
+      "usd": 0.001728072,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/4362c5e0ad87417cab7fed90091ad1bd.json",
+      "sha256": "adfe4f74be1c1070a9dc0e241aac77e27a70b3fc6cce9145088315b07ae56238",
+      "usage": {
+        "prompt_tokens": 1266,
+        "completion_tokens": 1249,
+        "total_tokens": 2515,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1037
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 754
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 176,
+      "state": "complete",
+      "usd": 0.0009435719999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/e87e5bbd517348f1b7497c35bf36226a.json",
+      "sha256": "e03427aa4aff47debb8eba6fe2380f04f2095f269b397030fac4598410b421e0",
+      "usage": {
+        "prompt_tokens": 1583,
+        "completion_tokens": 516,
+        "total_tokens": 2099,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 305
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1071
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 177,
+      "state": "complete",
+      "usd": 0.021452003999999997,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/8c1c9732c5ea49d78a355f1c687eca69.json",
+      "sha256": "0b2897e17a06420e47c7590b20694d306b8e1c1dcf4b2dfbb48ff64356b0f0f3",
+      "usage": {
+        "prompt_tokens": 2111,
+        "completion_tokens": 17443,
+        "total_tokens": 19554,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 17135
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1727
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 178,
+      "state": "complete",
+      "usd": 0.001935672,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/4fa416ec8bbc4b8ea036819ea5a0b3ee.json",
+      "sha256": "9ee476a5a63b518944ced57db6ae318bca72896e5263080e73b13aa5cd20daf5",
+      "usage": {
+        "prompt_tokens": 1374,
+        "completion_tokens": 1395,
+        "total_tokens": 2769,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1207
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 862
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 179,
+      "state": "complete",
+      "usd": 0.00413004,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/2301ee7f30cb4bf5935279d4ac35759f.json",
+      "sha256": "b34ca608124ee80c2a53510859d855dd72d2e0971f93f1e58273db9f8569cfe5",
+      "usage": {
+        "prompt_tokens": 1966,
+        "completion_tokens": 3107,
+        "total_tokens": 5073,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2866
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1326
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 180,
+      "state": "complete",
+      "usd": 0.002655672,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/230c8e8612354db59c9b2e7f553719a9.json",
+      "sha256": "ebcd6aa22c1f1f8bc36888a3e26a8d642e8e43851e43ab5bcd3cc7a40ade3142",
+      "usage": {
+        "prompt_tokens": 1150,
+        "completion_tokens": 2051,
+        "total_tokens": 3201,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1696
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 638
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 181,
+      "state": "complete",
+      "usd": 0.00682044,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/628e7e21fe084a86a6a8ca02f2d3ace1.json",
+      "sha256": "a30a94b69ae7d411887bdaf3a62a3cd9e30bc5f10e7d1280ab4dd7a53645aaac",
+      "usage": {
+        "prompt_tokens": 2594,
+        "completion_tokens": 5192,
+        "total_tokens": 7786,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4907
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1954
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 182,
+      "state": "complete",
+      "usd": 0.003158208,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/b708ee15be364498b9762abe17c0e5ba.json",
+      "sha256": "7d96849556e3171cad51d4f19aeb75d4d91096173f9f0b9a90a0bd773add1c13",
+      "usage": {
+        "prompt_tokens": 2032,
+        "completion_tokens": 2312,
+        "total_tokens": 4344,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2031
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1264
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 183,
+      "state": "complete",
+      "usd": 0.006697704,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/e794e1facd474372b2e2de5c41bfc55f.json",
+      "sha256": "673214348b3343041e8fb3536b1b5a72f6defafc98d2e632dbab395ca23b6e33",
+      "usage": {
+        "prompt_tokens": 1946,
+        "completion_tokens": 5189,
+        "total_tokens": 7135,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4594
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1562
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 184,
+      "state": "complete",
+      "usd": 0.007483872,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/1d6ec0f3793642078c3be4571c666f1b.json",
+      "sha256": "9b61be5fdbde1471a656932e747bb6dddf50c54e4a8975f5007c4df15acba2dd",
+      "usage": {
+        "prompt_tokens": 2792,
+        "completion_tokens": 5664,
+        "total_tokens": 8456,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5221
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 2280
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 185,
+      "state": "complete",
+      "usd": 0.008294603999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/49f02287f9534316a5c77e5ee100ab74.json",
+      "sha256": "6607d3964de852beeeaf384edbde6cc1d7998dec11a7f245958d6e04b90e6ec7",
+      "usage": {
+        "prompt_tokens": 1913,
+        "completion_tokens": 6528,
+        "total_tokens": 8441,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 6258
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1529
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 186,
+      "state": "complete",
+      "usd": 0.048478572,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/90918e7521ad4c57ab742f1e94c69d94.json",
+      "sha256": "8018d95f9e48adea4f299805a6d85a7141355296f5079914703be225953368d2",
+      "usage": {
+        "prompt_tokens": 2097,
+        "completion_tokens": 40000,
+        "total_tokens": 42097,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 40000
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1585
+      },
+      "finish": "length"
+    },
+    {
+      "rowid": 187,
+      "state": "complete",
+      "usd": 0.0052682399999999996,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/ed7170707b884238bef17a93ccfbef87.json",
+      "sha256": "b65904e1aed1566afda6572a13e58dcd66f56665fe39cf35bedbca41d3803758",
+      "usage": {
+        "prompt_tokens": 2912,
+        "completion_tokens": 3819,
+        "total_tokens": 6731,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3469
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 2272
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 188,
+      "state": "complete",
+      "usd": 0.005817971999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/65468e4ccdc04171870c4bdd14ef8425.json",
+      "sha256": "a36109fc075c6d0db38b22d50a05bafdb939be69a409e43ee63426aa372a2337",
+      "usage": {
+        "prompt_tokens": 2087,
+        "completion_tokens": 4452,
+        "total_tokens": 6539,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4109
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1575
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 189,
+      "state": "complete",
+      "usd": 0.012256872,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/512be842b1d14e59a14ea02600b3be7f.json",
+      "sha256": "5135b4cc1b3e557192cc4aad7bcc67f32b1476c415f48c139a99f63c84f01860",
+      "usage": {
+        "prompt_tokens": 882,
+        "completion_tokens": 10119,
+        "total_tokens": 11001,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9927
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 370
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 190,
+      "state": "complete",
+      "usd": 0.015017603999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/7167f5a0ea8f4e149fd90b42c712bca6.json",
+      "sha256": "950df48b03737d037b78f1d1608436d462b3794db7f108d1b1ed85c5496d9ef0",
+      "usage": {
+        "prompt_tokens": 2211,
+        "completion_tokens": 12056,
+        "total_tokens": 14267,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 11736
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 1827
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 191,
+      "state": "complete",
+      "usd": 0.007304471999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/a12d7edc991f4f7985b66edbb30b5753.json",
+      "sha256": "f465c009c984c063ed7a457b9d45ada0be0e4d4f3fe6b5e4f73a66c24b4a46a1",
+      "usage": {
+        "prompt_tokens": 886,
+        "completion_tokens": 5991,
+        "total_tokens": 6877,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5886
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 374
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 192,
+      "state": "complete",
+      "usd": 0.005175072,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/13059dde6b4a40198553da2d25d6ef6a.json",
+      "sha256": "ab2d7975768504975516de498c487f4932a095c2cf74e8c8e1e77396459e2da3",
+      "usage": {
+        "prompt_tokens": 1888,
+        "completion_tokens": 3966,
+        "total_tokens": 5854,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3599
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1376
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 193,
+      "state": "complete",
+      "usd": 0.005822508,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/bb175179e45f411badf267daefda9dcb.json",
+      "sha256": "f7b7901c14a0bff6a8be37ab6589b59a8b97bbbd32a0fd0948a02dac7f5ed060",
+      "usage": {
+        "prompt_tokens": 2681,
+        "completion_tokens": 4370,
+        "total_tokens": 7051,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 3813
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1913
+      },
+      "finish": "stop"
+    },
+    {
+      "rowid": 194,
+      "state": "complete",
+      "usd": 0.013106904,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/cd674fb9cfb64288951df1a149d0534a.json",
+      "sha256": "5cffbc5eae36e082c98ab660ffecd7e7223c87c801f0faa9b19cdfb18b8afda6",
+      "usage": {
+        "prompt_tokens": 1126,
+        "completion_tokens": 10735,
+        "total_tokens": 11861,
+        "prompt_tokens_details": {
+          "cached_tokens": 384
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 10263
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 742
+      },
+      "finish": "stop"
+    }
+  ],
+  "usd": 0.19695628799999998,
+  "ledger_after_usd": 1.064428284
+}
