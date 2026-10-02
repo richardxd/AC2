@@ -44,7 +44,10 @@ class SurrogateTests(unittest.TestCase):
             self.assertEqual(asyncio.run(surrogate_reward.compute_score(**kwargs)), {"score": 1})
             self.assertEqual(call.call_count, 1)
             for change in (dict(judge_url="http://127.0.0.1:18791/v1"), dict(judge_payload_style="deepseek_v4"),
-                           dict(judge_max_tokens=40000), dict(judge_reasoning_effort="low")):
+                           dict(judge_max_tokens=40000), dict(judge_reasoning_effort="low"),
+                           dict(finegrained_template_path="/tmp/custom-train.txt"),
+                           dict(val_judge_template_path="/tmp/custom-val.txt"),
+                           dict(train_rubric_template_path="/tmp/custom-rubric.txt")):
                 with self.assertRaises(AssertionError):
                     asyncio.run(surrogate_reward.compute_score(**(kwargs | change)))
             self.assertEqual(call.call_count, 1)

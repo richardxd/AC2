@@ -36,6 +36,8 @@ Decisions/defaults: retain native high reasoning effort and65536 output ceiling 
 
 R2 compose-only pin migration: existing research directory contained two DeepSeek compose manifests but no metrics/checkpoints/rollouts. Independent safety review approved preserving `judge_snapshot.pre-surrogate-compose.json` (SHA4c9d4824...) and updating only the active pin to the surrogate endpoint/model. Both R1/R2 now compose200steps/save20/val10 with strict local reward and full60×4 validation; no drift override enabled. Historical compose manifests remain intact and are excluded from executed-run curve comparison.
 
+S1 independent review confirmed actual20 prompt identities/parse/cost evidence, but found that alternate template paths could bypass the new adapter's canonical-byte check. Default applied before any S3 training: require canonical train/val paths and reject alternate training rubric; three negative path cases now fail before transport. Existing S1/S2 calls used unchanged original prompts. Evidence `runs/reviews/154fe36-independent-sivdo4j3/`.
+
 ## Preflight
 
 Read kickoff, roadmap, paper text, root README, install script, metric exporter documentation, and README/runner/launch scripts for all three main arms. Rendered the local PDF with PyMuPDF 1.28.2; inspected pages 8–10, 18–19, 26–27 for Figures 2–4, 7–9 and Tables 3–4. Images and independent text extraction: `runs/paper/`.
