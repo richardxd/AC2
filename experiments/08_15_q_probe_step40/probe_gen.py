@@ -60,6 +60,7 @@ def main():
     ap.add_argument("--seed", type=int, default=-1,
                     help="engine seed; -1 means use the shard index")
     args = ap.parse_args()
+    assert args.keep_ids >= args.budget_g > 0, "retained continuation IDs must cover the Q cut"
     if args.seed < 0:
         args.seed = args.shard
 

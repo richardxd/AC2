@@ -394,6 +394,7 @@ def main():
         for j, c in enumerate(g["completions"]):
             if not c["exceeds_g"]:
                 continue                      # never reached the cut: no Q value is defined
+            assert len(c["cont_token_ids"]) >= args.budget_g, "missing tokens at requested Q cut"
             attempt = list(g["prefix_token_ids"]) + list(c["cont_token_ids"])[:args.budget_g]
             ctx = build(g["prompt_token_ids"], attempt, ref)
             if len(ctx) + args.gen_reserve > args.max_model_len:
