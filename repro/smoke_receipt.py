@@ -153,12 +153,45 @@ def main():
         delta = args.run / "replay_buffer_deltas.jsonl"
         deltas = [json.loads(line) for line in delta.read_text().splitlines()]
         assert [r["dataset_step"] for r in deltas] == list(range(max(expected_steps)))
+        sequence = 0
+        active_entries = {}
+        reconstructed = {}
+        for row in deltas:
+            step = row["dataset_step"] + 1
+            m = metrics[step]
+            assert len(row["added_entries"]) == m["replay/admitted"]
+            assert len(row["replaced_entry_ids"]) == m["replay/replaced"]
+            for entry_id in row["replaced_entry_ids"]:
+                assert entry_id in active_entries
+                del active_entries[entry_id]
+            for entry in row["added_entries"]:
+                assert entry["entry_id"] not in active_entries and entry["response_token_ids"]
+                assert entry["meta"]["buffer_seq"] == sequence
+                assert entry["meta"]["dataset_step"] == row["dataset_step"]
+                sequence += 1
+                active_entries[entry["entry_id"]] = entry["qid"]
+            assert len(active_entries) == m["replay/buffer_size"]
+            assert len(set(active_entries.values())) == m["replay/coverage"]
+            reconstructed[step] = {"sequence": sequence, "covered": set(active_entries.values())}
         states = []
+        previous_ema_keys = set()
         for step in expected_steps:
             path = args.run / "checkpoints" / f"global_step_{step}" / "sp_replay_state.json"
             state = json.loads(path.read_text())
             assert state["next_dataset_step"] == step and state["seed_manifest_sha"] == seed_sha
             assert not state["reseeds"]
+            assert state["replay_policy"]["bucketing"] == "global"
+            assert state["buffer_seq_next"] == reconstructed[step]["sequence"]
+            assert state["ema"] and previous_ema_keys.issubset(state["ema"])
+            assert all(math.isfinite(v) and v >= 0 for v in state["ema"].values())
+            covered = reconstructed[step]["covered"]
+            assert covered.issubset(state["ema"])
+            if covered:
+                assert math.isclose(sum(state["ema"][q] for q in covered) / len(covered),
+                                    metrics[step]["replay/ema_mean"], rel_tol=1e-7, abs_tol=1e-10)
+            else:
+                assert math.isnan(metrics[step]["replay/ema_mean"])
+            previous_ema_keys = set(state["ema"])
             if states:
                 assert state["replay_policy"] == states[0]["replay_policy"]
             states.append({"step": step, "ema_entries": len(state["ema"]),
