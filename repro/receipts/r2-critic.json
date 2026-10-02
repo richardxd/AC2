@@ -1,0 +1,196 @@
+{
+  "run": "runs/r-smokes/r2",
+  "launches": [
+    {
+      "path": "runs/r-smoke-launches/r2-cold01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1464.4939061701298,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        1
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1427,
+          "active_samples_ge5pct": 1227,
+          "max_memory_mib": 29262.0,
+          "max_sampling_gap_s": 12.575000047683716
+        },
+        "2": {
+          "samples": 1427,
+          "active_samples_ge5pct": 1196,
+          "max_memory_mib": 29123.0,
+          "max_sampling_gap_s": 12.573999881744385
+        },
+        "3": {
+          "samples": 1427,
+          "active_samples_ge5pct": 1138,
+          "max_memory_mib": 29082.0,
+          "max_sampling_gap_s": 12.573999881744385
+        },
+        "4": {
+          "samples": 1427,
+          "active_samples_ge5pct": 1144,
+          "max_memory_mib": 28702.0,
+          "max_sampling_gap_s": 12.573999881744385
+        },
+        "5": {
+          "samples": 1427,
+          "active_samples_ge5pct": 909,
+          "max_memory_mib": 28661.0,
+          "max_sampling_gap_s": 12.573999881744385
+        },
+        "6": {
+          "samples": 1427,
+          "active_samples_ge5pct": 857,
+          "max_memory_mib": 29341.0,
+          "max_sampling_gap_s": 12.575000047683716
+        },
+        "7": {
+          "samples": 1427,
+          "active_samples_ge5pct": 911,
+          "max_memory_mib": 25201.0,
+          "max_sampling_gap_s": 12.575000047683716
+        }
+      },
+      "engineering_readiness": false
+    },
+    {
+      "path": "runs/r-smoke-launches/r2-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1214.5358500815928,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        2
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1074,
+          "active_samples_ge5pct": 786,
+          "max_memory_mib": 29332.0,
+          "max_sampling_gap_s": 44.73900008201599
+        },
+        "2": {
+          "samples": 1074,
+          "active_samples_ge5pct": 792,
+          "max_memory_mib": 29311.0,
+          "max_sampling_gap_s": 44.73799991607666
+        },
+        "3": {
+          "samples": 1073,
+          "active_samples_ge5pct": 790,
+          "max_memory_mib": 29272.0,
+          "max_sampling_gap_s": 44.73900008201599
+        },
+        "4": {
+          "samples": 1073,
+          "active_samples_ge5pct": 765,
+          "max_memory_mib": 29372.0,
+          "max_sampling_gap_s": 44.73900008201599
+        },
+        "5": {
+          "samples": 1073,
+          "active_samples_ge5pct": 785,
+          "max_memory_mib": 29331.0,
+          "max_sampling_gap_s": 44.73800015449524
+        },
+        "6": {
+          "samples": 1073,
+          "active_samples_ge5pct": 791,
+          "max_memory_mib": 29391.0,
+          "max_sampling_gap_s": 44.73800015449524
+        },
+        "7": {
+          "samples": 1073,
+          "active_samples_ge5pct": 798,
+          "max_memory_mib": 23219.0,
+          "max_sampling_gap_s": 44.73800015449524
+        }
+      },
+      "engineering_readiness": false
+    }
+  ],
+  "checkpoint": 2,
+  "critic_update_steps": [
+    2
+  ],
+  "q_optimizer_steps": {
+    "0": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "1": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "2": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "3": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "4": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "5": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "6": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    }
+  },
+  "ready_problems": 0,
+  "wave_counts": {
+    "probe": 16
+  },
+  "valid_waves": {
+    "probe": 16
+  },
+  "routes": {
+    "full": 160
+  },
+  "consumed_chunks": 0,
+  "max_consumed_chunk": null,
+  "chunk_limit": 4096,
+  "branch_checks_required": false,
+  "scope": "engineering branch coverage; permissive readiness is not a scientific result",
+  "sha256": {
+    "runs/r-smokes/r2/metrics.jsonl": "0b784caa2b16b3755170a7aabbae70f90f35bdaa507009d7369c54a8d804ec70",
+    "runs/r-smoke-launches/r2-cold01/stdout.log": "159c1090bedd0d0a59aabe084bab601ce50aa4ceab1a2ead29f73244a5c69701",
+    "runs/r-smoke-launches/r2-cold01/launch.json": "7658d2a0ae9e3fa8f740b8a4efefbb22193a97ffa8f460e8c1bf3fc59f7a05f0",
+    "runs/r-smoke-launches/r2-cold01/result.json": "50f6f8c3aa35a95fc6857325f4fd5d265a5381004c6e70ca919685e6a44a9c09",
+    "runs/r-smoke-launches/r2-cold01/gpu.csv": "2ef20f894605cf81d25ab524118b6800a08f6199eed2873f17c1842be5227e9b",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r2/launches/20261002T084033.540271Z/metrics_added.jsonl": "34d63fdc5fb00b5de3c861bfbf91b08cebf658eb30f1780c3e9bca4c4dac1730",
+    "runs/r-smoke-launches/r2-resume01/stdout.log": "aac7390e0e6d876aad00189e90275cc4ccf3ce3dfc4aac62094551d6822d38bb",
+    "runs/r-smoke-launches/r2-resume01/launch.json": "f4cb985094fbf36b9d73b29bd248d9f2b04a993854f53e4867aca42957cc0323",
+    "runs/r-smoke-launches/r2-resume01/result.json": "e4cb11021b0595f83ab53f4bda228c7d06dfec84a85a3b2087b724d704b14dcb",
+    "runs/r-smoke-launches/r2-resume01/gpu.csv": "3c49bec804ce41988d6911b3f211a6ed93f2686308236fa18c3671894a4111e6",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r2/launches/20261002T090557.767927Z/metrics_added.jsonl": "a0442444681ce5cdd0507217f8a29cb942dc9cf45f2b9888eafccb42d5b71ede",
+    "runs/r-smokes/r2/checkpoints/global_step_2/q_state.json": "94860e42dd0494868a2c03b115ede0f80f9a3a5cf3dcbdc1d5e124b778c3b8d1",
+    "runs/r-smokes/r2/checkpoints/global_step_2/sp_q_optim/_complete.json": "990e4fade771503b26cdf7137992b79ffdd8756a0602bbfa5143168fe6975ca6",
+    "runs/r-smokes/r2/q_wave/0.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/r-smokes/r2/q_wave/1.jsonl": "570ed4f4c0c71a6497138e122be17acda259f5ebc259ede652ef918da2e344fb",
+    "runs/r-smokes/r2/rollouts/1.jsonl": "65668916ca303b3ba280a5be2c5e96d1e7a66ae6b46c73d46fa564279ea515cc",
+    "runs/r-smokes/r2/rollouts/2.jsonl": "011e0568247516e03b5aa0db73531403408ab8b34ee21ce1ca7ef4cadf1d6800"
+  }
+}
