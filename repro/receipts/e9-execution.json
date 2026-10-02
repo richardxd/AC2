@@ -1,0 +1,176 @@
+[
+  {
+    "launch": "runs/e9/4b-generate02",
+    "result": {
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_s": 861.8185592666268,
+      "telemetry": "independent sampler; inspect timestamps for gaps",
+      "monitor_error": null
+    },
+    "command": [
+      "python",
+      "repro/model_gate.py",
+      "generate-all",
+      "--model",
+      "Qwen/Qwen3-4B-Thinking-2507",
+      "--out",
+      "runs/e9/4b-retry"
+    ],
+    "physical_gpu_activity": {
+      "1": {
+        "samples": 854,
+        "active_ge5pct": 736,
+        "max_memory_mib": 36602.0
+      },
+      "2": {
+        "samples": 854,
+        "active_ge5pct": 731,
+        "max_memory_mib": 36600.0
+      },
+      "3": {
+        "samples": 854,
+        "active_ge5pct": 698,
+        "max_memory_mib": 36600.0
+      },
+      "4": {
+        "samples": 854,
+        "active_ge5pct": 828,
+        "max_memory_mib": 36624.0
+      },
+      "5": {
+        "samples": 854,
+        "active_ge5pct": 617,
+        "max_memory_mib": 36610.0
+      },
+      "6": {
+        "samples": 854,
+        "active_ge5pct": 572,
+        "max_memory_mib": 36597.0
+      },
+      "7": {
+        "samples": 854,
+        "active_ge5pct": 596,
+        "max_memory_mib": 36582.0
+      }
+    },
+    "sha256": {
+      "runs/e9/4b-generate02/result.json": "88208b88c9d9c9e408f7b194ed3fb1eb46b3972ccdbf57d2538b42fa45391872",
+      "runs/e9/4b-generate02/launch.json": "5ab3eebb179a057a172ea5ab34f63805416b7a1d5907948b71aa91154022023d",
+      "runs/e9/4b-generate02/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runs/e9/4b-generate02/gpu.csv": "a32d16cd790e1350741e283c2f9fb9baafd1f14bea10298fb7212415f879a951"
+    }
+  },
+  {
+    "launch": "runs/e9/17b-generate01",
+    "result": {
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_s": 550.0091875866055,
+      "telemetry": "independent sampler; inspect timestamps for gaps",
+      "monitor_error": null
+    },
+    "command": [
+      "python",
+      "repro/model_gate.py",
+      "generate-all",
+      "--model",
+      "Qwen/Qwen3-1.7B",
+      "--out",
+      "runs/e9/17b"
+    ],
+    "physical_gpu_activity": {
+      "1": {
+        "samples": 546,
+        "active_ge5pct": 462,
+        "max_memory_mib": 36766.0
+      },
+      "2": {
+        "samples": 546,
+        "active_ge5pct": 471,
+        "max_memory_mib": 36768.0
+      },
+      "3": {
+        "samples": 546,
+        "active_ge5pct": 481,
+        "max_memory_mib": 36758.0
+      },
+      "4": {
+        "samples": 546,
+        "active_ge5pct": 517,
+        "max_memory_mib": 36760.0
+      },
+      "5": {
+        "samples": 546,
+        "active_ge5pct": 457,
+        "max_memory_mib": 36766.0
+      },
+      "6": {
+        "samples": 546,
+        "active_ge5pct": 361,
+        "max_memory_mib": 36755.0
+      },
+      "7": {
+        "samples": 546,
+        "active_ge5pct": 402,
+        "max_memory_mib": 36766.0
+      }
+    },
+    "sha256": {
+      "runs/e9/17b-generate01/result.json": "5d68c14981307e5c05fe062ad2c066298792c2a29f93b6dc68bfb9f568614ce7",
+      "runs/e9/17b-generate01/launch.json": "392c85f51b14392015fb980224a7c737a47dc7469c4049e8824f3161ebd2d15b",
+      "runs/e9/17b-generate01/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runs/e9/17b-generate01/gpu.csv": "dca4b24c713d9e3770236d48724410a85febeed3c3c285451d3a14eb55d972ec"
+    }
+  },
+  {
+    "launch": "runs/e9/4b-grade02",
+    "result": {
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_s": 86.57025728747249,
+      "telemetry": "independent sampler; inspect timestamps for gaps",
+      "monitor_error": null
+    },
+    "command": [
+      "python",
+      "repro/model_gate.py",
+      "grade",
+      "--model",
+      "Qwen/Qwen3-4B-Thinking-2507",
+      "--out",
+      "runs/e9/4b-retry"
+    ],
+    "sha256": {
+      "runs/e9/4b-grade02/result.json": "e2696404f5fe9155dc189df95464f5d696413c732297483459178abdcbfa967c",
+      "runs/e9/4b-grade02/launch.json": "6c06e81f1b8c16eb2204abdcf75672167b373d92dc82794c88ef61403bedde53",
+      "runs/e9/4b-grade02/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runs/e9/4b-grade02/gpu.csv": "62c00eef8fa672a2b8d7f4ed2797d4e4225511987dcd24b49b36e96338ef9047"
+    }
+  },
+  {
+    "launch": "runs/e9/17b-grade01",
+    "result": {
+      "returncode": 0,
+      "timed_out": false,
+      "elapsed_s": 11.26766749843955,
+      "telemetry": "independent sampler; inspect timestamps for gaps",
+      "monitor_error": null
+    },
+    "command": [
+      "python",
+      "repro/model_gate.py",
+      "grade",
+      "--model",
+      "Qwen/Qwen3-1.7B",
+      "--out",
+      "runs/e9/17b"
+    ],
+    "sha256": {
+      "runs/e9/17b-grade01/result.json": "c9e111108772acfa2f3f042f37252c9a1ec6e42a949265090723aaa60f0e7132",
+      "runs/e9/17b-grade01/launch.json": "c86c174b91f0c1385092868548d4063256587a0591bad4c6b39831c0576ff74e",
+      "runs/e9/17b-grade01/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "runs/e9/17b-grade01/gpu.csv": "0807282556e7371bcd56527f6416a0cfb524a66d507e16ea4bfde5d86ee0aae3"
+    }
+  }
+]

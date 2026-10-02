@@ -1,0 +1,40 @@
+{
+  "4b": {
+    "counts": {
+      "extractable_nonempty_proof": 15,
+      "no_extractable_proof": 45,
+      "stopped_without_extractable_proof": 0,
+      "literal_proof_tags_only_before_last_think_close": 0
+    },
+    "rule": "Original post-last-think-close, first complete proof-tag extraction; no normalization or post-hoc regrading",
+    "sha256": {
+      "runs/e9/4b-retry/generation-0.json": "d6a9da665f7a1481c3c7cfbcb973c8952468fe87b62904317876ba7bbff0d48c",
+      "runs/e9/4b-retry/generation-1.json": "5cbaf31ce961ffd7177382205eb971952876c624da96ea72b07ae5b8d19aa142",
+      "runs/e9/4b-retry/generation-2.json": "3c4a8c0eeb93aec14c3cf3e7ec3ba3c5deda5b645f3795fa9a4e1c9dacaa7f2b",
+      "runs/e9/4b-retry/generation-3.json": "06f962d538aa2594de363b508c7d83f29da704acaf1c8831a2a2f73843732b50",
+      "runs/e9/4b-retry/generation-4.json": "12fb9898ea82437ad205e6736036cd5c09c12ac86d3161ab4bc149cc616fdb54",
+      "runs/e9/4b-retry/generation-5.json": "332ee0f4f43bc857d3a2a9095159e9e312c02b578c5f345749f4eb7ef0e410d3",
+      "runs/e9/4b-retry/generation-6.json": "7a4f8a9d4d09e78858276e3a9eecf8a7bdf4cd3e5771e2018193265b23a6e011",
+      "runs/e9/4b-retry/grades.jsonl": "5559915a5c8ab68e9c3cc11b03cfd308b5a7b77d875d1103f4dddcab635e94c3"
+    }
+  },
+  "1.7b": {
+    "counts": {
+      "extractable_nonempty_proof": 5,
+      "no_extractable_proof": 55,
+      "stopped_without_extractable_proof": 33,
+      "literal_proof_tags_only_before_last_think_close": 7
+    },
+    "rule": "Original post-last-think-close, first complete proof-tag extraction; no normalization or post-hoc regrading",
+    "sha256": {
+      "runs/e9/17b/generation-0.json": "b70607145e6f0d41a4c6debea7c83e843d0a016680256295d3cf36770c13098b",
+      "runs/e9/17b/generation-1.json": "625f18f8cbb572c4a9ab2329db6f08e76d4290fb97e5a5d10a65ea89e1a609d2",
+      "runs/e9/17b/generation-2.json": "f56ff53795a3584b8d73e8b6118ace5ac072d28dc929201957a15cd338b4215b",
+      "runs/e9/17b/generation-3.json": "4c7f78f27b0be52d488c7d2d0b808d25edc1b1f171d53a991f4198e3a5aa3ad9",
+      "runs/e9/17b/generation-4.json": "ff85faeb9178788e9905765c6ddbfde058e2bb16c47cee519db75c8f976cad16",
+      "runs/e9/17b/generation-5.json": "34e687e3099f1b62ac47b2fea615f3db9c6bb611333c8856e4b1ff5f0d7e3cb7",
+      "runs/e9/17b/generation-6.json": "45a9b2b4df9d61e28e5eb6595d2da10546cc91d34c827f13e78a7c7a933e4eb5",
+      "runs/e9/17b/grades.jsonl": "295dc0f78115dde0e1ce770b76127feadb56c41999e160a9777de990050eee99"
+    }
+  }
+}

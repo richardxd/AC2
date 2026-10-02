@@ -1,0 +1,149 @@
+{
+  "tasks": {
+    "R1": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 2.7225241914899434,
+      "wall_days_2x_planning_allowance": 5.445048382979887,
+      "wall_days_q_capacity_scenario": 2.7225241914899434,
+      "wall_days_q_capacity_scenario_2x_allowance": 5.445048382979887,
+      "judge_usd_observed_train_plus_e9_val": 34.550404704,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 102.42802972799998,
+      "decode_flops_no_readiness_speedup_projection": 2341497505618329600,
+      "basis": "measured matching arm"
+    },
+    "R2": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 2.991312668213483,
+      "wall_days_2x_planning_allowance": 5.982625336426966,
+      "wall_days_q_capacity_scenario": 4.892613913703158,
+      "wall_days_q_capacity_scenario_2x_allowance": 9.785227827406317,
+      "judge_usd_observed_train_plus_e9_val": 31.924233504,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 123.71437468799998,
+      "decode_flops_no_readiness_speedup_projection": 3124350487691264000,
+      "basis": "measured matching arm"
+    },
+    "R3": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 3.0398949456812505,
+      "wall_days_2x_planning_allowance": 6.079789891362501,
+      "wall_days_q_capacity_scenario": 3.0398949456812505,
+      "wall_days_q_capacity_scenario_2x_allowance": 6.079789891362501,
+      "judge_usd_observed_train_plus_e9_val": 31.741605504,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 123.71437468799998,
+      "decode_flops_no_readiness_speedup_projection": 3187466526405427200,
+      "basis": "measured matching arm"
+    },
+    "R4_2k": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 2.991312668213483,
+      "wall_days_2x_planning_allowance": 5.982625336426966,
+      "wall_days_q_capacity_scenario": 4.892613913703158,
+      "wall_days_q_capacity_scenario_2x_allowance": 9.785227827406317,
+      "judge_usd_observed_train_plus_e9_val": 31.924233504,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 123.71437468799998,
+      "decode_flops_no_readiness_speedup_projection": 3124350487691264000,
+      "basis": "AC2 proxy; ablation-specific mature timing unmeasured"
+    },
+    "R4_correct_only": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 2.991312668213483,
+      "wall_days_2x_planning_allowance": 5.982625336426966,
+      "wall_days_q_capacity_scenario": 4.892613913703158,
+      "wall_days_q_capacity_scenario_2x_allowance": 9.785227827406317,
+      "judge_usd_observed_train_plus_e9_val": 31.924233504,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 123.71437468799998,
+      "decode_flops_no_readiness_speedup_projection": 3124350487691264000,
+      "basis": "AC2 proxy; ablation-specific mature timing unmeasured"
+    },
+    "R4_no_audit": {
+      "steps": 200,
+      "validation_events": 21,
+      "validation_n": 4,
+      "wall_days_observed_component_projection": 2.991312668213483,
+      "wall_days_2x_planning_allowance": 5.982625336426966,
+      "wall_days_q_capacity_scenario": 4.892613913703158,
+      "wall_days_q_capacity_scenario_2x_allowance": 9.785227827406317,
+      "judge_usd_observed_train_plus_e9_val": 31.924233504,
+      "judge_usd_every_trajectory_graded_at_e4_mean": 123.71437468799998,
+      "decode_flops_no_readiness_speedup_projection": 3124350487691264000,
+      "basis": "AC2 proxy; ablation-specific mature timing unmeasured"
+    },
+    "R5": {
+      "ready_problems": 32,
+      "continuations_per_problem": 4,
+      "policy_generation_hours_full_16k_envelope": 0.4343083742505234,
+      "judge_usd_every_continuation_graded_at_e4_mean": 0.8514537983999999,
+      "unmeasured_overhead": "checkpoint merge, critic queries and startup; bounded R5 smoke will measure these",
+      "scientific_dependency": "real R2 checkpoint with at least32 ready problems; otherwise report fewer available, never invent readiness"
+    }
+  },
+  "measured_components": {
+    "grpo": {
+      "step_without_checkpoint_s": 797.7566373571754,
+      "checkpoint_s": 78.2194598838687,
+      "launch_overhead_s": 140.71191964298487,
+      "judge_upper_usd_per_step": 0.143165772,
+      "decoding_flops_per_step": 11707487528091648
+    },
+    "ac2_cold": {
+      "step_without_checkpoint_s": 907.15044343099,
+      "checkpoint_s": 207.84177720919251,
+      "launch_overhead_s": 135.83073801919818,
+      "judge_upper_usd_per_step": 0.129811104,
+      "decoding_flops_per_step": 15621752438456320
+    },
+    "ac2_replay": {
+      "step_without_checkpoint_s": 804.7898294255137,
+      "checkpoint_s": 111.31250277534127,
+      "launch_overhead_s": 189.05192054063082,
+      "judge_upper_usd_per_step": 0.130034916,
+      "decoding_flops_per_step": 11208923499528192
+    },
+    "prefix": {
+      "step_without_checkpoint_s": 935.0360908471048,
+      "checkpoint_s": 75.81240035966039,
+      "launch_overhead_s": 129.72497902810574,
+      "judge_upper_usd_per_step": 0.129121776,
+      "decoding_flops_per_step": 15937332632027136
+    }
+  },
+  "validation_seconds_per_event_projection": 3559.612197848303,
+  "q_capacity_scenario": {
+    "measured_records": 16,
+    "configured_max_records": 64,
+    "whole_actor_update_multiplier": 4.0,
+    "extra_seconds_per_ac2_step": 821.3621380515397,
+    "scope": "Linear record-count scenario scales the entire interleaved actor/Q phase, overcounting fixed PPO work. Not a measured saturated Q batch or a hard runtime bound; contexts and reference mix can change."
+  },
+  "assumptions": [
+    "4B, seven TP1 replicas,16groups x4,16k response,4k chunk,Q batch64;200steps; save/evaluate every20/10steps.",
+    "Four validation samples/problem per ROADMAP starting point;21events include step zero. Scale E9's60x1 observed cost/time by4 (linear planning assumption, not a measured240-rollout event). Initial validation must be enabled for fresh R launches.",
+    "Generation throughput includes prefill and queueing; val runtime assumes balanced work on7GPUs plus serialized4-way judge service.",
+    "Observed costs include missing-proof short circuits. All-graded E4 mean is a planning scenario, not a hard upper bound.",
+    "One step/state cannot establish runtime variance, mature readiness savings or ablation effects.2x allowance is a stated margin, not a confidence interval.",
+    "R5 throughput is a full16k envelope at step-zero policy speed; exact checkpoint/probe timing awaits smoke.",
+    "All long runs and any spend above current engineering cap require Richard's approval; this file launches nothing."
+  ],
+  "sha256": {
+    "repro/receipts/e8-grpo-calibration.json": "a7e923dc7bc2e9e34ae94bacd47685322f9932822f3dc656ce607a45ba426bb2",
+    "repro/receipts/e8-ac2-cold-calibration.json": "9a266ee784bae08b1fa405ae710049d6c04f9a0b53f001a6aa245923ce4f46ad",
+    "repro/receipts/e8-ac2-replay-calibration.json": "3f30d7ce328c2380c3bd69146559b43d7a5075796a5e532ddfe0e2b7abc74a8c",
+    "repro/receipts/e8-prefix-calibration.json": "a8f349af3abee2de8e72225c4fb26879179f9f6322f40d2656fcfd9398d42038",
+    "repro/receipts/e9-model-gate.json": "5c7ee77938a265a6fe763977fd2ecd0de1a93a85c64fabcffb70f4a20c6810bd",
+    "/share/data/pals/richard1xur/ac2/repro/receipts/e4-cost-summary.json": "694fdc5b5a8e726027de67d060f982cf1ce7efa1e97d69c1a4218bec2cf96590",
+    "/share/data/pals/richard1xur/ac2/runs/e8/grpo-16x4/launches/20261002T052449.580721Z/arguments.json": "3d433c801bc28e0cc50691ce5ad0b31c2270dab59b56e2eab98ae0e3b178c5c4",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T054233.364036Z/arguments.json": "04aa3422afa360e74cfafefce9d5a026abdab3fa80d5a2cc623fa6498646ccbf",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/arguments.json": "0faf51f4f6afc217b2ad316b2a5c60727b55e5ebc556aa8d3a9daec4053fdb7c",
+    "/share/data/pals/richard1xur/ac2/runs/e8/prefix-16x4/launches/20261002T062802.567595Z/arguments.json": "e516f7c62ecdf63fc606f6d975685a5966ff93cc4926f7e34912227f68fb3e57"
+  }
+}

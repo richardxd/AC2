@@ -1,0 +1,300 @@
+{
+  "4b": {
+    "model": "Qwen/Qwen3-4B-Thinking-2507",
+    "revision": "768f209d9ea81521153ed38c47d515654e938aea",
+    "data_sha256": "6a11d6123d62196f23509414d4d39183fd07c4563a408c8e565307074eb638f3",
+    "n_problems": 60,
+    "samples_per_problem": 1,
+    "mean_score": 0.11904761904761904,
+    "mean_score_95pct_hoeffding": [
+      0.0,
+      0.29437777081170136
+    ],
+    "nonzero_fraction": 0.16666666666666666,
+    "nonzero_95pct_hoeffding": [
+      0.0,
+      0.341996818430749
+    ],
+    "scores_by_index": {
+      "21": 0.0,
+      "28": 0.0,
+      "35": 0.0,
+      "7": 0.0,
+      "49": 0.0,
+      "56": 0.0,
+      "0": 1.0,
+      "8": 0.0,
+      "15": 0.0,
+      "42": 0.0,
+      "29": 0.0,
+      "36": 0.0,
+      "43": 0.0,
+      "50": 0.0,
+      "57": 0.0,
+      "2": 0.0,
+      "1": 0.14285714285714285,
+      "9": 1.0,
+      "22": 0.14285714285714285,
+      "30": 0.0,
+      "37": 0.0,
+      "44": 0.0,
+      "51": 0.0,
+      "58": 0.0,
+      "3": 0.0,
+      "10": 0.0,
+      "16": 1.0,
+      "24": 0.0,
+      "31": 0.0,
+      "38": 0.0,
+      "45": 0.0,
+      "52": 0.0,
+      "59": 0.0,
+      "4": 0.0,
+      "11": 0.0,
+      "18": 0.0,
+      "25": 0.0,
+      "32": 0.0,
+      "39": 0.0,
+      "46": 0.0,
+      "53": 0.0,
+      "5": 0.0,
+      "23": 1.0,
+      "12": 1.0,
+      "14": 0.14285714285714285,
+      "33": 0.0,
+      "17": 0.8571428571428571,
+      "47": 0.0,
+      "54": 0.0,
+      "6": 0.0,
+      "26": 0.0,
+      "20": 0.0,
+      "27": 0.0,
+      "34": 0.0,
+      "41": 0.0,
+      "48": 0.0,
+      "55": 0.0,
+      "19": 0.0,
+      "40": 0.0,
+      "13": 0.8571428571428571
+    },
+    "generated_tokens": 919849,
+    "tokens_per_gpu_generation_second": 191.61573295456014,
+    "replicas": [
+      {
+        "gpu_uuid": "7f44c23c-faaa-e260-057a-389e51d49387",
+        "generation_wall_s": 738.6401509158313,
+        "generated_tokens": 133070,
+        "tokens_per_s": 180.15538396471956
+      },
+      {
+        "gpu_uuid": "78859338-3fe9-97b3-d2e2-92747b78b754",
+        "generation_wall_s": 733.2638479098678,
+        "generated_tokens": 137552,
+        "tokens_per_s": 187.58868365334683
+      },
+      {
+        "gpu_uuid": "bdbbe19c-4551-c636-b24a-3a467467e8f3",
+        "generation_wall_s": 702.4124685302377,
+        "generated_tokens": 132221,
+        "tokens_per_s": 188.2384011158938
+      },
+      {
+        "gpu_uuid": "08a774dd-c025-36a5-4fa6-203f011e4b77",
+        "generation_wall_s": 832.0557494200766,
+        "generated_tokens": 143925,
+        "tokens_per_s": 172.97518838168278
+      },
+      {
+        "gpu_uuid": "0e244512-2758-2a65-e49c-d5b0a61cbbda",
+        "generation_wall_s": 620.4238595403731,
+        "generated_tokens": 131072,
+        "tokens_per_s": 211.2620235093823
+      },
+      {
+        "gpu_uuid": "2f34c74e-1a10-c9d3-13a3-7dc22983e5f1",
+        "generation_wall_s": 575.776541698724,
+        "generated_tokens": 113784,
+        "tokens_per_s": 197.61833239037665
+      },
+      {
+        "gpu_uuid": "604ba4d0-69d5-d94d-b886-46defa25d373",
+        "generation_wall_s": 597.9152428545058,
+        "generated_tokens": 128225,
+        "tokens_per_s": 214.45347234808955
+      }
+    ],
+    "truncated_responses": 45,
+    "judge_attempts": 15,
+    "judge_charged_upper_usd": 0.070443456,
+    "sha256": {
+      "runs/e9/4b-retry/generation-0.json": "d6a9da665f7a1481c3c7cfbcb973c8952468fe87b62904317876ba7bbff0d48c",
+      "runs/e9/4b-retry/generation-1.json": "5cbaf31ce961ffd7177382205eb971952876c624da96ea72b07ae5b8d19aa142",
+      "runs/e9/4b-retry/generation-2.json": "3c4a8c0eeb93aec14c3cf3e7ec3ba3c5deda5b645f3795fa9a4e1c9dacaa7f2b",
+      "runs/e9/4b-retry/generation-3.json": "06f962d538aa2594de363b508c7d83f29da704acaf1c8831a2a2f73843732b50",
+      "runs/e9/4b-retry/generation-4.json": "12fb9898ea82437ad205e6736036cd5c09c12ac86d3161ab4bc149cc616fdb54",
+      "runs/e9/4b-retry/generation-5.json": "332ee0f4f43bc857d3a2a9095159e9e312c02b578c5f345749f4eb7ef0e410d3",
+      "runs/e9/4b-retry/generation-6.json": "7a4f8a9d4d09e78858276e3a9eecf8a7bdf4cd3e5771e2018193265b23a6e011",
+      "runs/e9/4b-retry/grades.jsonl": "5559915a5c8ab68e9c3cc11b03cfd308b5a7b77d875d1103f4dddcab635e94c3",
+      "runs/e9/4b-retry/judge_before.json": "90bd46bf73a7f6d4cb164bc7db42413af487bfc3d95f7f0e25586d9e334a3955",
+      "runs/e9/4b-retry/judge_after.json": "8fc5a7974da87dff7599c896f04b189d2226533b858bb9ac463fe0ec16bb213c"
+    }
+  },
+  "1.7b": {
+    "model": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "data_sha256": "6a11d6123d62196f23509414d4d39183fd07c4563a408c8e565307074eb638f3",
+    "n_problems": 60,
+    "samples_per_problem": 1,
+    "mean_score": 0.0,
+    "mean_score_95pct_hoeffding": [
+      0.0,
+      0.17533015176408231
+    ],
+    "nonzero_fraction": 0.0,
+    "nonzero_95pct_hoeffding": [
+      0.0,
+      0.17533015176408231
+    ],
+    "scores_by_index": {
+      "0": 0.0,
+      "7": 0.0,
+      "14": 0.0,
+      "28": 0.0,
+      "35": 0.0,
+      "42": 0.0,
+      "49": 0.0,
+      "56": 0.0,
+      "1": 0.0,
+      "8": 0.0,
+      "15": 0.0,
+      "22": 0.0,
+      "36": 0.0,
+      "43": 0.0,
+      "50": 0.0,
+      "57": 0.0,
+      "2": 0.0,
+      "9": 0.0,
+      "16": 0.0,
+      "23": 0.0,
+      "30": 0.0,
+      "37": 0.0,
+      "44": 0.0,
+      "51": 0.0,
+      "58": 0.0,
+      "3": 0.0,
+      "10": 0.0,
+      "17": 0.0,
+      "24": 0.0,
+      "31": 0.0,
+      "38": 0.0,
+      "45": 0.0,
+      "52": 0.0,
+      "59": 0.0,
+      "4": 0.0,
+      "11": 0.0,
+      "18": 0.0,
+      "25": 0.0,
+      "32": 0.0,
+      "39": 0.0,
+      "46": 0.0,
+      "53": 0.0,
+      "12": 0.0,
+      "19": 0.0,
+      "26": 0.0,
+      "33": 0.0,
+      "40": 0.0,
+      "47": 0.0,
+      "21": 0.0,
+      "6": 0.0,
+      "13": 0.0,
+      "20": 0.0,
+      "27": 0.0,
+      "54": 0.0,
+      "41": 0.0,
+      "48": 0.0,
+      "55": 0.0,
+      "29": 0.0,
+      "5": 0.0,
+      "34": 0.0
+    },
+    "generated_tokens": 792389,
+    "tokens_per_gpu_generation_second": 250.79015863179836,
+    "replicas": [
+      {
+        "gpu_uuid": "7f44c23c-faaa-e260-057a-389e51d49387",
+        "generation_wall_s": 464.0022605508566,
+        "generated_tokens": 110891,
+        "tokens_per_s": 238.9880598175359
+      },
+      {
+        "gpu_uuid": "78859338-3fe9-97b3-d2e2-92747b78b754",
+        "generation_wall_s": 472.2381238080561,
+        "generated_tokens": 124367,
+        "tokens_per_s": 263.3565435105567
+      },
+      {
+        "gpu_uuid": "bdbbe19c-4551-c636-b24a-3a467467e8f3",
+        "generation_wall_s": 482.6396147161722,
+        "generated_tokens": 120893,
+        "tokens_per_s": 250.48296143509484
+      },
+      {
+        "gpu_uuid": "08a774dd-c025-36a5-4fa6-203f011e4b77",
+        "generation_wall_s": 519.8826464749873,
+        "generated_tokens": 133115,
+        "tokens_per_s": 256.0481695293602
+      },
+      {
+        "gpu_uuid": "0e244512-2758-2a65-e49c-d5b0a61cbbda",
+        "generation_wall_s": 457.2686456590891,
+        "generated_tokens": 118816,
+        "tokens_per_s": 259.8385022195066
+      },
+      {
+        "gpu_uuid": "2f34c74e-1a10-c9d3-13a3-7dc22983e5f1",
+        "generation_wall_s": 361.74966241419315,
+        "generated_tokens": 90923,
+        "tokens_per_s": 251.3423216298561
+      },
+      {
+        "gpu_uuid": "604ba4d0-69d5-d94d-b886-46defa25d373",
+        "generation_wall_s": 401.7888011187315,
+        "generated_tokens": 93384,
+        "tokens_per_s": 232.4206143625301
+      }
+    ],
+    "truncated_responses": 22,
+    "judge_attempts": 5,
+    "judge_charged_upper_usd": 0.006157164,
+    "sha256": {
+      "runs/e9/17b/generation-0.json": "b70607145e6f0d41a4c6debea7c83e843d0a016680256295d3cf36770c13098b",
+      "runs/e9/17b/generation-1.json": "625f18f8cbb572c4a9ab2329db6f08e76d4290fb97e5a5d10a65ea89e1a609d2",
+      "runs/e9/17b/generation-2.json": "f56ff53795a3584b8d73e8b6118ace5ac072d28dc929201957a15cd338b4215b",
+      "runs/e9/17b/generation-3.json": "4c7f78f27b0be52d488c7d2d0b808d25edc1b1f171d53a991f4198e3a5aa3ad9",
+      "runs/e9/17b/generation-4.json": "ff85faeb9178788e9905765c6ddbfde058e2bb16c47cee519db75c8f976cad16",
+      "runs/e9/17b/generation-5.json": "34e687e3099f1b62ac47b2fea615f3db9c6bb611333c8856e4b1ff5f0d7e3cb7",
+      "runs/e9/17b/generation-6.json": "45a9b2b4df9d61e28e5eb6595d2da10546cc91d34c827f13e78a7c7a933e4eb5",
+      "runs/e9/17b/grades.jsonl": "295dc0f78115dde0e1ce770b76127feadb56c41999e160a9777de990050eee99",
+      "runs/e9/17b/judge_before.json": "8fc5a7974da87dff7599c896f04b189d2226533b858bb9ac463fe0ec16bb213c",
+      "runs/e9/17b/judge_after.json": "82b7d7b3e5624915b026ed0415f5d95e6bec69e29f8f0208a4f829a3ccdbcaa4"
+    }
+  },
+  "paired_small_minus_large": {
+    "mean": -0.11904761904761904,
+    "95pct_hoeffding": [
+      -0.46970792257578364,
+      0.2316126844805456
+    ]
+  },
+  "paired_small_minus_half_large": {
+    "mean": -0.05952380952380952,
+    "95pct_hoeffding": [
+      -0.322519037169933,
+      0.20347141812231395
+    ]
+  },
+  "uncertainty_scope": "Each interval is a separate conservative95% bound assuming independent per-problem random draws. One sample/problem cannot estimate within-problem variance; these are not simultaneous confidence bounds. No model-quality superiority follows from overlapping bounds.",
+  "timing_scope": "Per-GPU generation throughput includes prefill/queueing, excludes model startup and judge. Both use seven TP1 replicas with matched partition and concurrency4.",
+  "accounting_contract": "All other judge clients must be idle throughout each grading stage; snapshot deltas alone cannot identify unrelated new calls.",
+  "gate": "Combine with E8 projection: retain4B if scaled run<=10days; otherwise evaluate1.7B half-score/nonzero>=0.20 criteria, retaining unresolved uncertainty."
+}

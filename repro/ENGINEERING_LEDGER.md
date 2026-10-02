@@ -164,3 +164,11 @@ R5 scaled analysis `probe_report.py` validates complete unique matched input key
 Independent1914086 review clean: four tests, twelve token-context comparisons with live QHarness across both pinned tokenizers, corrupt seed-hash rejection, mocked full-attempt/eager/budget checks, and independently reproduced6/6 E7 no-reference contexts (`runs/reviews/probe-review-dh_wp8lg/`).
 
 Independent c7b740a review found a numerical measurement bug before any R5 outputs: centered variance can be a tiny nonzero float for identical decimal inputs (three0.2s), falsely yielding defined correlation. Fixed by checking input min/max equality first; regression tests reject both decimal-constant axes and accept a nonconstant perfect-correlation case. No measured result was affected.
+
+## E8/E9 completion and R proposal
+
+E9 successful4B/1.7B generation861.819s/550.009s, grading86.570s/11.268s; all four bounded launches exit0 with no timeout/monitor error. Both models show activity on all physical1–7. Grade60/60each, all flags0,15+5 actual API calls/$0.076600620; total167/$0.867471996, no pending reservations. [Gate](receipts/e9-model-gate.json), [execution](receipts/e9-execution.json), [format audit](receipts/e9-format-audit.json). Verified missing-proof zeros against the actual extractor:4B45,1.7B55 (including33 stopped responses); no intrinsic-quality conclusion. GPU cleanup leaves only pre-existingGPU0 processes. Scratch26GB/45GB, shared68GiB free; data82TiB free.
+
+Real E8/E9 [projections](receipts/e8-r-projections.json) and [PROPOSAL_R](PROPOSAL_R.md) now fix all six training configs and R5. Retain4B by runtime rule; AC2Q-capacity4.89days/2×allowance9.79days. Explicit mature-Q/validation transfer caveats, scale/seed/API deviations and per-arm judge costs recorded. Long launches and cap increases remain pending Richard; bounded smokes continue. R wrappers are being CPU-composed before GPU runs. R5 descriptive report additionally includes all-group hybrid and individual-cut pairs, retaining substitution-only advantages separately.
+
+Independent876df5a follow-up clean after c7b740a correction: original/fixed decimal-constant examples, independent mixed-group MAE0.15625,12 malformed-input cases and pre-GPU retained-ID rejection verified (`runs/reviews/probe-report-review-zb6vc8n2/fix-review.json`).
