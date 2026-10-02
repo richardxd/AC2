@@ -17,6 +17,7 @@ def main():
     p.add_argument("--steps", default="1,2,3")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--require-nonzero", action="store_true")
+    p.add_argument("--require-replay", action="store_true")
     args = p.parse_args()
     expected_steps = [int(x) for x in args.steps.split(",")]
     root = Path(__file__).resolve().parents[1]
@@ -97,6 +98,14 @@ def main():
                     assert f"Loaded {label} from {expected_path}" in log, (launch, expected_path)
         else:
             assert min(phase_steps) == 1, "first launch must establish the pre-resume sequence"
+        if args.require_replay:
+            if loaded_step is None:
+                assert "[sp_replay] no persisted state" in log
+            else:
+                state_path = args.run.resolve() / "checkpoints" / f"global_step_{loaded_step}" / "sp_replay_state.json"
+                state = json.loads(state_path.read_text())
+                assert f"[sp_replay] resumed cursor={loaded_step}, {len(state['ema'])} EMA entries from {state_path}" in log
+                assert f"[sp_replay] delta log: applied {loaded_step}, truncated 0" in log
         prior_final_step = max(phase_steps)
         logged_metrics.update(phase_metrics)
         assert re.search(rf"rank \d+ nranks {args.world_size} .*Init COMPLETE", log), "missing actual NCCL world size"
@@ -132,6 +141,32 @@ def main():
     receipt["zero_gradient_steps"] = [s for s in expected_steps if metrics[s]["actor/grad_norm"] == 0]
     receipt["nonzero_update_demonstrated"] = any(metrics[s]["actor/grad_norm"] > 0 for s in expected_steps)
     receipt["metrics_sha256"] = hashlib.sha256((args.run / "metrics.jsonl").read_bytes()).hexdigest()
+    if args.require_replay:
+        seed = args.run / "cold/replay_seed_cold/replay_buffer_manifest.json"
+        seed_sha = hashlib.sha256(seed.read_bytes()).hexdigest()
+        seed_data = json.loads(seed.read_text())
+        assert seed_data["entries"] == 0 and seed_data["problems"] == 0
+        from verl.trainer.ppo.sp_q_readiness import verify_manifest_shards
+        verify_manifest_shards(str(seed.parent), seed_data["shards"],
+            sorted(str(p) for p in (seed.parent / "replay_buffer").glob("shard_*.jsonl")), "smoke cold replay")
+        assert all(not (seed.parent / name).read_text().strip() for name in seed_data["shards"])
+        delta = args.run / "replay_buffer_deltas.jsonl"
+        deltas = [json.loads(line) for line in delta.read_text().splitlines()]
+        assert [r["dataset_step"] for r in deltas] == list(range(max(expected_steps)))
+        states = []
+        for step in expected_steps:
+            path = args.run / "checkpoints" / f"global_step_{step}" / "sp_replay_state.json"
+            state = json.loads(path.read_text())
+            assert state["next_dataset_step"] == step and state["seed_manifest_sha"] == seed_sha
+            assert not state["reseeds"]
+            if states:
+                assert state["replay_policy"] == states[0]["replay_policy"]
+            states.append({"step": step, "ema_entries": len(state["ema"]),
+                "buffer_seq_next": state["buffer_seq_next"], "replay_policy": state["replay_policy"],
+                "state_sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+        receipt["replay"] = {"states": states, "seed_sha256": seed_sha,
+            "delta_sha256": hashlib.sha256(delta.read_bytes()).hexdigest(),
+            "added_entries_per_step": [len(r["added_entries"]) for r in deltas]}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x") as f:
         json.dump(receipt, f, indent=2)
