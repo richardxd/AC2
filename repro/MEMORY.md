@@ -2,6 +2,8 @@
 
 ## Purpose
 
+Latest research/ML engineering amendment: [local surrogate judge](../docs/findings/repro/local-surrogate-judge.md). Richard approved R1 then R2 long with local gpt-oss-20b on GPU0 free memory; S1 passes20/20, API funds frozen. S2/S3 must finish before detached R1; R2 gated on200-step R1 acceptance. No other long arms approved.
+
 Keep durable pointers to project findings, not duplicate investigations.
 
 - Research/ML engineering: [initial CPU test inventory](../docs/findings/repro/cpu-tests.md). Baseline 114 passed, 6 failed; stale context/batch and dashboard tuple expectations.

@@ -21,6 +21,21 @@ Track every fixed [ROADMAP](ROADMAP.md) acceptance check using first-hand receip
 | R4 ablations | blocked | All three launch preparations pass cold/save/resume, checkpoint2, all-rank policy/Q restore, critic update2,16 valid probes each, replay/curve/template checks. Correct-only admission verified both ways. Scientific comparisons blocked on long-run/budget approval | [2k](receipts/r4-2k-save-resume.json), [correct-only](receipts/r4-correct-only-save-resume.json), [admission](receipts/r4-correct-only-admission.json), [no-audit](receipts/r4-no-audit-save-resume.json), [no-audit critic](receipts/r4-no-audit-critic.json), [curve](receipts/r4-no-audit-smoke-curve.json), [template](receipts/r4-no-audit-judge-template.json); no long launch |
 | R5 value probe | blocked | Launch preparation complete: all five stages and full resume pass;6/6 historical contexts,8 continuations,10/10 Q parses,8 graded rows with4 actual API calls. Authorized retry cost$0.019788816; analysis/resume add no calls. Scientific Fig.4 comparison awaits approved R2 checkpoint/long-run budget | [full receipt](receipts/r5-full-pipeline.json), [authorization/payload verification](receipts/r5-authorization-completion.json), [wrapper](r5_launch.py), `runs/r5-launches/`, `runs/r5-smoke/`; no long launch |
 
+## Amendment 2026-10-02, Richard approved
+
+Long R1 then R2 approved with local `openai/gpt-oss-20b` SURROGATE judge on GPU0 free memory; existing sglang processes remain untouched, training GPUs1–7. No DeepSeek API calls; preserve$2.281138832. R3/R4/R5 long runs remain unapproved. This supersedes earlier long-run/API blockers for R1/R2 only.
+
+| Task | Status | Acceptance / default |
+|---|---|---|
+| S1 surrogate service | done | [Receipt](receipts/s1-surrogate.json): revision6cee5e81ee83917806bbde320786a8fb61efebee, repository weights/LFS hashes verified;20/20 E4 parses,602.565s, mean102.961s,171.472 output tokens/s. GPU0 free4722MiB after load; existing PIDs preserved. Native gptoss/high/65536, unchanged train/val SHA pins. |
+| S2 agreement | in progress | All547 historical API calls being regraded at `runs/surrogate/s2-agreement-01`; repeats retained with call-weighted results, train/val separated. Invalid/truncated historical grades explicitly unpaired; no API calls. Agreement is not a gate. |
+| S3 surrogate R1 smoke | todo | New output directories; bounded cold+resume≤1740s each; train+val both local surrogate, step/judge timing recorded. |
+| S4 detached R1 then R2 | todo | R1 200steps/save20/full proposed val; detached durable process. R2 only after R1 completion and acceptance; no R3/R4/R5. |
+
+Decisions/defaults: retain native high reasoning effort and65536 output ceiling initially; tune only serving resource limits from evidence, record any necessary change. Exact duplicate historical requests will be inventoried explicitly; agreement populations must not silently discard failed or repeated calls. Scientific conclusions must identify the local surrogate deviation.
+
+R2 compose-only pin migration: existing research directory contained two DeepSeek compose manifests but no metrics/checkpoints/rollouts. Independent safety review approved preserving `judge_snapshot.pre-surrogate-compose.json` (SHA4c9d4824...) and updating only the active pin to the surrogate endpoint/model. Both R1/R2 now compose200steps/save20/val10 with strict local reward and full60×4 validation; no drift override enabled. Historical compose manifests remain intact and are excluded from executed-run curve comparison.
+
 ## Preflight
 
 Read kickoff, roadmap, paper text, root README, install script, metric exporter documentation, and README/runner/launch scripts for all three main arms. Rendered the local PDF with PyMuPDF 1.28.2; inspected pages 8–10, 18–19, 26–27 for Figures 2–4, 7–9 and Tables 3–4. Images and independent text extraction: `runs/paper/`.

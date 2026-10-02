@@ -4,7 +4,13 @@
 
 Fixed task list for reproducing "Trust the Critic More" (arXiv 2609.39247, repo WhenWen/AC2) on g16 (8x RTX 6000 Ada 48 GB). Each task has an acceptance check. Status and evidence live in `CHECKLIST.md`; code/config changes in `ENGINEERING_LEDGER.md`; paper-vs-ours numbers in `RESULTS_LEDGER.md`. Approved by Richard on 2026-10-01; changes to this file need Richard's approval.
 
-## Fixed decisions
+## Amendment 2026-10-02, Richard approved
+
+Richard authorizes long R1 then R2 at the proposed scale, using local `openai/gpt-oss-20b` as a SURROGATE judge for both training reward and validation. This supersedes the original API-only judge and GPU0 exclusion only for the new judge's use of GPU0 free memory. Preserve existing sglang PID3926213 and its workers; leave memory headroom. Training remains on physical GPUs1–7. No DeepSeek API calls; preserve the remaining$2.281138832. R3/R4/R5 long runs require a new decision.
+
+Execute in order: S1 serve pinned-revision weights under repository `models/` using the project venv/vLLM, native `gptoss` payloads and original SHA-pinned templates; record server arguments/reasoning effort and require20/20 E4-proof parses with latency/tokens-per-second. S2 regrade every saved DeepSeek-graded proof without API calls; separately report train(no-reference) and validation(reference+rubric) exact-points agreement, pass≥6 agreement/Cohen kappa, mean absolute point difference and Spearman. Agreement is a reported deviation, never a launch gate. S3 bounded R1 cold/resume smokes≤1740s each, measuring step time and judge share; update the proposal. S4 detach R1's200-step run under `runs/research/r1`, save every20steps on shared storage. Only after all200 R1 steps and acceptance receipts pass may detached R2 launch. All other hard rules remain, including scratch≤45GB and no Slurm actions.
+
+## Fixed decisions (original; amended above)
 
 1. Judge: DeepSeek official API, key file `/home-nfs/richard1xur/.codex/.deepseek_key` (never print, copy or commit it). `/models` lists `deepseek-flash` and `deepseek-v4-pro`; the paper pins DeepSeek-V4-Flash revision `60d8d707` served locally, so API identity with that revision is unverified: record this as a deviation. Balance on 2026-10-01: 32.43 USD. Total judge spend cap: 5 USD until Richard approves more.
 2. Full scale (4 nodes x 8 GPUs, about 30 GPU-hours/step, about 200 steps) is out of reach. Experiments use a scaled-down protocol fixed after E8/E9 and approved by Richard.

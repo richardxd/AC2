@@ -44,7 +44,8 @@ def collect(run):
     import pandas as pd
     from omegaconf import OmegaConf
     from verl.trainer.ppo.difficulty import qid_from_messages
-    manifests = sorted((run / "launches").glob("*/config.yaml"))
+    manifests = [p for p in sorted((run / "launches").glob("*/config.yaml"))
+                 if not json.loads((p.parent / "arguments.json").read_text())["compose_only"]]
     assert manifests
     cfg = OmegaConf.load(manifests[-1])
     arguments = json.loads((manifests[-1].parent / "arguments.json").read_text())
@@ -54,7 +55,22 @@ def collect(run):
         prior = json.loads((manifest.parent / "arguments.json").read_text())
         assert {k:v for k,v in prior.items() if k not in varying} == fixed, "run configuration changed"
     assert arguments["model"] == "Qwen/Qwen3-4B-Thinking-2507" and arguments["val_n"] == 4
-    assert cfg.reward.custom_reward_function.path.endswith("/repro/strict_reward.py")
+    backend = arguments.get("judge_backend", "deepseek")
+    assert backend in {"deepseek", "surrogate"}
+    expected_reward = "surrogate_reward.py" if backend == "surrogate" else "strict_reward.py"
+    assert cfg.reward.custom_reward_function.path.endswith("/repro/" + expected_reward)
+    judge_profile = None
+    if backend == "surrogate":
+        from surrogate_common import profile
+        judge_profile = profile()
+        for manifest in manifests:
+            assert json.loads((manifest.parent / "surrogate_profile.json").read_text()) == judge_profile
+            reward = OmegaConf.load(manifest).reward.custom_reward_function
+            assert reward.path.endswith("/repro/surrogate_reward.py")
+            for key in ("judge_url", "judge_payload_style", "judge_reasoning_effort", "judge_max_tokens"):
+                name = {"judge_url": "url", "judge_payload_style": "payload_style",
+                        "judge_reasoning_effort": "reasoning_effort", "judge_max_tokens": "max_tokens"}[key]
+                assert reward.reward_kwargs[key] == judge_profile[name]
     def one_file(value):
         if isinstance(value, str):
             return Path(value)
@@ -130,7 +146,8 @@ def collect(run):
     return {"run": str(run), "engineering_smoke": arguments["smoke"],
         "match_fields": {"model": arguments["model"], "response": arguments["response"],
                          "groups": arguments["batch"], "samples": arguments["group"],
-                         "train_sha256": sha(train_path), "val_sha256": sha(val_path)},
+                         "train_sha256": sha(train_path), "val_sha256": sha(val_path),
+                         **({"judge_profile": judge_profile} if judge_profile is not None else {})},
         "curve": curve, "training": rows,
         "first_global_gate_open_end_step": next((r["step"] for r in rows if r.get("global_gate_open_at_end")), None),
         "scope": "Eq.6 policy decoding only; excludes prefill, Q, judge, optimization and validation. Separate per-point bounds assume independent problem-level draw groups, not simultaneous coverage across checkpoints. Scientific peak crossings are point-estimate descriptions, not resolved effects. Smoke validation is only the fixed one-problem fixture.",

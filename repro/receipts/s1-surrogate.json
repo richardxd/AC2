@@ -1,0 +1,158 @@
+{
+  "accepted": true,
+  "summary": {
+    "count": 20,
+    "successful": 20,
+    "completion_tokens": 103323,
+    "mean_latency_s": 102.96103894542902,
+    "elapsed_s": 602.5650572776794,
+    "output_tokens_per_wall_s": 171.47194108268008,
+    "api_calls_added": 0,
+    "profile": {
+      "model": "openai/gpt-oss-20b",
+      "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+      "model_path": "/share/data/pals/richard1xur/ac2/models/gpt-oss-20b/6cee5e81ee83917806bbde320786a8fb61efebee",
+      "url": "http://127.0.0.1:18801/v1",
+      "upstream": "http://127.0.0.1:18800/v1/chat/completions",
+      "payload_style": "gptoss",
+      "reasoning_effort": "high",
+      "max_tokens": 65536,
+      "template_sha256": {
+        "finegrained_noref_judge.txt": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+        "imo_proofautograder.txt": "3b910a4e1084eb668c31aeb9cb8926fa903bb343f109583a090ecbfaafd40a31"
+      }
+    }
+  },
+  "server": {
+    "argv": [
+      "/scratch/richard1xur/ac2/venv/bin/python",
+      "-m",
+      "vllm.entrypoints.openai.api_server",
+      "--model",
+      "/share/data/pals/richard1xur/ac2/models/gpt-oss-20b/6cee5e81ee83917806bbde320786a8fb61efebee",
+      "--served-model-name",
+      "openai/gpt-oss-20b",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18800",
+      "--tensor-parallel-size",
+      "1",
+      "--dtype",
+      "bfloat16",
+      "--gpu-memory-utilization",
+      "0.55",
+      "--max-model-len",
+      "98304",
+      "--max-num-seqs",
+      "4",
+      "--max-num-batched-tokens",
+      "2048",
+      "--enforce-eager",
+      "--reasoning-parser",
+      "openai_gptoss",
+      "--moe-backend",
+      "marlin",
+      "--no-enable-log-requests"
+    ],
+    "pid": 1224492,
+    "create_time": 1790963095.09,
+    "started_unix": 1790963095.4559095,
+    "gpu": "0",
+    "free_before_mib": 31881,
+    "protected_processes": {
+      "3926213": 1788754563.63,
+      "3931489": 1788754601.2
+    },
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "detached": true
+  },
+  "model": {
+    "model": "openai/gpt-oss-20b",
+    "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "directory": "/share/data/pals/richard1xur/ac2/models/gpt-oss-20b/6cee5e81ee83917806bbde320786a8fb61efebee",
+    "files": {
+      ".gitattributes": {
+        "bytes": 1570,
+        "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930",
+        "lfs_sha_verified": false
+      },
+      "LICENSE": {
+        "bytes": 11357,
+        "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+        "lfs_sha_verified": false
+      },
+      "README.md": {
+        "bytes": 7095,
+        "sha256": "03c2fcf292549176757b85c911e7dcf527aef3e4241d64b6caec94af3ecf3ac2",
+        "lfs_sha_verified": false
+      },
+      "USAGE_POLICY": {
+        "bytes": 200,
+        "sha256": "d6387ef7985019c45db8d9801e6ac5fd9f98f02b9f1c56f8c5af80c3e8f385d0",
+        "lfs_sha_verified": false
+      },
+      "chat_template.jinja": {
+        "bytes": 16738,
+        "sha256": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+        "lfs_sha_verified": false
+      },
+      "config.json": {
+        "bytes": 1806,
+        "sha256": "3a2a26ded679375b7928ddeca59764df7cea83220c1961035f6d6e232659e9ce",
+        "lfs_sha_verified": false
+      },
+      "generation_config.json": {
+        "bytes": 177,
+        "sha256": "f9970ada892d2d1f72e3ed0a6535ccebadd11897318794ca671d8c7014c957da",
+        "lfs_sha_verified": false
+      },
+      "model-00000-of-00002.safetensors": {
+        "bytes": 4792272488,
+        "sha256": "16d0f997dcfc4462089d536bffe51b4bcea2f872f5c430be09ef8ed392312427",
+        "lfs_sha_verified": true
+      },
+      "model-00001-of-00002.safetensors": {
+        "bytes": 4798702184,
+        "sha256": "4fbe328ab445455d6f58dc73852b85873bd626986310abd91cd4d2ce3245eaea",
+        "lfs_sha_verified": true
+      },
+      "model-00002-of-00002.safetensors": {
+        "bytes": 4170342232,
+        "sha256": "a18106b209e9ab35c3406db4f6f12a927364a058b21e9d1373d682e20674b303",
+        "lfs_sha_verified": true
+      },
+      "model.safetensors.index.json": {
+        "bytes": 36355,
+        "sha256": "0e085b977c4c9942f85938828e8c989ed7d5cdabf852e4da6a67c116cd502cd1",
+        "lfs_sha_verified": false
+      },
+      "special_tokens_map.json": {
+        "bytes": 98,
+        "sha256": "dd5e191d20c12d2fee1da5bae14ca1db0f5f4215300af691f23cdee97120a293",
+        "lfs_sha_verified": false
+      },
+      "tokenizer.json": {
+        "bytes": 27868174,
+        "sha256": "0614fe83cadab421296e664e1f48f4261fa8fef6e03e63bb75c20f38e37d07d3",
+        "lfs_sha_verified": true
+      },
+      "tokenizer_config.json": {
+        "bytes": 4200,
+        "sha256": "9279e942392b742d633c7adbb89ebe002c98399db8926a7af5125c726f404070",
+        "lfs_sha_verified": false
+      }
+    }
+  },
+  "observed_gpu0_free_mib_after_load": 4722,
+  "protected_pids": [
+    3926213,
+    3931489
+  ],
+  "sha256": {
+    "runs/surrogate/server02/launch.json": "710445031cfe215d493a37a56943ac51eebba59ee8ef4dd0e728c2b5a969427c",
+    "runs/surrogate/model-verified.json": "576bd57aa0740bab33c0547dfb5e7ad27c3ab63adcc7fb93af8a8aa2b5e8a29b",
+    "runs/surrogate/s1-e4-01/summary.json": "b19a91e582cd7cd9ffaa79391c656c3ede8d2e92686b6d2bdf48ec4cb0f6811d",
+    "runs/surrogate/s1-e4-01/local_calls.json": "6d41b3cd7f54872c59fc9f76f2ab4f9c684b9a2925748c5b00d6ea153d537ca8"
+  }
+}

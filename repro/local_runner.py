@@ -76,6 +76,11 @@ def configure(args):
         "HF_HUB_OFFLINE": 1, "TRANSFORMERS_OFFLINE": 1, "WANDB_MODE": "offline",
         "VERL_STEP_CACHE_DIR": run / "step_cache", "NCCL_DEBUG": "INFO",
     }
+    if args.judge_backend == "surrogate":
+        from surrogate_common import URL, MODEL as JUDGE_MODEL, MAX_TOKENS, EFFORT
+        assert args.strict_judge and args.judge_max_tokens == MAX_TOKENS
+        env.update(SELF_PLAY_JUDGE_URL=URL, SP_JUDGE_API_MODEL=JUDGE_MODEL,
+                   SP_JUDGE_MODEL=JUDGE_MODEL, SP_JUDGE_REASONING_EFFORT=EFFORT)
     for name in list(os.environ):
         if name.startswith("SP_Q_") or name.startswith("SP_REPLAY_"):
             del os.environ[name]
@@ -146,6 +151,7 @@ def main():
     p.add_argument("--val-n", type=int, default=4)
     p.add_argument("--val-freq", type=int, default=10)
     p.add_argument("--judge-max-tokens", type=int, choices=[40000, 65536], default=40000)
+    p.add_argument("--judge-backend", choices=["deepseek", "surrogate"], default="deepseek")
     p.add_argument("--replay-bound", type=int, default=256)
     p.add_argument("--q-train-n", type=int)
     p.add_argument("--ablation", choices=["none", "correct-only", "no-audit"], default="none")
@@ -171,6 +177,15 @@ def main():
     with open_dict(cfg):
         if args.strict_judge:
             cfg.reward.custom_reward_function.path = str(ROOT / "repro/strict_reward.py")
+        if args.judge_backend == "surrogate":
+            from surrogate_common import URL, MAX_TOKENS, EFFORT, profile
+            cfg.reward.custom_reward_function.path = str(ROOT / "repro/surrogate_reward.py")
+            kwargs = cfg.reward.custom_reward_function.reward_kwargs
+            kwargs.judge_url = URL
+            kwargs.judge_payload_style = "gptoss"
+            kwargs.judge_max_tokens = MAX_TOKENS
+            kwargs.judge_reasoning_effort = EFFORT
+            print("SURROGATE_PROFILE " + json.dumps(profile()), flush=True)
         if args.val_data is not None:
             val_data = args.val_data.resolve()
             assert val_data.is_relative_to(ROOT / "runs") and val_data.is_file()
@@ -203,16 +218,24 @@ def main():
         return
     from ac2.utils.experiment_utils import manifest_dump
     manifest_dump(manifest / "source", cfg, src_dir=ROOT / "src", extra_files=[
-        Path(__file__), exp / "runner.py", ROOT / "repro/strict_reward.py"])
+        Path(__file__), exp / "runner.py", ROOT / "repro/strict_reward.py",
+        ROOT / "repro/surrogate_reward.py", ROOT / "repro/surrogate_common.py"])
     metrics_path = run / "metrics.jsonl"
     before = metrics_path.read_bytes() if metrics_path.exists() else b""
     (manifest / "metrics_before.jsonl").write_bytes(before)
     (manifest / "judge_before.json").write_text(json.dumps(judge_accounting(), indent=2))
+    if args.judge_backend == "surrogate":
+        from surrogate_common import accounting, profile
+        (manifest / "surrogate_profile.json").write_text(json.dumps(profile(), indent=2))
+        (manifest / "surrogate_before.json").write_text(json.dumps(accounting(), indent=2))
     runner.main_ppo.run_ppo(cfg)
     after = metrics_path.read_bytes()
     assert after.startswith(before), "metrics history was rewritten during launch"
     (manifest / "metrics_added.jsonl").write_bytes(after[len(before):])
     (manifest / "judge_after.json").write_text(json.dumps(judge_accounting(), indent=2))
+    if args.judge_backend == "surrogate":
+        assert json.loads((manifest / "judge_before.json").read_text()) == judge_accounting(), "external API accounting changed"
+        (manifest / "surrogate_after.json").write_text(json.dumps(accounting(), indent=2))
     print(f"RUN_COMPLETED metrics_added={manifest / 'metrics_added.jsonl'}", flush=True)
     import ray
     ray.shutdown()
