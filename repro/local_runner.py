@@ -64,7 +64,7 @@ def configure(args):
         "SP_LOG_PROB_MAX_TOKEN_LEN": args.response + 2048,
         "SP_ACTOR_GPU_MEM_UTIL": .45, "SP_ACTOR_MAX_NUM_SEQS": 16,
         "SP_MAX_NUM_BATCHED_TOKENS": 4096,
-        "SP_USE_FUSED_KERNELS": "False", "SP_DP_PAD": 1,
+        "SP_USE_FUSED_KERNELS": "True", "SP_DP_PAD": 1,
         "SP_TOTAL_STEPS": args.steps, "SP_SAVE_FREQ": args.save_freq,
         "SP_TEST_FREQ": -1 if args.smoke else args.val_freq,
         "SP_VAL_N": args.val_n, "SP_VAL_BEFORE_TRAIN": str(args.val_only),

@@ -1,0 +1,42 @@
+{
+  "physical_gpu": 1,
+  "uuid": "7f44c23c-faaa-e260-057a-389e51d49387",
+  "shape": [
+    65,
+    64,
+    1024
+  ],
+  "chunk": 32,
+  "temperature": 0.8,
+  "objective": "signed weighted log-prob +0.03 entropy",
+  "checks": [
+    {
+      "dtype": "torch.float32",
+      "forward_atol_rtol_and_gradient_rtol": 0.0001,
+      "max_absolute_errors": {
+        "log_probs": 4.76837158203125e-07,
+        "entropy": 2.384185791015625e-06,
+        "hidden_gradient": 1.862645149230957e-09,
+        "weight_gradient": 9.313225746154785e-10
+      },
+      "gradient_relative_l2_errors": {
+        "hidden_gradient": 1.6640220223962388e-07,
+        "weight_gradient": 1.0042864317938438e-07
+      }
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "forward_atol_rtol_and_gradient_rtol": 0.02,
+      "max_absolute_errors": {
+        "log_probs": 0.0004925727844238281,
+        "entropy": 0.014524459838867188,
+        "hidden_gradient": 6.103515625e-05,
+        "weight_gradient": 6.103515625e-05
+      },
+      "gradient_relative_l2_errors": {
+        "hidden_gradient": 0.004551591817289591,
+        "weight_gradient": 0.005321929696947336
+      }
+    }
+  ]
+}
