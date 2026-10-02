@@ -78,8 +78,11 @@ def main():
     config.update(response=16384, chunk=4096, samples=4, q_temperature=0,
                   policy_temperature=.8, top_p=1, top_k=-1, prefix_seed=192,
                   judge_max_tokens=65536, judge_http_timeout=540)
+    from judge_template_receipt import current_template, MODULE, TEMPLATE
+    config["judge_template_pin"] = current_template()
     code = [Path(__file__).resolve(), ROOT / "repro/probe_report.py",
-            EXP / "build_probe_set.py", EXP / "probe_gen.py", EXP / "probe_q.py", EXP / "probe_judge.py"]
+            EXP / "build_probe_set.py", EXP / "probe_gen.py", EXP / "probe_q.py", EXP / "probe_judge.py",
+            ROOT / "repro/judge_template_receipt.py", ROOT / MODULE, ROOT / TEMPLATE]
     config["pipeline_code_sha256"] = {str(path): digest(path) for path in code}
     configuration = args.out / "configuration.json"
     if configuration.exists():

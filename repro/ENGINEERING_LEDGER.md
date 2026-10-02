@@ -10,6 +10,12 @@ Record g16 environment facts, changes, verification and deviations from the pape
 
 ## Environment and changes
 
+Before R5's first stage, extended its configuration to assert/store the same live training-template module pin and include the pin helper, original judge module and template in its existing source hashes. All subsequent stages/resume must reproduce that configuration. No R5 outputs yet existed; no prior artifacts are reinterpreted. This brings the staged probe under the explicit R prompt-identity preflight as well as the original loader's pin check.
+
+R5 pin CPU checks: existing source suite3tests/4subtests passes; a fresh incomplete-pipeline fixture records the pin and9source hashes, rejects changed live pin and changed judge-source hash before any model/judge execution (`runs/r-preflight/r5-pin-preflight/checks.json`).
+
+Fresh `52fd695` review clean: actual admission receipt regenerates byte-identically, swapped-qid fixture fails with the intended reason, threshold6 positive and all prior/new metadata negatives pass (`runs/reviews/52fd695-independent-2pnoymds/review.json`).
+
 Independent `d297b4a` review reproduced all five actual receipts and verified84call cost, but found a false accept in the new admission checker: a passing proof could retain matching UID/tokens while its entry qid points to another problem. All11 actual admissions have correct qids. Fixed by comparing each entry qid to the original marker-based hash of its raw input, and checking its dataset step/zero-prefix/empty-source metadata. Actual receipt regenerates unchanged; the review's swapped-qid fixture now raises (`runs/r-preflight/r4-correct-only-qid-fix.json`, review `runs/reviews/d297b4a-independent-fjn_frmw/review.json`). This corrects the measurement, with no training change or regrading.
 
 R4 correct-only preparation passes cold1477.574584s/resume1111.971735s, policy gradients0.0401415657/0.0576312039, critic gradient338.4819336 with update2 and allrank optimizer counter1;16 valid probes, readiness0, bank12. [Save/resume](receipts/r4-correct-only-save-resume.json), [critic](receipts/r4-correct-only-critic.json), [curve](receipts/r4-correct-only-smoke-curve.json), [template](receipts/r4-correct-only-judge-template.json).84calls/$0.239602092; cumulative490complete/$2.428837968, no pending calls. Root host check verifies cleanup left only preexisting GPU0 processes.
