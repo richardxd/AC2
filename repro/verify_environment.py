@@ -2,6 +2,7 @@
 import importlib.metadata as md
 import json
 import os
+import subprocess
 
 import flash_attn
 import torch
@@ -13,6 +14,11 @@ assert vllm.__version__ == "0.23.0"
 assert flash_attn.__version__ == "2.8.1"
 assert os.environ["CUDA_VISIBLE_DEVICES"] == "1,2,3,4,5,6,7"
 assert torch.cuda.device_count() == 7
+expected = subprocess.check_output(["nvidia-smi", "-i", "1,2,3,4,5,6,7",
+    "--query-gpu=uuid", "--format=csv,noheader"], text=True).splitlines()
+expected = [x.removeprefix("GPU-") for x in expected]
+observed = [str(torch.cuda.get_device_properties(i).uuid) for i in range(7)]
+assert observed == expected, {"observed": observed, "expected": expected}
 receipts = []
 for i in range(7):
     torch.manual_seed(101)
@@ -26,7 +32,7 @@ for i in range(7):
     out.float().square().mean().backward()
     assert all(torch.isfinite(x.grad).all().item() for x in [q, k, v])
     receipts.append({"logical_gpu": i, "physical_gpu": i+1, "name": torch.cuda.get_device_name(i),
-                     "capability": torch.cuda.get_device_capability(i), "max_abs_error": error,
+                     "uuid": observed[i], "capability": torch.cuda.get_device_capability(i), "max_abs_error": error,
                      "finite_gradients": True})
 print(json.dumps({"torch": torch.__version__, "vllm": md.version("vllm"),
                   "flash_attn": flash_attn.__version__, "verl": verl.__file__,

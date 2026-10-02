@@ -1,0 +1,93 @@
+{
+  "torch": "2.11.0+cu129",
+  "vllm": "0.23.0+cu129",
+  "flash_attn": "2.8.1",
+  "verl": "/share/data/pals/richard1xur/ac2/src/verl/verl/__init__.py",
+  "device_count": 7,
+  "kernel_checks": [
+    {
+      "logical_gpu": 0,
+      "physical_gpu": 1,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "7f44c23c-faaa-e260-057a-389e51d49387",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 1,
+      "physical_gpu": 2,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "78859338-3fe9-97b3-d2e2-92747b78b754",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 2,
+      "physical_gpu": 3,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "bdbbe19c-4551-c636-b24a-3a467467e8f3",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 3,
+      "physical_gpu": 4,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "08a774dd-c025-36a5-4fa6-203f011e4b77",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 4,
+      "physical_gpu": 5,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "0e244512-2758-2a65-e49c-d5b0a61cbbda",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 5,
+      "physical_gpu": 6,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "2f34c74e-1a10-c9d3-13a3-7dc22983e5f1",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 6,
+      "physical_gpu": 7,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "uuid": "604ba4d0-69d5-d94d-b886-46defa25d373",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    }
+  ]
+}

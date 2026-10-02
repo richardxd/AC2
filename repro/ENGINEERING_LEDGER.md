@@ -39,6 +39,8 @@ FA-only second build succeeded. `repro/verify_environment.py` verified torch 2.1
 
 The sandbox process listing did not expose host compiler processes; an escalated read-only process listing confirmed the restarted build's uv/ninja/nvcc descendants were active. Absence in sandbox `ps` must not be interpreted as host-process absence. Post-build scratch usage: 26 GB, below 45 GB; shared available bytes 73,019,699,200.
 
+Independent E1 review flagged inferred physical GPU identity in the first receipt. Fixed by setting `CUDA_DEVICE_ORDER=PCI_BUS_ID` and asserting Torch device UUIDs equal nvidia-smi GPU1–7 UUIDs before kernel work. First UUID assertion failed only because nvidia-smi includes `GPU-` while Torch omits it; normalized that explicit prefix and reran successfully. Final authoritative receipt: `repro/receipts/e1-acceptance-uuid.json`; earlier receipt is retained but does not independently prove physical identity. The local training runner applies the same pre-kernel identity check.
+
 ## Commit and review receipts
 
 E2 commit `7d52571`: independent review by `review_e2` verified all 120 test-list entries against XML, all six diagnoses, experiment enumeration and shell syntax; clean within E2 scope. Paper/host facts not included in that review. Only push `origin repro-g16`.
