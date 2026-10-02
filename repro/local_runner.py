@@ -67,7 +67,7 @@ def configure(args):
         "SP_USE_FUSED_KERNELS": "True", "SP_DP_PAD": 1,
         "SP_TOTAL_STEPS": args.steps, "SP_SAVE_FREQ": args.save_freq,
         "SP_TEST_FREQ": -1 if args.smoke else args.val_freq,
-        "SP_VAL_N": args.val_n, "SP_VAL_BEFORE_TRAIN": str(args.val_only),
+        "SP_VAL_N": args.val_n, "SP_VAL_BEFORE_TRAIN": str(args.val_only or args.initial_val),
         "SP_VAL_ONLY": str(args.val_only), "SP_MAX_CKPT_KEEP": 100000,
         "SP_KEEP_BEST_CKPT": 0, "SP_CKPT_KEEP_EVERY": 1,
         "SP_ROLLOUT_BACKFILL": 0, "SP_LENPEN_ENABLE": 0, "SP_DIFF_SAMPLING": 0,
@@ -149,6 +149,12 @@ def main():
     p.add_argument("--q-train-n", type=int)
     p.add_argument("--ablation", choices=["none", "correct-only", "no-audit"], default="none")
     p.add_argument("--val-only", action="store_true")
+    p.add_argument("--initial-val", action="store_true",
+                   help="validate before training; R cold launches use this, resumes do not")
+    p.add_argument("--strict-judge", action="store_true",
+                   help="abort on judge failures instead of training on failed zero rewards")
+    p.add_argument("--val-data", type=Path,
+                   help="explicit validation parquet (bounded R smoke uses fixed problem0)")
     p.add_argument("--engineering-readiness", action="store_true")
     p.add_argument("--smoke", action="store_true")
     p.add_argument("--compose-only", action="store_true")
@@ -162,6 +168,12 @@ def main():
     cfg = runner.build_config()
     from omegaconf import OmegaConf, open_dict
     with open_dict(cfg):
+        if args.strict_judge:
+            cfg.reward.custom_reward_function.path = str(ROOT / "repro/strict_reward.py")
+        if args.val_data is not None:
+            val_data = args.val_data.resolve()
+            assert val_data.is_relative_to(ROOT / "runs") and val_data.is_file()
+            cfg.data.val_files = [str(val_data)]
         cfg.trainer.logger = ["console", "file"]
         cfg.reward.reward_model.enable_resource_pool = False
         cfg.actor_rollout_ref.rollout.enforce_eager = True
@@ -183,13 +195,14 @@ def main():
     manifest = run / "launches" / stamp
     manifest.mkdir(parents=True)
     OmegaConf.save(cfg, manifest / "config.yaml")
-    (manifest / "arguments.json").write_text(json.dumps(vars(args), indent=2))
+    (manifest / "arguments.json").write_text(json.dumps(vars(args), indent=2, default=str))
     print(f"COMPOSE_OK method={args.method} world_size={args.gpus} rollout_tp={args.tp} rollout_dp={args.gpus // args.tp} manifest={manifest}", flush=True)
     assert cfg.reward.reward_model.enable is False
     if args.compose_only:
         return
     from ac2.utils.experiment_utils import manifest_dump
-    manifest_dump(manifest / "source", cfg, src_dir=ROOT / "src", extra_files=[Path(__file__), exp / "runner.py"])
+    manifest_dump(manifest / "source", cfg, src_dir=ROOT / "src", extra_files=[
+        Path(__file__), exp / "runner.py", ROOT / "repro/strict_reward.py"])
     metrics_path = run / "metrics.jsonl"
     before = metrics_path.read_bytes() if metrics_path.exists() else b""
     (manifest / "metrics_before.jsonl").write_bytes(before)
