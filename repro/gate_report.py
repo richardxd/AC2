@@ -66,6 +66,7 @@ def main():
                   "95pct_hoeffding": bound(sum(half) / 60, 60, -.5, 1.)},
               "uncertainty_scope": "Each interval is a separate conservative95% bound assuming independent per-problem random draws. One sample/problem cannot estimate within-problem variance; these are not simultaneous confidence bounds. No model-quality superiority follows from overlapping bounds.",
               "timing_scope": "Per-GPU generation throughput includes prefill/queueing, excludes model startup and judge. Both use seven TP1 replicas with matched partition and concurrency4.",
+              "accounting_contract": "All other judge clients must be idle throughout each grading stage; snapshot deltas alone cannot identify unrelated new calls.",
               "gate": "Combine with E8 projection: retain4B if scaled run<=10days; otherwise evaluate1.7B half-score/nonzero>=0.20 criteria, retaining unresolved uncertainty."}
     with args.output.open("x") as f:
         json.dump(result, f, indent=2)

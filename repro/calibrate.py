@@ -13,6 +13,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--run", type=Path, required=True)
     p.add_argument("--manifest", type=Path, required=True)
+    p.add_argument("--launch", type=Path, help="bounded launch receipt for end-to-end overhead")
     p.add_argument("--output", type=Path, required=True)
     args = p.parse_args()
     spec = importlib.util.spec_from_file_location("exporter", ROOT / "scripts/export_paper_metrics.py")
@@ -39,6 +40,7 @@ def main():
     measured = []
     for record in metrics:
         step, data = record["step"], record["data"]
+        assert data.get("timing_s/gen", 0) > 0, "fresh generation timing absent; cached steps cannot calibrate throughput"
         row = scanned[step]
         assert row["complete"], row
         q_metrics = {k: v for k, v in data.items() if k.startswith("q/")}
@@ -59,10 +61,23 @@ def main():
     calls = [v for k, v in after.items() if k not in before]
     paths = [architecture, args.manifest / "config.yaml", args.manifest / "metrics_added.jsonl",
              args.manifest / "judge_before.json", args.manifest / "judge_after.json"]
+    launch_result = None
+    if args.launch is not None:
+        launch_result = json.loads((args.launch / "result.json").read_text())
+        assert launch_result["returncode"] == 0 and not launch_result["timed_out"]
+        assert launch_result["monitor_error"] is None
+        launch = json.loads((args.launch / "launch.json").read_text())
+        command = launch["command"]
+        assert (ROOT / command[command.index("--run-dir") + 1]).resolve() == args.run.resolve()
+        log = (args.launch / "stdout.log").read_text()
+        assert f"RUN_COMPLETED metrics_added={args.manifest.resolve() / 'metrics_added.jsonl'}" in log
+        paths += [args.launch / name for name in ["result.json", "launch.json", "stdout.log"]]
     paths += [args.run / row["source"] for row in scanned.values() if row["step"] in {m["step"] for m in measured}]
     result = {"run": str(args.run.resolve()), "manifest": str(args.manifest.resolve()),
               "eq6_A": a, "eq6_B": b, "steps": measured, "judge_calls": calls,
+              "launch_result": launch_result,
               "judge_charged_upper_usd": sum(r["charged_upper_usd"] for r in calls),
+              "accounting_contract": "All judge clients must be serialized during this launch; snapshots alone cannot identify unrelated new calls.",
               "scope": "training decode only; excludes prefill/Q/judge/update/validation FLOPs. Rollout timing includes judge/queue overhead, not pure decode throughput. No extrapolation in this receipt.",
               "sha256": {str(path.resolve()): hashlib.sha256(path.read_bytes()).hexdigest() for path in paths}}
     with args.output.open("x") as f:
