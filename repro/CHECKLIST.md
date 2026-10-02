@@ -4,6 +4,20 @@
 
 Track every fixed [ROADMAP](ROADMAP.md) acceptance check using first-hand receipts. Long R launches require approval; bounded R preparation smokes are authorized by kickoff revision `466f883`. Started 2026-10-01 (US/Central), base commit `d90aa18`, branch `repro-g16`.
 
+## PAUSED by Richard — 2026-10-02
+
+Richard is rethinking the plan. This pause supersedes the earlier instructions to continue and all queued supervisor notes about S3/S4. No new work, smokes, servers, S3 or S4 launches are permitted pending a new Richard decision. Only this pause record is being committed and pushed; the agent then ends its turn and waits.
+
+S2 was at **467/547 completed calls when interrupted**. Read-only host inspection while recording the pause found477 saved rows; the existing calibration continued in the background. Running processes observed:
+
+- S2 calibration PID1264750, create time1790965937.79: `surrogate_calibrate.py agreement --output runs/surrogate/s2-agreement-02`.
+- Existing GPU0 surrogate vLLM server03 PID1252663, create time1790965164.94, localhost18800; launch receipt `runs/surrogate/server03/launch.json`.
+- Existing local gateway02 PID1252664, create time1790965164.95, localhost18801; launch receipt `runs/surrogate/gateway02-launch.json`.
+
+These existing processes were neither started nor stopped in response to the pause. No S3 cold/resume smoke, S4 controller or R1/R2 long training has been launched. The S3 cold/resume and long-controller output directories are absent. There is no running controller that could automatically launch training after S2. S2 remains incomplete and no final agreement result is claimed. The last completed-response check at467 found two unparseable outputs and zero truncations. No DeepSeek API calls were made during this surrogate work; the recorded reserve remains$2.281138832.
+
+Uncommitted preparation is preserved without further work: modifications to `surrogate_chain.py` and `test_surrogate_long.py`, and untracked `surrogate_agreement_receipt.py`. Only `CHECKLIST.md` is included in the pause commit. All earlier continuation defaults below are historical and suspended by this pause.
+
 | Task | Status | Acceptance result | Evidence |
 |---|---|---|---|
 | E1 pinned environment | done | torch 2.11.0+cu129, vllm 0.23.0+cu129, flash_attn 2.8.1, verl importable; 7 GPUs. UUID mapping and real attention forward/backward verified on physical GPUs 1–7 | [acceptance](receipts/e1-acceptance-uuid.json), `runs/e1/`, [environment](env.sh), [finding](../docs/findings/repro/pinned-environment.md) |
@@ -28,9 +42,9 @@ Long R1 then R2 approved with local `openai/gpt-oss-20b` SURROGATE judge on GPU0
 | Task | Status | Acceptance / default |
 |---|---|---|
 | S1 surrogate service | done | [Active receipt](receipts/s1-surrogate-active.json): revision6cee5e81ee83917806bbde320786a8fb61efebee, repository weights/LFS hashes verified;20/20 E4 parses at concurrency16,425.338s, mean103.524s,237.141 output tokens/s. GPU0 free4644MiB under load; existing PIDs preserved. Native gptoss/high/65536, unchanged train/val SHA pins. [Historical concurrency4 receipt](receipts/s1-surrogate.json) retained. |
-| S2 agreement | in progress | Regrading all547 historical calls in `runs/surrogate/s2-agreement-02`, concurrency16. Original33-row partial pass and all37 local requests retained in agreement01/ledger. Independent review preceded owned-process pause; all requests drained and protected identities/free memory verified before restart. No partial agreement verdict or API calls. |
-| S3 surrogate R1 smoke | todo | New output directories; bounded cold+resume≤1740s each; train+val both local surrogate, step/judge timing recorded. |
-| S4 detached R1 then R2 | todo | R1 200steps/save20/full proposed val; detached durable process. R2 only after R1 completion and acceptance; no R3/R4/R5. |
+| S2 agreement | paused by Richard |467/547 at interruption; existing PID1264750 still running,477 rows at pause-state inspection. No final agreement acceptance. See pause record above; no further agent work. |
+| S3 surrogate R1 smoke | paused by Richard | Not launched. Earlier launch instructions suspended. |
+| S4 detached R1 then R2 | paused by Richard | No controller or long training launched; nothing can automatically advance from S2. Earlier authorization suspended pending Richard's new decision. |
 
 Decisions/defaults: retain native high reasoning effort and65536 output ceiling initially; tune only serving resource limits from evidence, record any necessary change. Exact duplicate historical requests will be inventoried explicitly; agreement populations must not silently discard failed or repeated calls. Scientific conclusions must identify the local surrogate deviation.
 
@@ -41,6 +55,10 @@ S1 independent review confirmed actual20 prompt identities/parse/cost evidence, 
 Capacity decision: four concurrent high-effort requests are too slow for a comfortable S3 margin. Default tune only batching (server/gateway16, unchanged0.55 GPU budget and2048 batched tokens), extend local HTTP ceiling to1800s so allowed long reasoning is not misclassified by the old API timeout; S3 launches still hard-bound1740s. Preserve partial S2, drain pending work, and restart only independently reviewed owned process identities. Revalidate all20 E4 cases before complete S2 repeat. Never signal protected sglang processes or remove pending ledger entries.
 
 Detached-launch review default: require completed S2 coverage without an agreement threshold; verify S3 profile and zero API calls; pin regular source bytes and symlink targets, including protocol/exporter. Require all200 R1 steps,21 full validation events,10 complete seven-rank checkpoints and frozen API accounting before R2. R2 reports readiness and descriptive first crossing of observed R1 peak; no crossing remains null. Sampler-startup failure cleans the owned training tree; failures stop the sequence without retry.
+
+Scratch default for detached runs: measure allocated project bytes before each arm and every300s; stop only the owned training tree at44,000,000,000bytes, leaving1GB margin below the45GB cap. No automatic cache/checkpoint deletion. Initial check27,964,182,528bytes; threshold acceptance/rejection tests pass. All bulky artifacts remain on shared data storage.
+
+S2 format-failure default: first165/547 local responses include two unparseable, nontruncated outputs (`39853bbf10c1438781ae8660ef47ec85`: no final content; `446bad68e6a24209b0b48c10e5c74d2e`: prose grade without required format). Continue full calibration as explicitly authorized; list excluded pairs and empirical failure counts. Preserve original templates/parser and strict training failure behavior, with no inferred grades or response repair. S1 still passed its specified20/20 sample; that does not establish reliability over a long run.
 
 ## Preflight
 
