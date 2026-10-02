@@ -1,0 +1,55 @@
+{
+  "run": "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2",
+  "engineering_smoke": true,
+  "match_fields": {
+    "model": "Qwen/Qwen3-4B-Thinking-2507",
+    "response": 16384,
+    "groups": 16,
+    "samples": 4,
+    "train_sha256": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "val_sha256": "3173aba7afca575f27e50f6877a6dc9f62382b37d78f6bc5ea895d7ab421d5fe"
+  },
+  "curve": [
+    {
+      "mean_score": 0.75,
+      "n_problems": 1,
+      "samples_per_problem": 4,
+      "nonzero_fraction": 0.75,
+      "separate_95pct_hoeffding": [
+        0,
+        1
+      ],
+      "problem_means": {
+        "0a6fe6aca354dbabd152900c479db754adb6f3e91b62529cd0ca6d355ff38be5": 0.75
+      },
+      "step": 0,
+      "cumulative_decoding_flops": 0
+    }
+  ],
+  "training": [
+    {
+      "step": 1,
+      "decoding_flops": 12173036066373632,
+      "cumulative_decoding_flops": 12173036066373632,
+      "logged_policy_token_sum_available": false
+    },
+    {
+      "step": 2,
+      "decoding_flops": 10817942709731328,
+      "cumulative_decoding_flops": 22990978776104960,
+      "logged_policy_token_sum_available": false
+    }
+  ],
+  "first_global_gate_open_end_step": null,
+  "scope": "Eq.6 policy decoding only; excludes prefill, Q, judge, optimization and validation. Separate per-point bounds assume independent problem-level draw groups, not simultaneous coverage across checkpoints. Scientific peak crossings are point-estimate descriptions, not resolved effects. Smoke validation is only the fixed one-problem fixture.",
+  "sha256": {
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/launches/20261002T075919.279507Z/config.yaml": "3012475b9ea36a782806e42e722b27555cd929b647651909d9e4d97b530a4939",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/launches/20261002T082208.318600Z/config.yaml": "a5d6e9f2bc7de4fbec47df8287ac344961d21c6a94d78f35cf61164566f6653b",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/metrics.jsonl": "1e126bde8e7529b220048ed37b4ddf7d2307a163c219938e0decd10299fd8f97",
+    "/share/data/pals/richard1xur/ac2/runs/e3/canonical/train.parquet": "65f8d2a52dcddb87ade13435e234a9c4558a993e32d8023fa31227e600399326",
+    "/share/data/pals/richard1xur/ac2/runs/r-preflight/test-first.parquet": "3173aba7afca575f27e50f6877a6dc9f62382b37d78f6bc5ea895d7ab421d5fe",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/rollouts/1.jsonl": "539fb9a39ba25025c64f617dd01fc774825ce08dfc18bc5bc782a6279e7cded8",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/rollouts/2.jsonl": "23f76c229d71d1aa04c3c6b6df89c4dfe860835dc1dfcd8f326abd55adb96cfc",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r1-attempt2/val_rollouts/0.jsonl": "ed0a8ae54a50e443dfbb7f3b836063cba13ab67098d2e60ff5dbe507c69c8381"
+  }
+}

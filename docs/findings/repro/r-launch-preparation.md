@@ -14,6 +14,8 @@ Research-engineer assessment: failed grades are missing measurements, not valid 
 
 ## Evidence checks
 
+R1 save/resume subsequently passed: resume981.554827s, all7ranks restored checkpoint1, checkpoint2 saved, resumed gradient0.0557945129. [Combined receipt](../../../repro/receipts/r1-save-resume.json) and [raw curve accounting](../../../repro/receipts/r1-smoke-curve.json) validate both updates. Successful phases cost54calls/$0.315421704, separate from the preserved failed attempt. Long R1 remains unapproved; the fixture's single initial validation point establishes no gain.
+
 R1 attempt2 cold passed in1324.340960s, with finite nonzero actor gradient0.0332254749 and checkpoint1. Its receipt proves world7 and physical1–7 activity; the host process check after cleanup showed only the preexisting GPU0 processes. The curve checker accepted64 training rows, exact initial validation prompts and1.2173036066373632e16 step1 policy decoding FLOPs. Only the initial validation point is present in this cold smoke; it does not demonstrate learning. Evidence: `runs/r-preflight/r1-cold02-verified.json`, `runs/r-preflight/r1-cold02-curve.json`. Save/resume acceptance requires the separate resume receipt.
 
 The training receipt binds the actual launch command to its output directory and verifies world size, physical GPU UUID activity, and all-rank model/optimizer/scheduler restoration. The AC2 checker additionally compares critic optimizer counters with observed applied updates and verifies Q-state cursor, probe records and chunk bounds. Its R-wrapper adaptation reproduced the historical E8 receipt exactly.
