@@ -26,7 +26,48 @@
           "1"
         ]
       ],
+      "logged_checkpoint_steps": [
+        1,
+        2
+      ],
+      "captured_metric_steps": [
+        1
+      ],
+      "loaded_checkpoint_step": null,
       "log_sha256": "71ab86f4d084557857051fb4714a51318183b2741d47b582d4a303a7f2324edd"
+    },
+    {
+      "path": "runs/e6/grpo-1gpu-17b-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 307.9073312357068,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "physical_gpus": {
+        "1": {
+          "samples": 307,
+          "active_samples_ge5pct": 95,
+          "max_util_pct": 100.0,
+          "max_memory_mib": 41210.0,
+          "max_sampling_gap_s": 1.181999921798706
+        }
+      },
+      "rollout_placements": [
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "logged_checkpoint_steps": [
+        3
+      ],
+      "captured_metric_steps": [
+        3
+      ],
+      "loaded_checkpoint_step": 2,
+      "log_sha256": "bc0d10897e3e460ae3bb49e5d3b7c8477ab27e2d168151bf858658fcb84f8dec"
     }
   ],
   "steps": [
@@ -149,11 +190,73 @@
           "bytes": 15141
         }
       ]
+    },
+    {
+      "step": 3,
+      "metrics": {
+        "actor/entropy": 0.2188900113105774,
+        "actor/aec_k": 0.08,
+        "actor/pg_clipfrac": 0.0,
+        "actor/ppo_kl": 0.0,
+        "actor/pg_clipfrac_lower": 0.0,
+        "actor/pg_loss": 0.0,
+        "actor/loss": 0.0,
+        "actor/grad_norm": 0.0,
+        "actor/perf/max_memory_allocated_gb": 36.366127490997314,
+        "actor/perf/max_memory_reserved_gb": 38.666015625,
+        "actor/perf/cpu_memory_used_gb": 170.2498073577881,
+        "actor/lr": 2e-06,
+        "timing_s/start_profile": 0.0015370957553386688,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 59.41016583517194,
+        "timing_s/agent_loop/generate_sequences/max": 59.64594280719757,
+        "timing_s/agent_loop/generate_sequences/mean": 59.51778088370338,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.00739482045173645,
+        "timing_s/agent_loop/compute_score/max": 0.0438484363257885,
+        "timing_s/agent_loop/compute_score/mean": 0.019973686430603266,
+        "timing_s/agent_loop/slowest/generate_sequences": 59.64594280719757,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 0.008273974061012268,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 183,
+        "timing_s/agent_loop/slowest/response_length": 4096,
+        "timing_s/gen": 59.9077897593379,
+        "timing_s/reward": 0.03221035376191139,
+        "timing_s/old_log_prob": 6.949399571865797,
+        "timing_s/adv": 0.008282504975795746,
+        "timing_s/update_actor": 13.961476419121027,
+        "timing_s/save_checkpoint": 75.52960143983364,
+        "timing_s/update_weights": 1.7992474883794785,
+        "timing_s/dump_rollout_generations": 0.04303093999624252,
+        "timing_s/step": 158.3642250970006,
+        "timing_s/stop_profile": 6.601214408874512e-05
+      },
+      "checkpoint_shards": [
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_3/actor/model_world_size_1_rank_0.pt",
+          "bytes": 8127118819
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_3/actor/optim_world_size_1_rank_0.pt",
+          "bytes": 13764626512
+        },
+        {
+          "path": "runs/e6/grpo-1gpu-17b-sampler/checkpoints/global_step_3/actor/extra_state_world_size_1_rank_0.pt",
+          "bytes": 15141
+        }
+      ]
     }
   ],
   "zero_gradient_steps": [
     1,
-    2
+    2,
+    3
   ],
-  "metrics_sha256": "76e9ecadb3a1fd57fb95c5214d0e1b00afa0bf43331e290c2e4e34685431a537"
+  "nonzero_update_demonstrated": false,
+  "metrics_sha256": "793eaf03f37ffd9822d9b95bc4ee0a08970ca623fede14b3aa0ec46d69a46ae9"
 }

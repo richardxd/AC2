@@ -169,7 +169,14 @@ def main():
         return
     from ac2.utils.experiment_utils import manifest_dump
     manifest_dump(manifest / "source", cfg, src_dir=ROOT / "src", extra_files=[Path(__file__), exp / "runner.py"])
+    metrics_path = run / "metrics.jsonl"
+    before = metrics_path.read_bytes() if metrics_path.exists() else b""
+    (manifest / "metrics_before.jsonl").write_bytes(before)
     runner.main_ppo.run_ppo(cfg)
+    after = metrics_path.read_bytes()
+    assert after.startswith(before), "metrics history was rewritten during launch"
+    (manifest / "metrics_added.jsonl").write_bytes(after[len(before):])
+    print(f"RUN_COMPLETED metrics_added={manifest / 'metrics_added.jsonl'}", flush=True)
     import ray
     ray.shutdown()
 
