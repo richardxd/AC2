@@ -31,7 +31,11 @@ Supervisor storage constraint (2026-10-01): **project scratch total must remain 
 
 ## Judge spending
 
-No judge calls made yet. Spend by this reproduction: $0. Cap: $5. The kickoff's historical balance ($32.43) is not a current measurement.
+E4 made 40 calls including the failed 16k-budget attempt: conservative peak-price upper cost $0.210646032, leaving $4.789353968 of the $5 cap. First-hand provider balance changed from $32.43 to $32.33 (rounded cents; off-peak billing differs). `repro/judge_gateway.py` is the single durable accounting point: reserve worst-case input bytes plus framing and output budget before each API attempt; uncertain calls retain reservation; reject before sending at cap. SQLite ledger and raw receipts: `runs/judge/`. Official [pricing](https://api-docs.deepseek.com/quick_start/pricing/) peak USD/million: cache miss 0.30, cache hit 0.006, output 1.20. These are upper costs, not claimed itemized billed charges.
+
+E4 final 20-call fixture (10 train + 10 val prompts) parsed 20/20 with 40k output; the earlier 16k attempt parsed 19/20 due to one truncation and is preserved. Mean train latency 26.335 s and upper cost $0.006651983; val 13.608 s and $0.003429097. Fixtures pair five official references and five unsupported assertions per route, not a representative generated-proof distribution. Illustrative 32×8 GRPO step $1.703; AC2 unready 32 refill + 32×8 continuations $1.916; 60×4 validation $0.823. A hypothetical 200-step run plus 21 validations projects $357.86 GRPO / $400.44 AC2 under those assumptions; these do not establish actual run cost. E8 must replace them with rollout measurements. Details and per-call receipts: [judge finding](../docs/findings/repro/judge-calibration.md).
+
+Official `/models` identifies DeepSeek-V4.1-Flash. Adapter uses thinking enabled/high effort and the paper's 40k judge output; local-vLLM temperature/top-p/seed settings are not forwarded to official thinking API. Scores are not exactly comparable to pinned paper judge.
 
 ## E1 acceptance
 

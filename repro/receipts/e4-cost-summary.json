@@ -1,0 +1,479 @@
+{
+  "model": "DeepSeek-V4.1-Flash",
+  "price_basis": "conservative peak USD; actual off-peak charge may be half",
+  "stats": {
+    "train": {
+      "count": 10,
+      "mean_latency_s": 26.334654378890992,
+      "min_latency_s": 2.382786750793457,
+      "max_latency_s": 94.98719692230225,
+      "mean_cost_upper_usd": 0.006651982799999999,
+      "reference_mean_cost_upper_usd": 0.007939799999999999,
+      "assertion_mean_cost_upper_usd": 0.0053641656
+    },
+    "val": {
+      "count": 10,
+      "mean_latency_s": 13.607937955856324,
+      "min_latency_s": 1.8053467273712158,
+      "max_latency_s": 44.53564715385437,
+      "mean_cost_upper_usd": 0.0034290972,
+      "reference_mean_cost_upper_usd": 0.0064544832,
+      "assertion_mean_cost_upper_usd": 0.00040371119999999997
+    }
+  },
+  "calls": [
+    {
+      "route": "train",
+      "index": 0,
+      "kind": "reference",
+      "receipt": "runs/judge/0c76be774fbe4e5ba09988f1da671051.json",
+      "sha256": "f21145ab7878d2e17ab481a7eac2ebf25c479862967e751f1c43e67af882c3a6",
+      "latency_s": 12.503533124923706,
+      "usage": {
+        "prompt_tokens": 896,
+        "completion_tokens": 2593,
+        "total_tokens": 3489,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 2274
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 256
+      },
+      "cost_upper_usd": 0.00319224
+    },
+    {
+      "route": "train",
+      "index": 1,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/b8e8006ad798464491eb4ed21696d608.json",
+      "sha256": "d36b9106c5846c847d2909ffc4e8519084875e93014c20f7c41144ac2233c7a5",
+      "latency_s": 3.1920666694641113,
+      "usage": {
+        "prompt_tokens": 718,
+        "completion_tokens": 429,
+        "total_tokens": 1147,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 312
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 206
+      },
+      "cost_upper_usd": 0.0005796719999999999
+    },
+    {
+      "route": "train",
+      "index": 2,
+      "kind": "reference",
+      "receipt": "runs/judge/cbd7b8bb83b5469fadf4127b8a8842ba.json",
+      "sha256": "aa6bb0e5a6214de4c97e9bddbcdb792544b62773c4520c4add94c67153283a37",
+      "latency_s": 36.0953631401062,
+      "usage": {
+        "prompt_tokens": 946,
+        "completion_tokens": 7707,
+        "total_tokens": 8653,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 7368
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 178
+      },
+      "cost_upper_usd": 0.009306407999999999
+    },
+    {
+      "route": "train",
+      "index": 3,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/006ad61a494d461ba6a8d59fdc22a27a.json",
+      "sha256": "f66eaa475941b51b39b4e30a466619376f748d790f142315d2002849ef95cb0c",
+      "latency_s": 94.98719692230225,
+      "usage": {
+        "prompt_tokens": 709,
+        "completion_tokens": 20398,
+        "total_tokens": 21107,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 20308
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 197
+      },
+      "cost_upper_usd": 0.024539771999999998
+    },
+    {
+      "route": "train",
+      "index": 4,
+      "kind": "reference",
+      "receipt": "runs/judge/e3f8f7dfdea0437185dae8798930e630.json",
+      "sha256": "47640e1774b2aac190f8902137d722feba9d93f081c45cd1fa4d13cebc520270",
+      "latency_s": 28.36719036102295,
+      "usage": {
+        "prompt_tokens": 1017,
+        "completion_tokens": 5894,
+        "total_tokens": 6911,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 5498
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 249
+      },
+      "cost_upper_usd": 0.007152108
+    },
+    {
+      "route": "train",
+      "index": 5,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/6c5df7d619df4a218bcb93548f985e74.json",
+      "sha256": "45aaf176bce5c0880ba10f35db0f936534d6fb0a62462d2fbc57dcd428c0786c",
+      "latency_s": 3.0880978107452393,
+      "usage": {
+        "prompt_tokens": 740,
+        "completion_tokens": 537,
+        "total_tokens": 1277,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 446
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 228
+      },
+      "cost_upper_usd": 0.000715872
+    },
+    {
+      "route": "train",
+      "index": 6,
+      "kind": "reference",
+      "receipt": "runs/judge/cd5731b877534420888c337193a765bb.json",
+      "sha256": "99f67a1782dae5a731d998d8664e28b03de28728ed358a459855604bac70fdb6",
+      "latency_s": 56.95451617240906,
+      "usage": {
+        "prompt_tokens": 3678,
+        "completion_tokens": 12194,
+        "total_tokens": 15872,
+        "prompt_tokens_details": {
+          "cached_tokens": 3456
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 11846
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 222
+      },
+      "cost_upper_usd": 0.014720135999999998
+    },
+    {
+      "route": "train",
+      "index": 7,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/9ce28697fe0e47528805f4e5a19720ad.json",
+      "sha256": "d43a53401999cffce9499415e6e277988af62244c7f1ff6b3e47dfc629c9d379",
+      "latency_s": 2.9363200664520264,
+      "usage": {
+        "prompt_tokens": 711,
+        "completion_tokens": 388,
+        "total_tokens": 1099,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 268
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 199
+      },
+      "cost_upper_usd": 0.0005283719999999999
+    },
+    {
+      "route": "train",
+      "index": 8,
+      "kind": "reference",
+      "receipt": "runs/judge/ec36070016f344499f1adf82821969db.json",
+      "sha256": "ac8c4ba95d38eeccf291c4f2835c874cdadcce7790aeb39ed38f26cf17620e49",
+      "latency_s": 22.839472770690918,
+      "usage": {
+        "prompt_tokens": 913,
+        "completion_tokens": 4400,
+        "total_tokens": 5313,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 4009
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 145
+      },
+      "cost_upper_usd": 0.005328108
+    },
+    {
+      "route": "train",
+      "index": 9,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/cc4da1f0f0574d1cbe72491cc3e87316.json",
+      "sha256": "8a120af1f73e19717fefbeb19167e08b7ec51d88f6b71a9c2c8f68dfe13c4e37",
+      "latency_s": 2.382786750793457,
+      "usage": {
+        "prompt_tokens": 807,
+        "completion_tokens": 336,
+        "total_tokens": 1143,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 233
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 167
+      },
+      "cost_upper_usd": 0.00045714
+    },
+    {
+      "route": "val",
+      "index": 0,
+      "kind": "reference",
+      "receipt": "runs/judge/fc78d698e24f4f309ace9257cb76a51c.json",
+      "sha256": "ca699f4e6e89341814e1bdc979cda1b0f12b258884491a8a4f86f0c37455841d",
+      "latency_s": 9.384489297866821,
+      "usage": {
+        "prompt_tokens": 1259,
+        "completion_tokens": 1850,
+        "total_tokens": 3109,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1574
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 235
+      },
+      "cost_upper_usd": 0.002296644
+    },
+    {
+      "route": "val",
+      "index": 1,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/6bcc7d8947364ed3a7f2e35d83df19a2.json",
+      "sha256": "7bcd36d4e5bc7d7c27ecd5c9cfcbcb286b49154930606a23e9af623362c6db24",
+      "latency_s": 2.3870816230773926,
+      "usage": {
+        "prompt_tokens": 1030,
+        "completion_tokens": 302,
+        "total_tokens": 1332,
+        "prompt_tokens_details": {
+          "cached_tokens": 896
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 184
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 134
+      },
+      "cost_upper_usd": 0.000407976
+    },
+    {
+      "route": "val",
+      "index": 2,
+      "kind": "reference",
+      "receipt": "runs/judge/4338a8ad0eae4289aade033cc87ff143.json",
+      "sha256": "dbe09f12f7d46ee18c2e73009096f0f0f8583161799cc81c7a2d6c173de2449e",
+      "latency_s": 44.53564715385437,
+      "usage": {
+        "prompt_tokens": 1343,
+        "completion_tokens": 9550,
+        "total_tokens": 10893,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9334
+        },
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 191
+      },
+      "cost_upper_usd": 0.011524211999999999
+    },
+    {
+      "route": "val",
+      "index": 3,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/13fbb88d671b4a1a859788d3828f267a.json",
+      "sha256": "a4787c909be84e280def2eb8e6923bc90c3353b6ac424b271563604d37e50f8c",
+      "latency_s": 2.1323533058166504,
+      "usage": {
+        "prompt_tokens": 1313,
+        "completion_tokens": 320,
+        "total_tokens": 1633,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 185
+        },
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 161
+      },
+      "cost_upper_usd": 0.00043921199999999997
+    },
+    {
+      "route": "val",
+      "index": 4,
+      "kind": "reference",
+      "receipt": "runs/judge/42c0f740c6554b21bd6c0a68b9591d0d.json",
+      "sha256": "19c8c64c0e6035b2c64535364745e6f275c606c31d59d07b1cbb7dcca9811334",
+      "latency_s": 36.55467653274536,
+      "usage": {
+        "prompt_tokens": 1452,
+        "completion_tokens": 8019,
+        "total_tokens": 9471,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 7633
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 172
+      },
+      "cost_upper_usd": 0.00968208
+    },
+    {
+      "route": "val",
+      "index": 5,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/636603f1fc544d95b26811054d4ab46e.json",
+      "sha256": "ec018ceaf8eab0e20063ea22b9609e5854e06fb94d73ab08a6420fcf295a32e8",
+      "latency_s": 2.1381516456604004,
+      "usage": {
+        "prompt_tokens": 1242,
+        "completion_tokens": 254,
+        "total_tokens": 1496,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 171
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 218
+      },
+      "cost_upper_usd": 0.000376344
+    },
+    {
+      "route": "val",
+      "index": 6,
+      "kind": "reference",
+      "receipt": "runs/judge/f1f455abac3e4ce2affb6005bbb05ffe.json",
+      "sha256": "c827cface56910b65a2c0c7aa54ed2c374416c9a8b3f715c04ef7661499c97f3",
+      "latency_s": 4.483224630355835,
+      "usage": {
+        "prompt_tokens": 6816,
+        "completion_tokens": 750,
+        "total_tokens": 7566,
+        "prompt_tokens_details": {
+          "cached_tokens": 6656
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 433
+        },
+        "prompt_cache_hit_tokens": 6656,
+        "prompt_cache_miss_tokens": 160
+      },
+      "cost_upper_usd": 0.000987936
+    },
+    {
+      "route": "val",
+      "index": 7,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/dbe7a4188a2a4da199b1de6cd9714e67.json",
+      "sha256": "a0317ded2ee07b5525835f45c350dc58b1d3d48796cddd8115c586ac85ba02a2",
+      "latency_s": 2.5717132091522217,
+      "usage": {
+        "prompt_tokens": 1165,
+        "completion_tokens": 330,
+        "total_tokens": 1495,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 225
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 141
+      },
+      "cost_upper_usd": 0.000444444
+    },
+    {
+      "route": "val",
+      "index": 8,
+      "kind": "reference",
+      "receipt": "runs/judge/888ca8052feb48e393666083e771f00d.json",
+      "sha256": "0615a1a3f748bffcc88f692f81c121626d017e5de02d4d2499c1cf1395a4f00f",
+      "latency_s": 30.086695432662964,
+      "usage": {
+        "prompt_tokens": 1222,
+        "completion_tokens": 6430,
+        "total_tokens": 7652,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 6169
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 198
+      },
+      "cost_upper_usd": 0.007781544
+    },
+    {
+      "route": "val",
+      "index": 9,
+      "kind": "unsupported_assertion",
+      "receipt": "runs/judge/18b6064f663f48329262bee4006e2a02.json",
+      "sha256": "a429f116beb0bbaf74b42f91317428bac476a205a9de481221b61696ab138394",
+      "latency_s": 1.8053467273712158,
+      "usage": {
+        "prompt_tokens": 1519,
+        "completion_tokens": 226,
+        "total_tokens": 1745,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 133
+        },
+        "prompt_cache_hit_tokens": 1280,
+        "prompt_cache_miss_tokens": 239
+      },
+      "cost_upper_usd": 0.00035057999999999997
+    }
+  ],
+  "all_attempts_cost_upper_usd": 0.21064603199999998,
+  "balance_after": {
+    "is_available": true,
+    "balance_infos": [
+      {
+        "currency": "USD",
+        "total_balance": "32.33",
+        "granted_balance": "0.00",
+        "topped_up_balance": "32.33"
+      }
+    ]
+  },
+  "fixture_limit": "paired first 10 validation problems, 5 reference proofs + 5 unsupported assertions per route; NOT representative generated proof distribution"
+}
