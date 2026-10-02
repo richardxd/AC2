@@ -295,3 +295,5 @@ experiments/*/legacy/
 experiments/*/[0-9]*_metrics_extract.json
 experiments/*/*_cluster_a_metrics.json
 
+# g16 reproduction outputs; small verification receipts live in repro/receipts/.
+/runs/

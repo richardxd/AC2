@@ -1,0 +1,482 @@
+[
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_bundle_gap_validation_separation_and_numeric_only",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_cache_only_handoff_alias",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_canonical_supplements_existing_logs_without_overriding",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_data_bearing_handoff_alias_and_duplicate_layout",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_exact_attention_replay_zero_and_prefill",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_invalid_lengths_never_become_complete",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_metrics_only_cli_skips_rollouts_and_bundles_means",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_token_total_mismatch_flags_lineage",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_export_paper_metrics.ExportTests::test_training_means_survive_export_without_rollouts",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_pad_count",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_08_31_at_dp56",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_dividing_shape_is_exact_halves",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_pads_anywhere_in_the_order",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[0]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[1]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[2]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[3]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[4]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[5]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[6]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[7]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[8]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[9]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[10]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[11]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[12]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[13]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[14]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[15]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[16]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[17]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[18]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_random_shapes[19]",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_minibatch_ids_refuses_impossible_shapes",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_describe_flags_activity",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_enabled_reads_env",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_pad_batch_strip_roundtrip_appended",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_pad_batch_honours_a_plan_and_strip_recovers_it",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_pad_batch_is_identity_when_it_divides",
+    "status": "passed"
+  },
+  {
+    "test": "tests.local.test_sp_dp_pad::test_make_iterator_by_ids_groups_rows",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_q_ready.test_global_ready_mode::test_problem_mode_is_the_lineage_behaviour",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_q_ready.test_global_ready_mode::test_global_mode_ignores_the_per_problem_table",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_q_ready.test_global_ready_mode::test_global_mode_keeps_the_audit_draw",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_q_ready.test_global_ready_mode::test_latch_vs_live_gate",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_q_ready.test_global_ready_mode::test_flags_from_a_legacy_state_derive_from_the_saved_window",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_distinct_when_grid_is_large_enough",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_full_coverage_before_any_repeat_when_grid_is_small",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_deterministic_and_keyed",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_grain_override_and_clamp",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_short_trajectory_fallback_matches_prefix_cut",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_prefix_cuts_td::test_metrics_appended_per_cut",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_advantage::test_td_singleton_is_r_minus_q_on_generated_span",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_advantage::test_td_invalid_stamp_falls_back_to_grpo_singleton",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_advantage::test_mixed_batch_leaves_unstamped_groups_bit_identical_to_grpo",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_copy_ranges_are_contiguous_interleaved",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_gen_rewrite_assigns_per_copy_prefix_and_cap",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_driver_rewrite_singleton_uids_and_per_copy_extra",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_count_mismatch_is_refused",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_no_td_key_is_a_noop",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_union_passes_after_mirror_of_rewritten_keys",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_qtd.test_td_rewrite::test_mirror_is_noop_without_shared_keys",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_no_seg_rows_is_bit_identical_to_grpo",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_singleton_group_matches_grpo_zero_mean_convention",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_invalid_flag_zero_is_honoured",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_two_segment_values_and_boundary",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_small_group_is_still_split_no_fallback",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_grid_collapse_gives_zero_a1_and_is_counted_not_routed",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_masked_prefix_tokens_stay_zero",
+    "status": "passed"
+  },
+  {
+    "test": "tests.sp_segment.test_sp_segment_advantage::test_lane_split_metrics_are_separate",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_success_captures_tokens_and_response",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_score_zero",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_usage_spelling_variants",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_missing_usage_sentinels_not_silent_zero",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_parse_failure_keeps_tokens",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_truncated_flag",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_http_error",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_missing_proof_no_judge_call",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_prover_judge_reward::test_key_uniformity_across_paths",
+    "status": "passed"
+  },
+  {
+    "test": "tests.test_utils::test_manifest",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_ladder_schedule_and_floor",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_ladder_resume_is_exact",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_prompt_variants",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_reference_requires_judge_pass",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_cold_bootstrap_fill_is_disjoint_and_full",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_relaunch_does_not_call_the_separate_q_resharder",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_off_switches_are_pinned_and_asserted",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_q_config_reaches_the_dashboard_from_a_real_config_shape",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_rejection_metric_is_a_delta_not_an_order_dependent_reset",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_refs_are_prewarmed_before_replay_eviction",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_judge_is_the_lineage_model_at_a_pinned_revision",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_readiness_gates_are_split_and_independent",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_tp_gt_1_is_gated_on_the_aot_preflight",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_context_group_moves_together",
+    "status": "failed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_retention_keeps_every_tenth_step",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_13_tiedq_seed192.test_08_04_logic::test_aot_preflight_shares_the_engine_workspace",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_cold_bootstrap_fill_is_disjoint_and_full",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_relaunch_does_not_call_the_separate_q_resharder",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_off_switches_are_pinned_and_asserted",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_judge_is_the_lineage_model_at_a_pinned_revision",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_tp_gt_1_is_gated_on_the_aot_preflight",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_context_group_moves_together",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_retention_keeps_every_tenth_step",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_aot_preflight_shares_the_engine_workspace",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_q_is_absent_and_pinned_off",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_dataset_installs_no_q_and_routes_every_row_full",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_resume_refuses_a_checkpoint_that_carries_q_state",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_cold_build_writes_only_the_replay_seed",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_single_factor_diff_against_the_main_run",
+    "status": "failed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_question_sampling_is_optin_and_resume_safe",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_11_ablation1_replay_noq.test_ablation1_logic::test_both_arms_pin_the_same_draw_policy",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_inflow_stamp_schedule",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_resolver_three_valued",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_resolver_refuses_empty_step",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_zero_count_repeat_alignment",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_whole_burst_fifo_turnover",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_partial_bound_would_collapse_diversity",
+    "status": "passed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_panel1_mask_covers_burst_run_zero_inflow_steps",
+    "status": "failed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_panel1_mask_unchanged_on_every_step_inflow_runs",
+    "status": "failed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_panel1_mask_leaves_grafted_parent_steps_alone",
+    "status": "failed"
+  },
+  {
+    "test": "experiments.08_28_extreme_offpolicy.test_08_28_logic::test_panel1_mask_absent_without_sp_inflow_key",
+    "status": "failed"
+  }
+]
