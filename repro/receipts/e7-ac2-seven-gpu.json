@@ -1,0 +1,218 @@
+{
+  "run": "runs/e7/ac2-7gpu-retry",
+  "launches": [
+    {
+      "path": "runs/e7/ac2-7gpu-cold02",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 595.041389465332,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        1,
+        2
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 577,
+          "active_samples_ge5pct": 251,
+          "max_memory_mib": 23038.0,
+          "max_sampling_gap_s": 1.5460000038146973
+        },
+        "2": {
+          "samples": 577,
+          "active_samples_ge5pct": 250,
+          "max_memory_mib": 23039.0,
+          "max_sampling_gap_s": 8.0
+        },
+        "3": {
+          "samples": 577,
+          "active_samples_ge5pct": 256,
+          "max_memory_mib": 23008.0,
+          "max_sampling_gap_s": 15.764000177383423
+        },
+        "4": {
+          "samples": 577,
+          "active_samples_ge5pct": 245,
+          "max_memory_mib": 23028.0,
+          "max_sampling_gap_s": 15.77999997138977
+        },
+        "5": {
+          "samples": 577,
+          "active_samples_ge5pct": 252,
+          "max_memory_mib": 23015.0,
+          "max_sampling_gap_s": 15.77999997138977
+        },
+        "6": {
+          "samples": 577,
+          "active_samples_ge5pct": 251,
+          "max_memory_mib": 23009.0,
+          "max_sampling_gap_s": 15.787999868392944
+        },
+        "7": {
+          "samples": 577,
+          "active_samples_ge5pct": 254,
+          "max_memory_mib": 22961.0,
+          "max_sampling_gap_s": 15.787999868392944
+        }
+      },
+      "engineering_readiness": false
+    },
+    {
+      "path": "runs/e7/ac2-7gpu-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1055.9002207145095,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 995,
+          "active_samples_ge5pct": 485,
+          "max_memory_mib": 23500.0,
+          "max_sampling_gap_s": 42.420000076293945
+        },
+        "2": {
+          "samples": 995,
+          "active_samples_ge5pct": 485,
+          "max_memory_mib": 23519.0,
+          "max_sampling_gap_s": 42.187999963760376
+        },
+        "3": {
+          "samples": 995,
+          "active_samples_ge5pct": 479,
+          "max_memory_mib": 23520.0,
+          "max_sampling_gap_s": 42.25699996948242
+        },
+        "4": {
+          "samples": 995,
+          "active_samples_ge5pct": 473,
+          "max_memory_mib": 23520.0,
+          "max_sampling_gap_s": 42.259000062942505
+        },
+        "5": {
+          "samples": 995,
+          "active_samples_ge5pct": 476,
+          "max_memory_mib": 23519.0,
+          "max_sampling_gap_s": 42.418999910354614
+        },
+        "6": {
+          "samples": 995,
+          "active_samples_ge5pct": 474,
+          "max_memory_mib": 23519.0,
+          "max_sampling_gap_s": 42.418999910354614
+        },
+        "7": {
+          "samples": 995,
+          "active_samples_ge5pct": 474,
+          "max_memory_mib": 23519.0,
+          "max_sampling_gap_s": 42.420000076293945
+        }
+      },
+      "engineering_readiness": true
+    }
+  ],
+  "checkpoint": 6,
+  "critic_update_steps": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "q_optimizer_steps": {
+    "0": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "1": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "2": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "3": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "4": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "5": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    },
+    "6": {
+      "parameters_with_state": 37,
+      "min_step": 5.0,
+      "max_step": 5.0
+    }
+  },
+  "ready_problems": 23,
+  "wave_counts": {
+    "probe": 80,
+    "consumed": 6,
+    "audit_cut": 1
+  },
+  "valid_waves": {
+    "probe": 80,
+    "consumed": 6,
+    "audit_cut": 1
+  },
+  "routes": {
+    "full": 270,
+    "short": 12,
+    "audit": 6
+  },
+  "consumed_chunks": 6,
+  "max_consumed_chunk": 128,
+  "chunk_limit": 128,
+  "branch_checks_required": true,
+  "scope": "engineering branch coverage; permissive readiness is not a scientific result",
+  "sha256": {
+    "runs/e7/ac2-7gpu-retry/metrics.jsonl": "8a5879487c42574965b47fb6938af6683ce25d8f0185922c4e2e899c1cda816c",
+    "runs/e7/ac2-7gpu-cold02/stdout.log": "c5b48be6ba0c51e03500289720a28fd99a780b9ff7d6ff47c9a3536dba40144f",
+    "runs/e7/ac2-7gpu-cold02/launch.json": "326009cfc6a27c531a7589fb7e89dd69ef7187a25218754bbf70c5437e788c71",
+    "runs/e7/ac2-7gpu-cold02/result.json": "c19624202fe1e3a339e857a26a0ce118980ecb515fbf17fe11940247181c2de4",
+    "runs/e7/ac2-7gpu-cold02/gpu.csv": "8feabc2752ffddc96d394d79113c4220af9123c5ecfc65f2adebb24f30d83bdb",
+    "/share/data/pals/richard1xur/ac2/runs/e7/ac2-7gpu-retry/launches/20261002T045455.025993Z/metrics_added.jsonl": "13f73f4c7647b2a3dbce8acd59ffea6d3d7831a6c5c19b3cfdd6b02010e5bc48",
+    "runs/e7/ac2-7gpu-resume01/stdout.log": "d8db0af3d02aece58eb17f21692c5a4be8878f0ae1325cdf7b21a02c60216f28",
+    "runs/e7/ac2-7gpu-resume01/launch.json": "ee519ab971205420eb3f38663c71aa081fa57c17e3fbaac03c136e3e6ae21bd5",
+    "runs/e7/ac2-7gpu-resume01/result.json": "0e5c56d129fdc9526e65d1a296782c3ee15b57fab2edd49234d1f37bb8372fe9",
+    "runs/e7/ac2-7gpu-resume01/gpu.csv": "fea817af6d206cb3d4ff62f81629f52ec341c086e228f0c325206a2faaed38d2",
+    "/share/data/pals/richard1xur/ac2/runs/e7/ac2-7gpu-retry/launches/20261002T050520.229767Z/metrics_added.jsonl": "6252d11eb990e5e17a26997459476cd4cc58f84468ab09f020c743613009ac08",
+    "runs/e7/ac2-7gpu-retry/checkpoints/global_step_6/q_state.json": "35fcc9f75839c67c9fa9173f4219a3cd103c8d9c04d2713239ccee1e0a0d0a2e",
+    "runs/e7/ac2-7gpu-retry/checkpoints/global_step_6/sp_q_optim/_complete.json": "42050d942b4c226ab4a9f1446266e4444a96eb1d01e76d74c35be14260aead41",
+    "runs/e7/ac2-7gpu-retry/q_wave/0.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/e7/ac2-7gpu-retry/q_wave/1.jsonl": "d2a807c8ee8b72f2501d59daced6fb9bfb6206cefc71ace2241c673dd40807d0",
+    "runs/e7/ac2-7gpu-retry/q_wave/2.jsonl": "5f69104ac8448fab67ee0fdb9d05a8c9d171d73f5298693201dc2a0dee1664a3",
+    "runs/e7/ac2-7gpu-retry/q_wave/3.jsonl": "3e53637bc68847f5fce023e0fe96b1983a7fc4677752ee7171a7378010ac1b94",
+    "runs/e7/ac2-7gpu-retry/q_wave/4.jsonl": "b3c15a67e740c0e324607d35883462a23e53bba8bad409ba9a2087d101e170e8",
+    "runs/e7/ac2-7gpu-retry/q_wave/5.jsonl": "15aa1bb647f2908bb443c0229507e9b6353e94771bd5c4c88202f830a58fd6f7",
+    "runs/e7/ac2-7gpu-retry/rollouts/1.jsonl": "f8e9b1c6b57a9049e35236d94137ea565c2979a4bef360cfa1d6f52258022a6b",
+    "runs/e7/ac2-7gpu-retry/rollouts/2.jsonl": "fe3084f3a7d6249bef2787af27c26738adca71633e749731d31f5c803ec26bfd",
+    "runs/e7/ac2-7gpu-retry/rollouts/3.jsonl": "a665bba352baf3a9cdf75a6280e6b60b7f85ead383d969df20f121a126fd97c0",
+    "runs/e7/ac2-7gpu-retry/rollouts/4.jsonl": "1285689ba7b9ffcf0d9bc05ca2d97b9adb8071aef342589cb1a995df3d51ee07",
+    "runs/e7/ac2-7gpu-retry/rollouts/5.jsonl": "ae0cbe8eee5cb145621749542ebe3f6ee4e1e601f685f54c7d335cda1ae3a3d1",
+    "runs/e7/ac2-7gpu-retry/rollouts/6.jsonl": "ec30d8c3eec4d362024da41a53d04d4fcfb79267d687b72baa3982f2e33d730e"
+  }
+}

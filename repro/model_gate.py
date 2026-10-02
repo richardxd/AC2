@@ -38,7 +38,8 @@ def generate(args):
     source = ROOT / "runs/e9/data60/test.parquet"
     dataset = RLHFDataset(str(source), tokenizer, OmegaConf.create({
         "cache_dir": str(Path(os.environ["TMPDIR"]) / "gate-dataset"),
-        "max_prompt_length": 2048, "filter_overlong_prompts": True, "truncation": "error"}))
+        "max_prompt_length": 2048, "filter_overlong_prompts": True,
+        "filter_overlong_prompts_workers": 1, "truncation": "error"}))
     assert len(dataset) == 60
     rows = [dataset[i] for i in range(len(dataset)) if i % 7 == args.shard]
     prompts = [normalize_token_ids(apply_chat_template(tokenizer, r["raw_prompt"], tools=None,

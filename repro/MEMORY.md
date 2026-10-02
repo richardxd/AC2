@@ -11,3 +11,4 @@ Keep durable pointers to project findings, not duplicate investigations.
 - Research/ML engineering: [judge calibration](../docs/findings/repro/judge-calibration.md). 20/20 parsing at 40k; conservative durable $5 cap; official V4.1 judge differs from paper. Diagnostic costs are not rollout estimates.
 - Research/ML engineering: [local launch](../docs/findings/repro/local-launch.md). Three original builders compose with private Ray and external judge; GPU training acceptance remains separate.
 - Research/ML engineering: [multi-GPU smoke](../docs/findings/repro/multigpu-smoke.md). Mechanical one/seven-GPU coverage, uneven microbatch and long-response memory diagnoses; cached retries cannot measure fresh rollout throughput.
+- Research/ML engineering: [AC2 smoke](../docs/findings/repro/ac2-smoke.md). E7 six-step critic save/resume and consumed/audit/chunk coverage verified; permissive readiness is an engineering fixture, not a research result.

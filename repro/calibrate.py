@@ -43,6 +43,10 @@ def main():
         assert data.get("timing_s/gen", 0) > 0, "fresh generation timing absent; cached steps cannot calibrate throughput"
         row = scanned[step]
         assert row["complete"], row
+        trajectories = [json.loads(line) for line in (args.run / row["source"]).read_text().splitlines()]
+        assert trajectories
+        for trajectory in trajectories:
+            assert all(trajectory[key] == 0 for key in ["judge_parse_failed", "judge_http_error", "judge_truncated"]), "judge failure invalidates calibration"
         q_metrics = {k: v for k, v in data.items() if k.startswith("q/")}
         nonfinite_q = [k for k, v in q_metrics.items() if isinstance(v, (float, int)) and not math.isfinite(v)]
         for key in nonfinite_q:
@@ -59,6 +63,7 @@ def main():
     after = {r["id"]: r for r in json.loads((args.manifest / "judge_after.json").read_text())}
     assert all(after[k] == v for k, v in before.items()), "overlapping judge activity changed earlier calls"
     calls = [v for k, v in after.items() if k not in before]
+    assert all(call["state"] == "complete" for call in calls), "incomplete judge accounting"
     paths = [architecture, args.manifest / "config.yaml", args.manifest / "metrics_added.jsonl",
              args.manifest / "judge_before.json", args.manifest / "judge_after.json"]
     launch_result = None
