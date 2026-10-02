@@ -1,0 +1,40 @@
+{
+  "run": "runs/r-smokes/r4-correct-only",
+  "steps": [
+    {
+      "step": 1,
+      "inflow": 16,
+      "admitted": 3,
+      "rejected": 13,
+      "admitted_points": [
+        7,
+        7,
+        7
+      ]
+    },
+    {
+      "step": 2,
+      "inflow": 16,
+      "admitted": 8,
+      "rejected": 8,
+      "admitted_points": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7
+      ]
+    }
+  ],
+  "scope": "engineering admission check; no efficacy claim",
+  "sha256": {
+    "runs/r-smokes/r4-correct-only/replay_buffer_deltas.jsonl": "09e56d4de575a4fae1fa52a9eb299d32e90c426ba45356c6f2e2cb42b05d7a91",
+    "runs/r-smokes/r4-correct-only/launches/20261002T112240.855469Z/config.yaml": "87465d4b2c3b9d242a25efb0f162376054e70d40148251a07ac5b8b16414a87a",
+    "runs/r-smokes/r4-correct-only/launches/20261002T114844.131497Z/config.yaml": "12d3047c91e5df96b7f645427e7f53b410f8c60f8a5cebcf583dba7b3ec7228e",
+    "runs/r-smokes/r4-correct-only/rollouts/1.jsonl": "a4c36fa69ce7080a8b32796c77d6ab11bdfd5d4a9f1b3963be7da6d2eed4e2c5",
+    "runs/r-smokes/r4-correct-only/rollouts/2.jsonl": "3bc12a04286c949e1b033fc410499563d9f1fd8f8eac52d502303b1d092028c7"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "run": "runs/r-smokes/r4-correct-only",
+  "launches": [
+    {
+      "manifest": "runs/r-smokes/r4-correct-only/launches/20261002T112240.855469Z",
+      "template_sha256": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+      "module_pin": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+      "configured_template_path": "/share/data/pals/richard1xur/ac2/src/ac2/rewards/templates/finegrained_noref_judge.txt",
+      "verification": "archived source bytes",
+      "archive_sha256": "98e82fbbec4620fe1bda31e50bcd3ce589ac34843623d6d6d8900f34e318c5e3",
+      "config_sha256": "87465d4b2c3b9d242a25efb0f162376054e70d40148251a07ac5b8b16414a87a"
+    },
+    {
+      "manifest": "runs/r-smokes/r4-correct-only/launches/20261002T114844.131497Z",
+      "template_sha256": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+      "module_pin": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+      "configured_template_path": "/share/data/pals/richard1xur/ac2/src/ac2/rewards/templates/finegrained_noref_judge.txt",
+      "verification": "archived source bytes",
+      "archive_sha256": "98e82fbbec4620fe1bda31e50bcd3ce589ac34843623d6d6d8900f34e318c5e3",
+      "config_sha256": "12d3047c91e5df96b7f645427e7f53b410f8c60f8a5cebcf583dba7b3ec7228e"
+    }
+  ]
+}

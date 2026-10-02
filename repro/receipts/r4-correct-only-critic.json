@@ -1,0 +1,196 @@
+{
+  "run": "runs/r-smokes/r4-correct-only",
+  "launches": [
+    {
+      "path": "runs/r-smoke-launches/r4-correct-only-cold01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1477.574584081769,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        1
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1412,
+          "active_samples_ge5pct": 1226,
+          "max_memory_mib": 29222.0,
+          "max_sampling_gap_s": 22.802000045776367
+        },
+        "2": {
+          "samples": 1412,
+          "active_samples_ge5pct": 1178,
+          "max_memory_mib": 29241.0,
+          "max_sampling_gap_s": 22.799999952316284
+        },
+        "3": {
+          "samples": 1412,
+          "active_samples_ge5pct": 1161,
+          "max_memory_mib": 29242.0,
+          "max_sampling_gap_s": 22.799999952316284
+        },
+        "4": {
+          "samples": 1412,
+          "active_samples_ge5pct": 1138,
+          "max_memory_mib": 29242.0,
+          "max_sampling_gap_s": 22.799999952316284
+        },
+        "5": {
+          "samples": 1412,
+          "active_samples_ge5pct": 895,
+          "max_memory_mib": 29241.0,
+          "max_sampling_gap_s": 22.799999952316284
+        },
+        "6": {
+          "samples": 1412,
+          "active_samples_ge5pct": 878,
+          "max_memory_mib": 29261.0,
+          "max_sampling_gap_s": 22.799999952316284
+        },
+        "7": {
+          "samples": 1412,
+          "active_samples_ge5pct": 905,
+          "max_memory_mib": 26341.0,
+          "max_sampling_gap_s": 22.800999879837036
+        }
+      },
+      "engineering_readiness": false
+    },
+    {
+      "path": "runs/r-smoke-launches/r4-correct-only-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1111.9717347621918,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        2
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 963,
+          "active_samples_ge5pct": 700,
+          "max_memory_mib": 28592.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "2": {
+          "samples": 963,
+          "active_samples_ge5pct": 706,
+          "max_memory_mib": 28931.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "3": {
+          "samples": 963,
+          "active_samples_ge5pct": 640,
+          "max_memory_mib": 29132.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "4": {
+          "samples": 963,
+          "active_samples_ge5pct": 686,
+          "max_memory_mib": 29072.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "5": {
+          "samples": 963,
+          "active_samples_ge5pct": 674,
+          "max_memory_mib": 27871.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "6": {
+          "samples": 963,
+          "active_samples_ge5pct": 688,
+          "max_memory_mib": 29511.0,
+          "max_sampling_gap_s": 53.138999938964844
+        },
+        "7": {
+          "samples": 963,
+          "active_samples_ge5pct": 703,
+          "max_memory_mib": 24911.0,
+          "max_sampling_gap_s": 53.138999938964844
+        }
+      },
+      "engineering_readiness": false
+    }
+  ],
+  "checkpoint": 2,
+  "critic_update_steps": [
+    2
+  ],
+  "q_optimizer_steps": {
+    "0": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "1": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "2": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "3": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "4": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "5": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "6": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    }
+  },
+  "ready_problems": 0,
+  "wave_counts": {
+    "probe": 16
+  },
+  "valid_waves": {
+    "probe": 16
+  },
+  "routes": {
+    "full": 160
+  },
+  "consumed_chunks": 0,
+  "max_consumed_chunk": null,
+  "chunk_limit": 4096,
+  "branch_checks_required": false,
+  "scope": "engineering branch coverage; permissive readiness is not a scientific result",
+  "sha256": {
+    "runs/r-smokes/r4-correct-only/metrics.jsonl": "ad9d16f5f847f2bc6ec4571e82fd1d890ad4ec1262265a86c7ebf0d5fca1adc5",
+    "runs/r-smoke-launches/r4-correct-only-cold01/stdout.log": "38d16c5d06f47897e78dd0e93550daf1971195f6f9db04228c99b6137c6c7f68",
+    "runs/r-smoke-launches/r4-correct-only-cold01/launch.json": "0ce2aae912debd16fc16860bebce5fc76b869d13c879f37e6076b8c972cced57",
+    "runs/r-smoke-launches/r4-correct-only-cold01/result.json": "b3aebf60a993075f791bfbc925cb59242d67257fcb6769c3bb436ec46543e790",
+    "runs/r-smoke-launches/r4-correct-only-cold01/gpu.csv": "08f2fda1c330caac2aef82592120060e732cfd4e7d04d8b0852001ee89e14098",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-correct-only/launches/20261002T112240.855469Z/metrics_added.jsonl": "89bd4bb0fdf35242cfc6c1613286ae52fafdf6209698cca408a549a4fcaff3a3",
+    "runs/r-smoke-launches/r4-correct-only-resume01/stdout.log": "7634e666a68a9f98bfcff68ee15e91f903d3ccf6e259d457679618c8d1d29b9b",
+    "runs/r-smoke-launches/r4-correct-only-resume01/launch.json": "7546290618f14c57eba774641663f16335e181d1af72082e5e2dcd0bf8190693",
+    "runs/r-smoke-launches/r4-correct-only-resume01/result.json": "aac462926a480d904e37b63349e1df2823dfcce9dd10cbae07fc2c5d91a17943",
+    "runs/r-smoke-launches/r4-correct-only-resume01/gpu.csv": "43d6092d15019bad09eb84764e960e072b409a2e3ca9a2fe676b214c0bb6db9f",
+    "/share/data/pals/richard1xur/ac2/runs/r-smokes/r4-correct-only/launches/20261002T114844.131497Z/metrics_added.jsonl": "d71da8e101459324e1e1f172b6dbe7763364c671543d17bfc3b682321451b61c",
+    "runs/r-smokes/r4-correct-only/checkpoints/global_step_2/q_state.json": "d93a3c7ae7e2bd37a0ad63c025ca1c5454c30661bb6b3b47a3b8cf90cbe2f506",
+    "runs/r-smokes/r4-correct-only/checkpoints/global_step_2/sp_q_optim/_complete.json": "990e4fade771503b26cdf7137992b79ffdd8756a0602bbfa5143168fe6975ca6",
+    "runs/r-smokes/r4-correct-only/q_wave/0.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/r-smokes/r4-correct-only/q_wave/1.jsonl": "db2f415c38461f0419c2cf7c2ef27ed43e58f8fbce95536080825bd818ce3e6c",
+    "runs/r-smokes/r4-correct-only/rollouts/1.jsonl": "a4c36fa69ce7080a8b32796c77d6ab11bdfd5d4a9f1b3963be7da6d2eed4e2c5",
+    "runs/r-smokes/r4-correct-only/rollouts/2.jsonl": "3bc12a04286c949e1b033fc410499563d9f1fd8f8eac52d502303b1d092028c7"
+  }
+}
