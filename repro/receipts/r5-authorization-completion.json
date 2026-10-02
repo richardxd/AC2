@@ -1,0 +1,45 @@
+{
+  "authorization": "Supervisor explicitly confirmed Richard standing authorization for exactly four R5 proofs plus public problems to api.deepseek.com through judge_gateway.py; retry stage once, expected cost below $0.05, total cap $5.",
+  "prior_denial_preserved": "runs/r5-smoke/judge-approval-block.json",
+  "plan": "repro/receipts/r5-grading-plan.json",
+  "plan_sha256": "79dd8483283a863c0b6b218e5bbbde88c1197132b392d29a5b6fc9b6878ed8b2",
+  "destination": "https://api.deepseek.com/chat/completions",
+  "model_alias": "deepseek-flash",
+  "judge_max_tokens": 65536,
+  "calls": [
+    {
+      "id": "27f611ae5a13432e9a0e5d1ba37696f4",
+      "prompt_sha256": "03276e3cf0fd1cf9463d267b29869b5def70ace60733516c86dfac34999c1c9b",
+      "cost_upper_usd": 0.005433204,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/27f611ae5a13432e9a0e5d1ba37696f4.json",
+      "sha256": "d5c5e2523e8d6efc02099ed0084df6ec599dc3c3fe4d3b98b81e885de84a9da1"
+    },
+    {
+      "id": "89742d6238454ad8a6054ddf093c7f44",
+      "prompt_sha256": "da20f5d47a1fbd699c3bd1a8822ade3b0cbef585896d25124ba70d9a452f8447",
+      "cost_upper_usd": 0.005365103999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/89742d6238454ad8a6054ddf093c7f44.json",
+      "sha256": "4bdbe9241a3f971e6a60f3084a94493ab7294b6ea43e644eac419a3cb1b03475"
+    },
+    {
+      "id": "9a5039be93694c18a2280fd0bfeac0cb",
+      "prompt_sha256": "cecd6689f1c9bfd567143ebf3c55bb5f0ac3e94f3dc6ecd30e119811acc72ef9",
+      "cost_upper_usd": 0.0070424039999999995,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/9a5039be93694c18a2280fd0bfeac0cb.json",
+      "sha256": "4049ca862eb55bf86eddb69964954be17806b3e0734abd9527590a05128e2bf4"
+    },
+    {
+      "id": "aaa48d3cc89849959ed290e1c576dd9d",
+      "prompt_sha256": "4c5c411c629193bde19abb34c7802cf4c2460e1b5ef98b7c62bceed3496f71d9",
+      "cost_upper_usd": 0.001948104,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/aaa48d3cc89849959ed290e1c576dd9d.json",
+      "sha256": "ead0f86772e1dabc4dcbb4048b64d78550d9181e7fe9bb9b26e03526ef35ae47"
+    }
+  ],
+  "new_calls": 4,
+  "judge_usd": 0.019788815999999997,
+  "completed_judge_calls": 547,
+  "completed_spend_usd": 2.7188611679999997,
+  "remaining_cap_usd": 2.2811388320000003,
+  "actual_payload_matches_authorized_plan": true
+}

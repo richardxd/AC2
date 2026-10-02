@@ -1,0 +1,126 @@
+{
+  "directory": "runs/r5-smoke",
+  "engineering_fixture": true,
+  "stages": [
+    {
+      "stage": "prepare",
+      "launch": "runs/r5-launches/prepare01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 341.7252347767353,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {},
+      "log_sha256": "96793c48f014ec1f5423e5cd05ceceafc02aaccbab30d74f6393f6517ba6a2ef"
+    },
+    {
+      "stage": "generate",
+      "launch": "runs/r5-launches/generate01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 337.71727319806814,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {
+        "1": 208,
+        "2": 299,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+      },
+      "log_sha256": "582ac3b02991b790c16888f9ae5bd98f91ab58e1655d20fc0b31783ad0cc2d03"
+    },
+    {
+      "stage": "critic",
+      "launch": "runs/r5-launches/critic01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 47.441545221954584,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {
+        "1": 3,
+        "2": 3,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+      },
+      "log_sha256": "effae6a8a504e7bb6f55de0ffa9057de5e5a7611936e30b33c914e59c33c6614"
+    },
+    {
+      "stage": "judge",
+      "launch": "runs/r5-launches/judge01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 51.239212449640036,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {},
+      "log_sha256": "f408bb2d7346d2dc64b682f775c843bb845ba860ecdbc2f0efb3044d3d2bb5e1"
+    },
+    {
+      "stage": "analyze",
+      "launch": "runs/r5-launches/analyze01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 22.203027565032244,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {},
+      "log_sha256": "4676a3098700b0dc237d3127046ccbf1b3df3a98f241aaf512724554e1bf88e1"
+    },
+    {
+      "stage": "verify-resume",
+      "launch": "runs/r5-launches/resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 22.39433454349637,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "active_samples_ge5pct": {},
+      "log_sha256": "533144cab1d57f97a3523de418f185980e09d5d306b37a76bbfd9366cd7fc8ee"
+    }
+  ],
+  "verified_artifacts": 38,
+  "judge_template_pin": {
+    "path": "/share/data/pals/richard1xur/ac2/src/ac2/rewards/templates/finegrained_noref_judge.txt",
+    "sha256": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6"
+  },
+  "historical_contexts_exact": 6,
+  "generated_tokens": 103832,
+  "groups": 2,
+  "q_measurements": 10,
+  "judge_rows": 8,
+  "groups_complete_valid": 2,
+  "excluded_invalid_q_groups": [],
+  "judge_calls": 4,
+  "judge_usd": 0.019788815999999997,
+  "cumulative_judge_usd": 2.7188611679999997,
+  "no_calls_after_judge_stage": true,
+  "sha256": {
+    "runs/r5-smoke/configuration.json": "d453702941609110306c597de38ebfeada992d09e8372f3bef95c27b8e7b664e",
+    "runs/r5-smoke/report.json": "7bdde60e68c8525b8b5ac89f971255392a295478d9c2aa33675cb6813697df0a",
+    "runs/r5-smoke/prepare.done.json": "24cd79179ac36bb2829255ac416e9d785a5779eee2a547f9c36f4629cadcac03",
+    "runs/r5-smoke/generate.done.json": "f7da708af8c0f1750eb3ba943d40f80996c7f60d945634409961ccd938a1f935",
+    "runs/r5-smoke/critic.done.json": "935bb81cd16ff7bcbb4ffb49d5eab7e4c3d59e64ab3050e707f38e84dd8007d3",
+    "runs/r5-smoke/judge.done.json": "0ecc284e6318ca0c02cc9c3c0b752094ebba000b2cbf9a5d1a7725c67d524130",
+    "runs/r5-smoke/analyze.done.json": "8f9723e628cadf014a4af535a09c1d013f810ea3f63808e9125cde5c5a4e84f3"
+  },
+  "scope": "Bounded two-group pipeline/save-resume evidence; no scientific value-quality claim."
+}
