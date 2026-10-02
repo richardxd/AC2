@@ -1,0 +1,3 @@
+[submodule "src/samplers"]
+	path = src/samplers
+	url = git@github.com:richardxd/samplers.git
