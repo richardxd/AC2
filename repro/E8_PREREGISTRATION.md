@@ -19,3 +19,7 @@ Research role: reduced horizons, groups, Q batch and validation sampling must be
 ## Timeout amendment before populated AC2
 
 The first GRPO candidate's fresh generation/judging occupied approximately8minutes after model startup, followed by long-response actor training. Populated AC2 also restores critic state, generates16 inflow trajectories, and trains Q. Permit its single-step resume up to1740seconds (29minutes), plus the launcher's bounded owned-process cleanup. Independent safety review confirms a nominal1765-second maximum including polling/cleanup, leaving35seconds below30minutes; this cannot guarantee timing against an OS stall. Cold launches retain1500seconds. This changes only the execution deadline, not inputs or protocol. Exact measured component times will replace this preliminary timing observation in the receipt; no rate is inferred from this amendment.
+
+## Populated-Q capacity interpretation
+
+The completed early replay step trained16 FIFO records although the configured maximum is64. Keep the observed projection separate from a capacity scenario that multiplies the entire interleaved actor/Q update duration by64/16 (overcounting fixed PPO work). Neither is a measured mature-state bound; contexts, reference mix and readiness can change. Report the capacity scenario and its2×planning allowance before the model gate, rather than silently treating early16-pair timing as saturated64-pair timing.

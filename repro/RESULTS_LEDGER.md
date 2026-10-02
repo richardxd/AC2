@@ -127,3 +127,5 @@ Values are from Table 4 and App. C unless otherwise stated. Ours will link an ex
 | E8 cold AC2 | 1,225,030 | 1.562175243845632e16 | 1114.992 / 207.842 | 0.129811104 | [cold AC2](receipts/e8-ac2-cold-calibration.json) |
 
 Both use4B,7GPUs,16groups×4,16k response; AC2 adds16 inflow trajectories. Q was empty/skipped in cold AC2. These single-step measurements cannot establish scientific score improvement, runtime uncertainty, or mature readiness savings. E7 permissive readiness remains engineering coverage only.
+
+Populated E8 AC2 step2:840,875 generated tokens,1.1208923499528192e16 decode FLOPs,916.102s step/111.313s save,$0.130034916 for31 calls ([receipt](receipts/e8-ac2-replay-calibration.json)). It trained16 of the configured maximum64 Q records; the proposal must account for that capacity difference. Normal readiness remains closed; these are engineering measurements.

@@ -1,0 +1,346 @@
+{
+  "run": "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4",
+  "manifest": "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z",
+  "eq6_A": 8044544000,
+  "eq6_B": 589824,
+  "steps": [
+    {
+      "step": 2,
+      "generated_tokens": 840875,
+      "decode_forwards": 840795,
+      "decode_context_sum": 7536334783,
+      "decoding_flops": 11208923499528192,
+      "timing_s": {
+        "timing_s/start_profile": 5.163997411727905e-05,
+        "timing_s/agent_loop/num_preempted/min": -1,
+        "timing_s/agent_loop/num_preempted/max": -1,
+        "timing_s/agent_loop/num_preempted/mean": -1.0,
+        "timing_s/agent_loop/generate_sequences/min": 60.177257273346186,
+        "timing_s/agent_loop/generate_sequences/max": 415.7710945829749,
+        "timing_s/agent_loop/generate_sequences/mean": 260.9414463885594,
+        "timing_s/agent_loop/tool_calls/min": 0.0,
+        "timing_s/agent_loop/tool_calls/max": 0.0,
+        "timing_s/agent_loop/tool_calls/mean": 0.0,
+        "timing_s/agent_loop/compute_score/min": 0.010045241564512253,
+        "timing_s/agent_loop/compute_score/max": 67.97704235091805,
+        "timing_s/agent_loop/compute_score/mean": 6.43811039221473,
+        "timing_s/agent_loop/slowest/generate_sequences": 394.43128448724747,
+        "timing_s/agent_loop/slowest/tool_calls": 0.0,
+        "timing_s/agent_loop/slowest/compute_score": 23.301475770771503,
+        "timing_s/agent_loop/slowest/num_preempted": -1,
+        "timing_s/agent_loop/slowest/prompt_length": 269,
+        "timing_s/agent_loop/slowest/response_length": 16130,
+        "timing_s/gen": 418.30306969210505,
+        "timing_s/sp_q_wave": 3.6495792493224144,
+        "timing_s/reward": 0.2610602267086506,
+        "timing_s/old_log_prob": 83.4580405652523,
+        "timing_s/sp_q_admit": 0.03182250261306763,
+        "timing_s/adv": 0.2167849764227867,
+        "timing_s/sp_q_train": 1.2089931704103947,
+        "timing_s/update_actor": 273.7873793505132,
+        "timing_s/sp_q_apply": 0.2663995958864689,
+        "timing_s/save_checkpoint": 111.31250277534127,
+        "timing_s/update_weights": 22.00798635557294,
+        "timing_s/dump_rollout_generations": 0.2623171769082546,
+        "timing_s/step": 916.102332200855,
+        "timing_s/stop_profile": 4.5359134674072266e-05
+      },
+      "end_to_end_rollout_tokens_per_s": 2010.2051859646454,
+      "score_mean": 0.28125,
+      "actor_grad_norm": 0.04914868623018265,
+      "q_metrics": {
+        "q/ref_prewarmed": 0,
+        "q/ref_prewarmed_resolved": 0,
+        "q/ready_thresh_global": 0.2,
+        "q/ready_thresh_problem": 0.18,
+        "q/global_gate_open": 0,
+        "q/ready_mode_global": 0,
+        "q/global_ready_latched": 0,
+        "q/global_ready_effective": 0,
+        "q/readiness_mae5": -1.0,
+        "q/readiness_mae5_n": -1,
+        "q/probe_mae_fresh": 0.43125,
+        "q/readiness_obs": 16,
+        "q/readiness_obs_invalid": 0,
+        "q/readiness_transitions": 0,
+        "q/ready_problems": 0,
+        "q/ready_blocked_no_bank": 0,
+        "q/ready_require_bank": 1,
+        "q/nonzero_seen_total": 14,
+        "q/ready_sampled_prefixes": 0,
+        "q/ready_fraction_sampled": 0.0,
+        "q/audit_prefixes": 0,
+        "q/fifo_size": 16,
+        "q/ref_rejected_unpassed": 11,
+        "q/ref_rejected_unpassed_total": 11,
+        "q/capacity": 1920,
+        "q/admitted": 16,
+        "q/evicted": 0,
+        "q/target_below_min_valid": 0,
+        "q/td_targets_admitted": 0,
+        "q/td_admit_capped": 0,
+        "q/consumed_calls": 0,
+        "q/consumed_invalid": 0,
+        "q/bank_size": 18,
+        "q/bank_added": 7,
+        "q/audit_cut_calls": 0,
+        "q/seg_wave_calls": 0,
+        "q/seg_wave_invalid": 0,
+        "q/audit_cut_pairs": 0,
+        "q/audit_cut_invalid": 0,
+        "q/audit_cut_mae": null,
+        "q/audit_distinct_problems": 0,
+        "q/admit_frac_terminal_group": 1.0,
+        "q/admit_frac_q_bootstrap": 0.0,
+        "q/admit_frac_mixed_final_q": 0.0,
+        "q/fifo_frac_terminal_group": 1.0,
+        "q/fifo_frac_q_bootstrap": 0.0,
+        "q/fifo_frac_mixed_final_q": 0.0,
+        "q/dropped_rollouts": 0,
+        "q/td_dropped_no_baseline": 0,
+        "q/q_records_trained": 16,
+        "q/sample_overflowed": 0,
+        "q/sample_overflow_ref_only": 0,
+        "q/sample_overflow_noref_only": 0,
+        "q/sample_skipped_no_reference": 0,
+        "q/sample_age_mean": 8.5,
+        "q/sample_age_max": 16,
+        "q/lr_current": 2.8284271247461903e-06,
+        "q/loss": 1.1194523019450051,
+        "q/loss_noref": 0.8562151044607162,
+        "q/loss_ref": 0.26323720812797546,
+        "q/grad_norm": 225.05670166015625,
+        "q/target_tokens": 50.0,
+        "q/interleave_late": 0,
+        "q/loss_non_finite": 0,
+        "q/grad_non_finite": 0,
+        "q/delta_ppo1": 0.05959667570175799,
+        "q/delta_ppo2": 0.05645482509162392,
+        "q/delta_ppo_sum": 0.1160515007933819,
+        "q/delta_ppo_net": 0.1160515007933819,
+        "q/delta_q": 0.15751699973946012,
+        "q/delta_q_applied": 0.15751699973946012,
+        "q/q_phase_skipped": 0,
+        "q/rho": 1.3573025653490116,
+        "q/lr_next": 2.8284271247461903e-06,
+        "q/lr_breach": 0,
+        "q/lr_breach_streak": 0,
+        "q/lr_reduced": 0,
+        "q/lr_floor_alert": 0,
+        "q/delta_q_cumsum": 0.15751699973946012,
+        "q/delta_ppo_net_cumsum": 0.1160515007933819,
+        "q/cum_ratio": 1.3573025653490116
+      },
+      "nonfinite_q_metrics": []
+    }
+  ],
+  "judge_calls": [
+    {
+      "id": "05ba68a902e54dcabe8677f7aa836b58",
+      "state": "complete",
+      "charged_upper_usd": 0.001967772,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/05ba68a902e54dcabe8677f7aa836b58.json"
+    },
+    {
+      "id": "0ae4f7165b5843789dbf2114e2635bc7",
+      "state": "complete",
+      "charged_upper_usd": 0.013444271999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/0ae4f7165b5843789dbf2114e2635bc7.json"
+    },
+    {
+      "id": "1fb1019bba0843c4be4ee4beec4f8113",
+      "state": "complete",
+      "charged_upper_usd": 0.0012744719999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/1fb1019bba0843c4be4ee4beec4f8113.json"
+    },
+    {
+      "id": "31be2aca2ef44bf8bd15c8fbc9441ce7",
+      "state": "complete",
+      "charged_upper_usd": 0.0019208040000000001,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/31be2aca2ef44bf8bd15c8fbc9441ce7.json"
+    },
+    {
+      "id": "43ac4e793b294db6a922f0489ea148b6",
+      "state": "complete",
+      "charged_upper_usd": 0.0019245719999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/43ac4e793b294db6a922f0489ea148b6.json"
+    },
+    {
+      "id": "485840db649c442094abb41778b2701d",
+      "state": "complete",
+      "charged_upper_usd": 0.017030472,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/485840db649c442094abb41778b2701d.json"
+    },
+    {
+      "id": "5451933e701446be841a41fa3d5d3000",
+      "state": "complete",
+      "charged_upper_usd": 0.0021192719999999997,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/5451933e701446be841a41fa3d5d3000.json"
+    },
+    {
+      "id": "57a0e310eef74c9982dc250314368d95",
+      "state": "complete",
+      "charged_upper_usd": 0.001054272,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/57a0e310eef74c9982dc250314368d95.json"
+    },
+    {
+      "id": "67abf71e75354bc4876caf132a7a5444",
+      "state": "complete",
+      "charged_upper_usd": 0.007887504,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/67abf71e75354bc4876caf132a7a5444.json"
+    },
+    {
+      "id": "6bda3a5fae9242cf906cbbe4431714d7",
+      "state": "complete",
+      "charged_upper_usd": 0.014316971999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/6bda3a5fae9242cf906cbbe4431714d7.json"
+    },
+    {
+      "id": "75518113ad74441d945b245f2c29aca8",
+      "state": "complete",
+      "charged_upper_usd": 0.006803304,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/75518113ad74441d945b245f2c29aca8.json"
+    },
+    {
+      "id": "7a2310f5b09a4645b3a2562647eaa48e",
+      "state": "complete",
+      "charged_upper_usd": 0.001980804,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/7a2310f5b09a4645b3a2562647eaa48e.json"
+    },
+    {
+      "id": "85d0905b4a5b4632b572db85f339d0a4",
+      "state": "complete",
+      "charged_upper_usd": 0.012358872,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/85d0905b4a5b4632b572db85f339d0a4.json"
+    },
+    {
+      "id": "8f5e4acc4bde459c89fb162662762dcc",
+      "state": "complete",
+      "charged_upper_usd": 0.0027261720000000002,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/8f5e4acc4bde459c89fb162662762dcc.json"
+    },
+    {
+      "id": "93892fc51e254c4092e41979e3c58a49",
+      "state": "complete",
+      "charged_upper_usd": 0.0017646720000000001,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/93892fc51e254c4092e41979e3c58a49.json"
+    },
+    {
+      "id": "98a6de5ef9804586b7a3d9425bf06ad7",
+      "state": "complete",
+      "charged_upper_usd": 0.0016931039999999997,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/98a6de5ef9804586b7a3d9425bf06ad7.json"
+    },
+    {
+      "id": "a42cdec05c734fca90c94c8412207906",
+      "state": "complete",
+      "charged_upper_usd": 0.001881804,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/a42cdec05c734fca90c94c8412207906.json"
+    },
+    {
+      "id": "a6a7b3a9413e4d2f892f3e986ff74d1b",
+      "state": "complete",
+      "charged_upper_usd": 0.0051509039999999996,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/a6a7b3a9413e4d2f892f3e986ff74d1b.json"
+    },
+    {
+      "id": "bfdb783d2a134c29bf6de7e97b1e288c",
+      "state": "complete",
+      "charged_upper_usd": 0.0027611040000000003,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/bfdb783d2a134c29bf6de7e97b1e288c.json"
+    },
+    {
+      "id": "c8ce0f82f537440d85d40381d6b0bd59",
+      "state": "complete",
+      "charged_upper_usd": 0.002124372,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/c8ce0f82f537440d85d40381d6b0bd59.json"
+    },
+    {
+      "id": "d2d2a6bbb7be4cedb6d3ecc87fd4c76c",
+      "state": "complete",
+      "charged_upper_usd": 0.003067404,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/d2d2a6bbb7be4cedb6d3ecc87fd4c76c.json"
+    },
+    {
+      "id": "e0e22a0cc63d425ea90fbfab0e255ce8",
+      "state": "complete",
+      "charged_upper_usd": 0.001573704,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/e0e22a0cc63d425ea90fbfab0e255ce8.json"
+    },
+    {
+      "id": "e22d394134ad4440868232a249f041a7",
+      "state": "complete",
+      "charged_upper_usd": 0.0021918719999999997,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/e22d394134ad4440868232a249f041a7.json"
+    },
+    {
+      "id": "e46f014ee438403394ea62a6f6e6448b",
+      "state": "complete",
+      "charged_upper_usd": 0.0015443039999999998,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/e46f014ee438403394ea62a6f6e6448b.json"
+    },
+    {
+      "id": "ee0f5323e16343e0aaf0757a47846065",
+      "state": "complete",
+      "charged_upper_usd": 0.006156072,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/ee0f5323e16343e0aaf0757a47846065.json"
+    },
+    {
+      "id": "ef089245ab9f4b3e81edefab69fbd6c3",
+      "state": "complete",
+      "charged_upper_usd": 0.001100472,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/ef089245ab9f4b3e81edefab69fbd6c3.json"
+    },
+    {
+      "id": "f3322d319e354bf2acb7bba0c0840a0d",
+      "state": "complete",
+      "charged_upper_usd": 0.001534272,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/f3322d319e354bf2acb7bba0c0840a0d.json"
+    },
+    {
+      "id": "f42254086fb94b63ac6cf68ec43a900d",
+      "state": "complete",
+      "charged_upper_usd": 0.001209372,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/f42254086fb94b63ac6cf68ec43a900d.json"
+    },
+    {
+      "id": "f7c679ee882d4c7fb6340822c378f57f",
+      "state": "complete",
+      "charged_upper_usd": 0.002915172,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/f7c679ee882d4c7fb6340822c378f57f.json"
+    },
+    {
+      "id": "fd2d18f85e2e40b8a35550b2ac35bc49",
+      "state": "complete",
+      "charged_upper_usd": 0.001193172,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/fd2d18f85e2e40b8a35550b2ac35bc49.json"
+    },
+    {
+      "id": "ff9f7df1f73e4d67ba17b0e95748571c",
+      "state": "complete",
+      "charged_upper_usd": 0.005363603999999999,
+      "receipt": "/share/data/pals/richard1xur/ac2/runs/judge/ff9f7df1f73e4d67ba17b0e95748571c.json"
+    }
+  ],
+  "launch_result": {
+    "returncode": 0,
+    "timed_out": false,
+    "elapsed_s": 1105.1542527414858,
+    "telemetry": "independent sampler; inspect timestamps for gaps",
+    "monitor_error": null
+  },
+  "judge_charged_upper_usd": 0.130034916,
+  "accounting_contract": "All judge clients must be serialized during this launch; snapshots alone cannot identify unrelated new calls.",
+  "scope": "training decode only; excludes prefill/Q/judge/update/validation FLOPs. Rollout timing includes judge/queue overhead, not pure decode throughput. No extrapolation in this receipt.",
+  "sha256": {
+    "/mnt/scratch/richard1xur/ac2/hf/hub/models--Qwen--Qwen3-4B-Thinking-2507/blobs/6988f134db143052042f2bd6e0c897bc6a605189": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/config.yaml": "2f16762c269ee5f1f901783d2de47a87450aef4f90a3f06a522c3d9056bf1c3e",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/metrics_added.jsonl": "2f9028803961f541e147448ba90145075f22180adbe2ece775c55b6a21fa65a7",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/judge_before.json": "86bf34e220ac1cfd1831902c89647f1c33cc087610a43b4f872cd87da1ede52a",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/judge_after.json": "c0da846af008446d4c02f8ec8dacaa334e650c8b5caf35000a75fa531eeae132",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-resume01/result.json": "0687c447f5ae864caf4c535d073ee8241b01038fa0c4d9e34db3b8f299efa0e8",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-resume01/launch.json": "045c6b24923978079ab2eadb63619916618fcb34fa0dee0ad460750bc4898590",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-resume01/stdout.log": "16378fae7bfe8396467439a76bae738b4f75ab7b572f284f72a5e44057730f45",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/rollouts/2.jsonl": "30d21ff0b579cbf29f6af535c79dbbbf820ee01d6d9d75d91385619003fb3722"
+  }
+}

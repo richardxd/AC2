@@ -1,0 +1,196 @@
+{
+  "run": "runs/e8/ac2-16x4",
+  "launches": [
+    {
+      "path": "runs/e8/ac2-cold01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1250.8229586593807,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        1
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1215,
+          "active_samples_ge5pct": 905,
+          "max_memory_mib": 29022.0,
+          "max_sampling_gap_s": 10.535000085830688
+        },
+        "2": {
+          "samples": 1215,
+          "active_samples_ge5pct": 925,
+          "max_memory_mib": 27941.0,
+          "max_sampling_gap_s": 10.533999919891357
+        },
+        "3": {
+          "samples": 1215,
+          "active_samples_ge5pct": 938,
+          "max_memory_mib": 28302.0,
+          "max_sampling_gap_s": 10.532999992370605
+        },
+        "4": {
+          "samples": 1215,
+          "active_samples_ge5pct": 888,
+          "max_memory_mib": 29302.0,
+          "max_sampling_gap_s": 11.058000087738037
+        },
+        "5": {
+          "samples": 1215,
+          "active_samples_ge5pct": 893,
+          "max_memory_mib": 29301.0,
+          "max_sampling_gap_s": 11.058000087738037
+        },
+        "6": {
+          "samples": 1215,
+          "active_samples_ge5pct": 885,
+          "max_memory_mib": 29301.0,
+          "max_sampling_gap_s": 11.058000087738037
+        },
+        "7": {
+          "samples": 1215,
+          "active_samples_ge5pct": 852,
+          "max_memory_mib": 24061.0,
+          "max_sampling_gap_s": 11.059000015258789
+        }
+      },
+      "engineering_readiness": false
+    },
+    {
+      "path": "runs/e8/ac2-resume01",
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_s": 1105.1542527414858,
+        "telemetry": "independent sampler; inspect timestamps for gaps",
+        "monitor_error": null
+      },
+      "metric_steps": [
+        2
+      ],
+      "telemetry": {
+        "1": {
+          "samples": 1081,
+          "active_samples_ge5pct": 840,
+          "max_memory_mib": 28452.0,
+          "max_sampling_gap_s": 1.7160000801086426
+        },
+        "2": {
+          "samples": 1081,
+          "active_samples_ge5pct": 844,
+          "max_memory_mib": 29331.0,
+          "max_sampling_gap_s": 9.17799997329712
+        },
+        "3": {
+          "samples": 1081,
+          "active_samples_ge5pct": 827,
+          "max_memory_mib": 29292.0,
+          "max_sampling_gap_s": 14.03600001335144
+        },
+        "4": {
+          "samples": 1081,
+          "active_samples_ge5pct": 789,
+          "max_memory_mib": 29394.0,
+          "max_sampling_gap_s": 15.736000061035156
+        },
+        "5": {
+          "samples": 1081,
+          "active_samples_ge5pct": 795,
+          "max_memory_mib": 28651.0,
+          "max_sampling_gap_s": 15.754000186920166
+        },
+        "6": {
+          "samples": 1081,
+          "active_samples_ge5pct": 780,
+          "max_memory_mib": 29371.0,
+          "max_sampling_gap_s": 15.754000186920166
+        },
+        "7": {
+          "samples": 1081,
+          "active_samples_ge5pct": 819,
+          "max_memory_mib": 26271.0,
+          "max_sampling_gap_s": 15.76200008392334
+        }
+      },
+      "engineering_readiness": false
+    }
+  ],
+  "checkpoint": 2,
+  "critic_update_steps": [
+    2
+  ],
+  "q_optimizer_steps": {
+    "0": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "1": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "2": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "3": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "4": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "5": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    },
+    "6": {
+      "parameters_with_state": 37,
+      "min_step": 1.0,
+      "max_step": 1.0
+    }
+  },
+  "ready_problems": 0,
+  "wave_counts": {
+    "probe": 16
+  },
+  "valid_waves": {
+    "probe": 16
+  },
+  "routes": {
+    "full": 160
+  },
+  "consumed_chunks": 0,
+  "max_consumed_chunk": null,
+  "chunk_limit": 4096,
+  "branch_checks_required": false,
+  "scope": "engineering branch coverage; permissive readiness is not a scientific result",
+  "sha256": {
+    "runs/e8/ac2-16x4/metrics.jsonl": "4fa470458e367670a8f84d3945355fdc0299fab28d9206880428098d2f0533ab",
+    "runs/e8/ac2-cold01/stdout.log": "4bb2e7d36ba950dc2c4cd1619ac85cc09dc5b62f3ba7252835221633cbcda53b",
+    "runs/e8/ac2-cold01/launch.json": "d500e3282e04c6dd43ffd52925fc9ed4d6da3f77ff98c17f15928ce399fc899c",
+    "runs/e8/ac2-cold01/result.json": "d3152385813a0df90ab5f3786bb47e5793ab02f4b39c6d3a33585cdb060bff09",
+    "runs/e8/ac2-cold01/gpu.csv": "63193e4b9f976a70e478c030e716a5b827b5cfaed6db1de270b914583e905dd6",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T054233.364036Z/metrics_added.jsonl": "5144e4c0f453209382993fa61c3f42aa60ebd8e1c027d38af9365a2e2ae6b005",
+    "runs/e8/ac2-resume01/stdout.log": "16378fae7bfe8396467439a76bae738b4f75ab7b572f284f72a5e44057730f45",
+    "runs/e8/ac2-resume01/launch.json": "045c6b24923978079ab2eadb63619916618fcb34fa0dee0ad460750bc4898590",
+    "runs/e8/ac2-resume01/result.json": "0687c447f5ae864caf4c535d073ee8241b01038fa0c4d9e34db3b8f299efa0e8",
+    "runs/e8/ac2-resume01/gpu.csv": "4aeb5c04fd6b8b9c696f799cd05fdb711b2543189c2d6d5be7a7f316d91f500d",
+    "/share/data/pals/richard1xur/ac2/runs/e8/ac2-16x4/launches/20261002T060834.798548Z/metrics_added.jsonl": "2f9028803961f541e147448ba90145075f22180adbe2ece775c55b6a21fa65a7",
+    "runs/e8/ac2-16x4/checkpoints/global_step_2/q_state.json": "0798a7890aec0657cfb84645f4eefe15edfdad3cdcd076836d7fa4a0fa2a2855",
+    "runs/e8/ac2-16x4/checkpoints/global_step_2/sp_q_optim/_complete.json": "990e4fade771503b26cdf7137992b79ffdd8756a0602bbfa5143168fe6975ca6",
+    "runs/e8/ac2-16x4/q_wave/0.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs/e8/ac2-16x4/q_wave/1.jsonl": "45c7646d2a372512816b9e641a1b54569c34f51f7109732923680fa7b765e8f6",
+    "runs/e8/ac2-16x4/rollouts/1.jsonl": "26cdeffa5847ddcddbc3764c7dce48d6058c5cc944fb4f442db06cc0477f4538",
+    "runs/e8/ac2-16x4/rollouts/2.jsonl": "30d21ff0b579cbf29f6af535c79dbbbf820ee01d6d9d75d91385619003fb3722"
+  }
+}

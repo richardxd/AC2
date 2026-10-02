@@ -67,6 +67,13 @@ def main():
         }
     # Cold and populated replay bracket only the observed states, not future readiness.
     ac2 = {k: max(measured[n][k] for n in ["ac2_cold", "ac2_replay"]) for k in measured["ac2_cold"]}
+    # Early replay may not fill the configured Q minibatch. Q is interleaved inside
+    # update_actor, so its isolated duration is unavailable. Inflate that entire
+    # phase by the record-count ratio for a deliberately overinclusive scenario.
+    q_records = rq["q/q_records_trained"]
+    assert isinstance(q_records, int) and 0 < q_records <= min(64, rq["q/fifo_size"])
+    q_ratio = max(1., 64 / q_records)
+    q_capacity_extra_s = replay["steps"][0]["timing_s"]["timing_s/update_actor"] * (q_ratio - 1)
     tasks = {}
     for name, source, trajectories in [
         ("R1", measured["grpo"], 64), ("R2", ac2, 80), ("R3", measured["prefix"], 80),
@@ -74,10 +81,13 @@ def main():
     ]:
         seconds = steps * source["step_without_checkpoint_s"] + saves * source["checkpoint_s"]
         seconds += source["launch_overhead_s"] + evaluations * val_s
+        capacity_seconds = seconds + (steps * q_capacity_extra_s if name == "R2" or name.startswith("R4") else 0)
         tasks[name] = {
             "steps": steps, "validation_events": evaluations, "validation_n": val_samples,
             "wall_days_observed_component_projection": seconds / 86400,
             "wall_days_2x_planning_allowance": 2 * seconds / 86400,
+            "wall_days_q_capacity_scenario": capacity_seconds / 86400,
+            "wall_days_q_capacity_scenario_2x_allowance": 2 * capacity_seconds / 86400,
             "judge_usd_observed_train_plus_e9_val": steps * source["judge_upper_usd_per_step"] + evaluations * val_samples * gate["judge_charged_upper_usd"],
             "judge_usd_every_trajectory_graded_at_e4_mean": steps * trajectories * train_cost + evaluations * problems * val_samples * val_cost,
             "decode_flops_no_readiness_speedup_projection": steps * source["decoding_flops_per_step"],
@@ -95,6 +105,9 @@ def main():
     result = {
         "tasks": tasks, "measured_components": measured,
         "validation_seconds_per_event_projection": val_s,
+        "q_capacity_scenario": {"measured_records": q_records, "configured_max_records": 64,
+            "whole_actor_update_multiplier": q_ratio, "extra_seconds_per_ac2_step": q_capacity_extra_s,
+            "scope": "Linear record-count scenario scales the entire interleaved actor/Q phase, overcounting fixed PPO work. Not a measured saturated Q batch or a hard runtime bound; contexts and reference mix can change."},
         "assumptions": [
             "4B, seven TP1 replicas,16groups x4,16k response,4k chunk,Q batch64;200steps; save/evaluate every20/10steps.",
             "Four validation samples/problem per ROADMAP starting point;21events include step zero. Scale E9's60x1 observed cost/time by4 (linear planning assumption, not a measured240-rollout event). Initial validation must be enabled for fresh R launches.",
