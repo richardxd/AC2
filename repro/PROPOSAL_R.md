@@ -2,6 +2,8 @@
 
 ## Purpose
 
+**Amendment 2026-10-02, Richard approved:** long R1 then R2 are authorized with the local `openai/gpt-oss-20b` surrogate for both train reward and validation. R2 starts only after R1 completes200steps and acceptance passes. R3/R4/R5 long runs remain unapproved. No DeepSeek API calls are allowed;$2.281138832 stays unused. The original API-cost scenarios and approval wording below are historical, superseded only for these two local-judge runs. S1/S2/S3 evidence and revised local timing projections are being added before detached R1 launch.
+
 R preparation amendment (2026-10-02): judge max output65536, client timeout540s/gateway480s, strict failure checks and$5 cap unchanged. R1's first cold smoke failed before update on a40000-token reasoning-only judge response; it is preserved and attempt2 passes cold/resume. All other configurations pass attempt1. The smoke-era65536 cost measurements below supplement historical E4/E8 measurements at40000; neither set bounds long-run tail cost/time.
 
 Fix the protocol supported by E8/E9 and completed bounded launch preparation. Richard must approve every long R launch and its judge budget. No long experiment has been started. All R1–R5 engineering preparation passes under the existing$5 cap and at most29minutes per launch, with bounded owned-process cleanup. Current completed spend is$2.718861168 across547calls, leaving$2.281138832; no reservations remain. This proposal is ready for Richard's review.

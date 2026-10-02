@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 
 import aiohttp
-from surrogate_common import ROOT, URL, MAX_TOKENS, EFFORT, profile, route, accounting
+from surrogate_common import ROOT, URL, MAX_TOKENS, EFFORT, CONCURRENCY, HTTP_TIMEOUT, profile, route, accounting
 from local_runner import judge_accounting
 from ac2.rewards import ds4_finegrained_judge as judge, prover_judge as pj
 
@@ -30,10 +30,13 @@ def statistics(rows):
     observed = sum(u == v for u, v in zip(a, b))/n
     pa, pb = sum(a)/n, sum(b)/n
     expected = pa*pb + (1-pa)*(1-pb)
+    exact = sum(u == v for u, v in zip(x, y))/n
+    expected_points = sum(x.count(point)*y.count(point) for point in set(x+y))/(n*n)
     rho = float(pd.Series(x).rank(method="average").corr(pd.Series(y).rank(method="average"))) if len(set(x)) > 1 and len(set(y)) > 1 else None
     return {"total": len(rows), "paired": n,
             "excluded_ids": [r["id"] for r in rows if r not in valid],
-            "exact_points_agreement": sum(u == v for u, v in zip(x, y))/n,
+            "exact_points_agreement": exact,
+            "points_cohen_kappa": (exact-expected_points)/(1-expected_points) if expected_points < 1 else None,
             "pass_agreement": observed, "pass_cohen_kappa": (observed-expected)/(1-expected) if expected < 1 else None,
             "mean_absolute_point_difference": sum(abs(u-v) for u, v in zip(x, y))/n,
             "spearman": rho, "deepseek_pass_fraction": pa, "surrogate_pass_fraction": pb}
@@ -46,7 +49,7 @@ async def main(args):
     write(out / "configuration.json", profile())
     write(out / "api_before.json", before)
     started = time.monotonic()
-    limit = asyncio.Semaphore(4)
+    limit = asyncio.Semaphore(CONCURRENCY)
     if args.stage == "e4":
         candidates = json.loads((ROOT / "runs/e4/candidates.json").read_text())
         assert len(candidates) == 20
@@ -73,7 +76,7 @@ async def main(args):
                    "mean_latency_s": sum(r["wall_s"] for r in rows)/len(rows)}
     else:
         assert len(before) == 547 and all(r["state"] == "complete" for r in before)
-        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=540)) as session:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=HTTP_TIMEOUT)) as session:
             async def one(call):
                 original = json.loads(Path(call["receipt"]).read_text())
                 prompt = original["request"]["messages"][0]["content"]

@@ -77,10 +77,11 @@ def configure(args):
         "VERL_STEP_CACHE_DIR": run / "step_cache", "NCCL_DEBUG": "INFO",
     }
     if args.judge_backend == "surrogate":
-        from surrogate_common import URL, MODEL as JUDGE_MODEL, MAX_TOKENS, EFFORT
+        from surrogate_common import URL, MODEL as JUDGE_MODEL, MAX_TOKENS, EFFORT, CONCURRENCY, HTTP_TIMEOUT
         assert args.strict_judge and args.judge_max_tokens == MAX_TOKENS
         env.update(SELF_PLAY_JUDGE_URL=URL, SP_JUDGE_API_MODEL=JUDGE_MODEL,
-                   SP_JUDGE_MODEL=JUDGE_MODEL, SP_JUDGE_REASONING_EFFORT=EFFORT)
+                   SP_JUDGE_MODEL=JUDGE_MODEL, SP_JUDGE_REASONING_EFFORT=EFFORT,
+                   SP_JUDGE_HTTP_TOTAL_TIMEOUT=HTTP_TIMEOUT, SP_JUDGE_MAX_INFLIGHT=CONCURRENCY//2)
     for name in list(os.environ):
         if name.startswith("SP_Q_") or name.startswith("SP_REPLAY_"):
             del os.environ[name]

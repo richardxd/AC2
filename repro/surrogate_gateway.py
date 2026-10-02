@@ -8,7 +8,7 @@ from pathlib import Path
 
 import aiohttp
 from aiohttp import web
-from surrogate_common import ROOT, MODEL, UPSTREAM, MAX_TOKENS, EFFORT, profile, route
+from surrogate_common import ROOT, MODEL, UPSTREAM, MAX_TOKENS, EFFORT, CONCURRENCY, HTTP_TIMEOUT, profile, route
 
 
 async def main():
@@ -18,10 +18,10 @@ async def main():
     db = sqlite3.connect(root / "calls.sqlite")
     db.execute("CREATE TABLE IF NOT EXISTS calls (id TEXT PRIMARY KEY, started REAL, finished REAL, status INTEGER, receipt TEXT)")
     db.commit()
-    limit = asyncio.Semaphore(4)
+    limit = asyncio.Semaphore(CONCURRENCY)
 
     async def lifecycle(app):
-        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=520)) as session:
+        async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=HTTP_TIMEOUT-10)) as session:
             app["session"] = session
             yield
         db.close()

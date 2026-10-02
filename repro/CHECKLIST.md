@@ -27,8 +27,8 @@ Long R1 then R2 approved with local `openai/gpt-oss-20b` SURROGATE judge on GPU0
 
 | Task | Status | Acceptance / default |
 |---|---|---|
-| S1 surrogate service | done | [Receipt](receipts/s1-surrogate.json): revision6cee5e81ee83917806bbde320786a8fb61efebee, repository weights/LFS hashes verified;20/20 E4 parses,602.565s, mean102.961s,171.472 output tokens/s. GPU0 free4722MiB after load; existing PIDs preserved. Native gptoss/high/65536, unchanged train/val SHA pins. |
-| S2 agreement | in progress | All547 historical API calls being regraded at `runs/surrogate/s2-agreement-01`; repeats retained with call-weighted results, train/val separated. Invalid/truncated historical grades explicitly unpaired; no API calls. Agreement is not a gate. |
+| S1 surrogate service | done | [Active receipt](receipts/s1-surrogate-active.json): revision6cee5e81ee83917806bbde320786a8fb61efebee, repository weights/LFS hashes verified;20/20 E4 parses at concurrency16,425.338s, mean103.524s,237.141 output tokens/s. GPU0 free4644MiB under load; existing PIDs preserved. Native gptoss/high/65536, unchanged train/val SHA pins. [Historical concurrency4 receipt](receipts/s1-surrogate.json) retained. |
+| S2 agreement | in progress | Regrading all547 historical calls in `runs/surrogate/s2-agreement-02`, concurrency16. Original33-row partial pass and all37 local requests retained in agreement01/ledger. Independent review preceded owned-process pause; all requests drained and protected identities/free memory verified before restart. No partial agreement verdict or API calls. |
 | S3 surrogate R1 smoke | todo | New output directories; bounded cold+resume≤1740s each; train+val both local surrogate, step/judge timing recorded. |
 | S4 detached R1 then R2 | todo | R1 200steps/save20/full proposed val; detached durable process. R2 only after R1 completion and acceptance; no R3/R4/R5. |
 
@@ -38,6 +38,8 @@ R2 compose-only pin migration: existing research directory contained two DeepSee
 
 S1 independent review confirmed actual20 prompt identities/parse/cost evidence, but found that alternate template paths could bypass the new adapter's canonical-byte check. Default applied before any S3 training: require canonical train/val paths and reject alternate training rubric; three negative path cases now fail before transport. Existing S1/S2 calls used unchanged original prompts. Evidence `runs/reviews/154fe36-independent-sivdo4j3/`.
 
+Capacity decision: four concurrent high-effort requests are too slow for a comfortable S3 margin. Default tune only batching (server/gateway16, unchanged0.55 GPU budget and2048 batched tokens), extend local HTTP ceiling to1800s so allowed long reasoning is not misclassified by the old API timeout; S3 launches still hard-bound1740s. Preserve partial S2, drain pending work, and restart only independently reviewed owned process identities. Revalidate all20 E4 cases before complete S2 repeat. Never signal protected sglang processes or remove pending ledger entries.
+
 ## Preflight
 
 Read kickoff, roadmap, paper text, root README, install script, metric exporter documentation, and README/runner/launch scripts for all three main arms. Rendered the local PDF with PyMuPDF 1.28.2; inspected pages 8–10, 18–19, 26–27 for Figures 2–4, 7–9 and Tables 3–4. Images and independent text extraction: `runs/paper/`.
@@ -46,7 +48,7 @@ Paper SHA256: `e89e2d289db589f0bcd7d576f9f2a82406d9f0188730028604993fff38690421`
 
 ## Stopping rules
 
-No Slurm operations, GPU0 work, other-project resources, or R runs over 30 minutes. Record blockers and finish every unblocked task, including R launch preparation and bounded save/resume smokes. E8/E9 must support `PROPOSAL_R.md`; missing measurements remain unknown. No idle watchdog is assumed.
+No Slurm operations or other-project resources. Amendment2026-10-02 permits the local surrogate on GPU0 free memory and long R1 followed by accepted R2; all other long runs remain unapproved. Preserve the existing sglang processes and the remaining API budget. S3 smokes remain bounded to1740s. Record blockers and finish every unblocked task; missing measurements remain unknown. No idle watchdog is assumed.
 
 ## Open questions for Richard
 

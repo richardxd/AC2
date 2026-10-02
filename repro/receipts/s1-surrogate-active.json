@@ -1,0 +1,119 @@
+{
+  "accepted": true,
+  "summary": {
+    "count": 20,
+    "successful": 20,
+    "completion_tokens": 100865,
+    "mean_latency_s": 103.52429090067744,
+    "elapsed_s": 425.33782025426626,
+    "output_tokens_per_wall_s": 237.14091528400428,
+    "api_calls_added": 0,
+    "profile": {
+      "model": "openai/gpt-oss-20b",
+      "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+      "model_path": "/share/data/pals/richard1xur/ac2/models/gpt-oss-20b/6cee5e81ee83917806bbde320786a8fb61efebee",
+      "url": "http://127.0.0.1:18801/v1",
+      "upstream": "http://127.0.0.1:18800/v1/chat/completions",
+      "payload_style": "gptoss",
+      "reasoning_effort": "high",
+      "max_tokens": 65536,
+      "template_sha256": {
+        "finegrained_noref_judge.txt": "474fc5f44191ebcee4bb9e3bd1d3cd3f407d059dfda316439dc4fd930ee2fbe6",
+        "imo_proofautograder.txt": "3b910a4e1084eb668c31aeb9cb8926fa903bb343f109583a090ecbfaafd40a31"
+      },
+      "concurrency": 16,
+      "http_timeout_s": 1800
+    }
+  },
+  "server": {
+    "argv": [
+      "/scratch/richard1xur/ac2/venv/bin/python",
+      "-m",
+      "vllm.entrypoints.openai.api_server",
+      "--model",
+      "/share/data/pals/richard1xur/ac2/models/gpt-oss-20b/6cee5e81ee83917806bbde320786a8fb61efebee",
+      "--served-model-name",
+      "openai/gpt-oss-20b",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "18800",
+      "--tensor-parallel-size",
+      "1",
+      "--dtype",
+      "bfloat16",
+      "--gpu-memory-utilization",
+      "0.55",
+      "--max-model-len",
+      "98304",
+      "--max-num-seqs",
+      "16",
+      "--max-num-batched-tokens",
+      "2048",
+      "--enforce-eager",
+      "--reasoning-parser",
+      "openai_gptoss",
+      "--moe-backend",
+      "marlin",
+      "--no-enable-log-requests"
+    ],
+    "pid": 1252663,
+    "create_time": 1790965164.94,
+    "started_unix": 1790965165.3054516,
+    "gpu": "0",
+    "free_before_mib": 31881,
+    "protected_processes": {
+      "3926213": 1788754563.63,
+      "3931489": 1788754601.2
+    },
+    "model_revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+    "detached": true
+  },
+  "gateway": {
+    "pid": 1252664,
+    "create_time": 1790965164.95,
+    "detached": true
+  },
+  "gpu_memory": {
+    "unix": 1790965704.9292288,
+    "gpus": "index, uuid, memory.used [MiB], memory.free [MiB]\n0, GPU-ce0455a4-a9c7-8c42-f44e-f42a02dc40ce, 43866 MiB, 4644 MiB\n1, GPU-7f44c23c-faaa-e260-057a-389e51d49387, 5 MiB, 48505 MiB\n2, GPU-78859338-3fe9-97b3-d2e2-92747b78b754, 4 MiB, 48506 MiB\n3, GPU-bdbbe19c-4551-c636-b24a-3a467467e8f3, 5 MiB, 48505 MiB\n4, GPU-08a774dd-c025-36a5-4fa6-203f011e4b77, 5 MiB, 48505 MiB\n5, GPU-0e244512-2758-2a65-e49c-d5b0a61cbbda, 4 MiB, 48506 MiB\n6, GPU-2f34c74e-1a10-c9d3-13a3-7dc22983e5f1, 4 MiB, 48506 MiB\n7, GPU-604ba4d0-69d5-d94d-b886-46defa25d373, 4 MiB, 48506 MiB\n",
+    "processes": "pid, process_name, used_gpu_memory [MiB]\n3926213, /usr/bin/python3, 518 MiB\n3931489, sglang::scheduler, 16096 MiB\n1253019, VLLM::EngineCore, 27232 MiB\n",
+    "protected": {
+      "3926213": 1788754563.63,
+      "3931489": 1788754601.2
+    }
+  },
+  "sha256": {
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-7-unsupported_assertion.json": "e3b292cd7ce119078da54146cda5f354b108727b6b98155f141eac36aa95744b",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-0-reference.json": "280d493cad39befd656beecfedb801a63e1c8031e9b336172c2bb11d3030ab7f",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-8-reference.json": "28f409da2c9eb591ed635edbf5274b3657a93625c0d5d58da3fce7d7c5529a89",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-1-unsupported_assertion.json": "8c3e70a9d0abd141fae4d8c5801da818ad6a7eb73d997d32f7931852d3f8ad11",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-9-unsupported_assertion.json": "7d7aa71e0745188967b5673406d9b822668177c766d8dbfce2f7ed84fae9e299",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/local_calls.json": "3ae1d1fe6a95495c0935eae289e3c17baaa060275bdc6d9a91f04437804592ac",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-6-reference.json": "feb27846b16627982f495ba42b673523e919f99e90a54ff1dd4bffa5f5c6d18c",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-2-reference.json": "fe060de9fa67b347147aa4e46db287e427781d647abe291e66cf53a9de3a5690",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-3-unsupported_assertion.json": "369af558881a0fe6779c1521aaff896d1c18c47e5fd6f4af128c2559d7d78dd5",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-5-unsupported_assertion.json": "c5f217d9d4c2f5102d5af22edfa2c45cf6cb7bac4e735f4e44c7a8f54fb80563",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-4-reference.json": "eceee8af4499fdb22cb723f9d0c5ffe7df7a57b98aa27a57504fb545f294e701",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-7-unsupported_assertion.json": "53cc4e04875383bdab4fb79b81c32939ed86d863a97eda50144b823bf63df9d8",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-2-reference.json": "003bf8260dd115dd75adf11394f226eb4f2f25ef18142ce8f8c1f5182bd4ae47",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-1-unsupported_assertion.json": "9b4bee90d53c477aea87ffa87e15389631631abba3bc2bf39aad5af8a98de7e0",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-4-reference.json": "e4fa3c8b56fbd468dbfb316f5a8c131f017641a23e10398598bfd210c1ad543b",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-9-unsupported_assertion.json": "69c1fac39814f606c1396b2f20c1798a871d410f2518ec6319412d5daaac3055",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-3-unsupported_assertion.json": "da8aa678fe56836369ab091734417597af7850b0400396e792529ce62f6e201b",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-0-reference.json": "3e9b3b3741ab17bbddc7b69198f7c9f2a46a27b72ef8966211f62faa67e8a11c",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-8-reference.json": "eda8d005f33f765b7a56ad1d698cb27172c35cadf39717faf9799bc14bb8ae3b",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/train-6-reference.json": "32194e71d2677d06620da95873d581885bd809f80e44c6169f984b9cbf5c2dac",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/configuration.json": "734d9528b93c648b75b1d506cbf20afe24e8bed6668fe2e0be4d4699d8a5ab16",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/api_before.json": "ccee29d6d655f710b08a77abe9cf172c3ed216081c970e6333b51e5bcda087b3",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/val-5-unsupported_assertion.json": "f9bc57759701629ae150ae295106ac5d29685cfd16c9c9d420172a6f287ced75",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/s1-e4-02/summary.json": "380cd6faeaf62be8916d9d437ced1c8f84c45ef5c5b6840bcdec831e687ed44a",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/server03/launch.json": "f5bcd65c1a5fdd4ace99254af9126b4e9c3b09cdb87c3d4a408f74734b799d86",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/server03/memory-under-s1.json": "217ffd331a4146d152602be72b6056cf73c649d47d3f8214aa32a90df0cb46ed",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/gateway02-launch.json": "dee60f6b0ca5cb1d3a7a371049a9c3dd8aff66cc98a0f3152189c8a78ca8064f",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/model-verified.json": "576bd57aa0740bab33c0547dfb5e7ad27c3ab63adcc7fb93af8a8aa2b5e8a29b",
+    "/share/data/pals/richard1xur/ac2/runs/surrogate/capacity-drain-stop.json": "13f94678428b76a12b2676d4f7a143589ab7b4f66ec54815c2e27218baaaaab0"
+  },
+  "historical_receipt": "repro/receipts/s1-surrogate.json",
+  "scope": "All20 E4 cases repeated after serving-only capacity change. Native high reasoning and original pinned templates; no API calls."
+}
