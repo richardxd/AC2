@@ -321,6 +321,9 @@ def _pin_judge_snapshot(resolved: str) -> str:
     Override with SP_ALLOW_JUDGE_DRIFT=1 (and write down why)."""
     pin_path = RUN_DATA / "judge_snapshot.json"
     payload = {"repo": _JUDGE_REPO, "revision": _JUDGE_REVISION, "resolved": resolved}
+    if os.environ.get("SELF_PLAY_JUDGE_URL"):
+        payload = {"api_url": os.environ["SELF_PLAY_JUDGE_URL"], "model": resolved,
+                   "revision": None, "resolved": resolved}
     if pin_path.exists():
         try:
             was = json.loads(pin_path.read_text())
@@ -348,7 +351,7 @@ def _pin_judge_snapshot(resolved: str) -> str:
     return resolved
 
 
-JUDGE_MODEL       = _pin_judge_snapshot(_resolve_judge_model())
+JUDGE_MODEL       = _pin_judge_snapshot(os.environ["SP_JUDGE_API_MODEL"] if os.environ.get("SELF_PLAY_JUDGE_URL") else _resolve_judge_model())
 JUDGE_TP          = _env("SP_JUDGE_TP", 8, int)
 JUDGE_MAXLEN      = _env("SP_JUDGE_MAXLEN", 98304, int)
 JUDGE_RESP_LEN    = _env("SP_JUDGE_RESP_LEN", 40960, int)
@@ -397,7 +400,7 @@ OVERRIDES = [
     "reward.reward_manager.name=naive",
     f"reward.num_workers={REWARD_NUM_WORKERS}",
     # ---- colocated judge: DeepSeek-V4-Flash @ the pinned revision ----
-    "reward.reward_model.enable=True",
+    f"reward.reward_model.enable={not bool(os.environ.get('SELF_PLAY_JUDGE_URL'))}",
     "reward.reward_model.enable_resource_pool={}".format(JUDGE_STANDALONE),
     f"reward.reward_model.model_path={JUDGE_MODEL}",
     "reward.reward_model.rollout.name=vllm",
@@ -515,6 +518,9 @@ if JUDGE_STANDALONE:
         "reward.reward_model.nnodes=1",
         f"reward.reward_model.n_gpus_per_node={JUDGE_TP}",
     ]
+
+if os.environ.get("SELF_PLAY_JUDGE_URL"):
+    OVERRIDES.append(f"+reward.custom_reward_function.reward_kwargs.judge_url={os.environ['SELF_PLAY_JUDGE_URL']}")
 
 _JUDGE_COMPILATION_CONFIG = json.dumps({
     "mode": 0,

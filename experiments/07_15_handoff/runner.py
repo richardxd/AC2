@@ -152,7 +152,7 @@ OVERRIDES = [
     "reward.reward_manager.name=naive",
     f"reward.num_workers={REWARD_NUM_WORKERS}",
     # ---- colocated DS4-Flash judge ----
-    "reward.reward_model.enable=True",
+    f"reward.reward_model.enable={not bool(os.environ.get('SELF_PLAY_JUDGE_URL'))}",
     "reward.reward_model.enable_resource_pool={}".format(JUDGE_STANDALONE),
     f"reward.reward_model.model_path={JUDGE_MODEL}",
     "reward.reward_model.rollout.name=vllm",
@@ -249,6 +249,9 @@ if JUDGE_STANDALONE:
         "reward.reward_model.nnodes=1",
         f"reward.reward_model.n_gpus_per_node={JUDGE_TP}",
     ]
+
+if os.environ.get("SELF_PLAY_JUDGE_URL"):
+    OVERRIDES.append(f"+reward.custom_reward_function.reward_kwargs.judge_url={os.environ['SELF_PLAY_JUDGE_URL']}")
 # One-time optimizer reset (pass SP_RESET_OPTIMIZER=1 for a SINGLE re-attach only).
 # Not needed for an ordinary resume: with the same world size the full optimizer state resumes.
 if _env("SP_RESET_OPTIMIZER", 0, int):

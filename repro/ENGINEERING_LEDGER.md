@@ -47,9 +47,21 @@ Independent E1 review flagged inferred physical GPU identity in the first receip
 
 ## Commit and review receipts
 
+E1 commits `8f0015b`, `cb34fda`: independent final UUID review clean; pushed. Initial identity-inference finding corrected with real UUID assertions before kernels.
+
 E2 commit `7d52571`: independent review by `review_e2` verified all 120 test-list entries against XML, all six diagnoses, experiment enumeration and shell syntax; clean within E2 scope. Paper/host facts not included in that review. Only push `origin repro-g16`.
 
 E3 commit `982a4c9`: independent review by `review_e3` verified all ten raw/derived hashes, the sole row-51 change, prompt/metadata preservation, all 60 references against archived official CSV and 5,225 unique nonempty train rubrics. Clean within E3 scope.
+
+## E5 local adaptation
+
+`repro/local_runner.py` composes the three original entry points with explicit GPU count, TP/DP, project data/output/cache paths, offline logging, external API judge and short smoke settings. Minimal runner changes disable the local reward model when `SELF_PLAY_JUDGE_URL` is supplied and record API identity without downloading the local judge. `compose_dryrun.sh` passes GRPO/AC2/Prefix GRPO; local Ray preflight exposed one alive node, seven GPUs, 24 CPUs, then shut down its own cluster (`runs/e5/`). Composition is not training acceptance.
+
+Model snapshots are pinned to 4B `768f209d9ea81521153ed38c47d515654e938aea` and 1.7B `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`. First E6 GPU1 attempt initialized FSDP then vLLM's offline repository completeness check rejected absent README/LICENSE/.gitattributes despite weights loading. The runner now supplies the pinned local snapshot directory and verifies all weight shards rather than requesting repository metadata. No alternate model or core exception fallback.
+
+Engineering smoke deviations: response 256, chunk 128, group 2, batch 8 (+8 refill for replay), critic train 32, eager decoding, TP1, no validation, save every step; all appear in config manifests. Replay/critic cold seeds use the shipped generator. GPU backfill is disabled; `SP_DP_PAD=1` is forwarded into Ray workers. Checkpoint pruning is disabled for these bounded runs. These tiny settings are not a proposed scientific protocol.
+
+`repro/run_bounded.py` captures physical-GPU samples and enforces ≤1,740 seconds plus bounded cleanup. It signals only captured descendants through PID/birth-checked pidfds. Independent safety review requested two fixes (telemetry timeout and identity-safe descendant tracking); both implemented. Disposable parent/child timeout test finished in 1.508 seconds, return -15, timed_out true. Review approved first GPU1 smoke; it failed after 85.995 seconds with the offline metadata error. Transient descendants between polling samples remain a monitoring limitation; do not infer absence from sandbox process listings.
 
 ## E3 data preparation
 
