@@ -19,7 +19,8 @@ def test_usage_counts_cache_hits_and_output():
         gateway.usage_cost({"prompt_tokens": 1, "completion_tokens": 0, "prompt_cache_hit_tokens": 2})
 
 
-def test_reservations_survive_restart_and_cap_blocks_before_io(tmp_path):
+@pytest.mark.parametrize("max_tokens", [40000, 65536])
+def test_reservations_survive_restart_and_cap_blocks_before_io(tmp_path, max_tokens):
     g = gateway.Gateway(tmp_path)
     g.db.execute("INSERT INTO calls VALUES ('uncertain','reserved',4.999,'')")
     g.db.commit()
@@ -28,11 +29,25 @@ def test_reservations_survive_restart_and_cap_blocks_before_io(tmp_path):
     g = gateway.Gateway(tmp_path)
     class Request:
         async def json(self):
-            return {"messages": [{"role": "user", "content": "proof"}], "max_tokens": 40000}
+            return {"messages": [{"role": "user", "content": "proof"}], "max_tokens": max_tokens}
     with pytest.raises(web.HTTPPaymentRequired):
         asyncio.run(g.chat(Request()))
     assert g.total() == 4.999
     assert g.db.execute("SELECT COUNT(*) FROM calls").fetchone()[0] == 1
+    g.db.close()
+    g.lock_file.close()
+
+
+@pytest.mark.parametrize("max_tokens", [0, 65537])
+def test_output_limit_rejected_before_reservation(tmp_path, max_tokens):
+    g = gateway.Gateway(tmp_path)
+    class Request:
+        async def json(self):
+            return {"messages": [{"role": "user", "content": "proof"}], "max_tokens": max_tokens}
+    with pytest.raises(web.HTTPBadRequest):
+        asyncio.run(g.chat(Request()))
+    assert g.total() == 0
+    assert g.db.execute("SELECT COUNT(*) FROM calls").fetchone()[0] == 0
     g.db.close()
     g.lock_file.close()
 

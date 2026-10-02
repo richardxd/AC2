@@ -1,6 +1,6 @@
 """R1–R4 curves from complete raw rollouts; no cached or imputed measurements."""
 import argparse
-from collections import defaultdict
+from collections import Counter, defaultdict
 import hashlib
 import importlib.util
 import json
@@ -18,7 +18,7 @@ def sha(path):
         return hashlib.file_digest(f, "sha256").hexdigest()
 
 
-def validation(rows, samples, problems, logged_mean):
+def validation(rows, samples, problems, logged_mean, expected_inputs=None):
     assert len(rows) == samples * problems
     groups = defaultdict(list)
     for row in rows:
@@ -27,6 +27,9 @@ def validation(rows, samples, problems, logged_mean):
         assert math.isfinite(score) and 0 <= score <= 1
         groups[row["input"]].append(score)
     assert len(groups) == problems and all(len(v) == samples for v in groups.values())
+    if expected_inputs is not None:
+        assert len(set(expected_inputs)) == problems
+        assert set(groups) == set(expected_inputs), "validation problems differ from configured dataset"
     group_means = [sum(v)/samples for v in groups.values()]
     mean = sum(group_means)/problems
     assert math.isclose(mean, logged_mean, abs_tol=1e-8), "raw and logged validation means disagree"
@@ -45,6 +48,11 @@ def collect(run):
     assert manifests
     cfg = OmegaConf.load(manifests[-1])
     arguments = json.loads((manifests[-1].parent / "arguments.json").read_text())
+    varying = {"steps", "initial_val", "compose_only"}
+    fixed = {k:v for k,v in arguments.items() if k not in varying}
+    for manifest in manifests:
+        prior = json.loads((manifest.parent / "arguments.json").read_text())
+        assert {k:v for k,v in prior.items() if k not in varying} == fixed, "run configuration changed"
     assert arguments["model"] == "Qwen/Qwen3-4B-Thinking-2507" and arguments["val_n"] == 4
     assert cfg.reward.custom_reward_function.path.endswith("/repro/strict_reward.py")
     def one_file(value):
@@ -55,7 +63,13 @@ def collect(run):
     train_path, val_path = one_file(cfg.data.train_files), one_file(cfg.data.val_files)
     train = pd.read_parquet(train_path)
     unique_train = len({qid_from_messages(x) for x in train["prompt"]})
-    problems = len(pd.read_parquet(val_path))
+    val = pd.read_parquet(val_path)
+    problems = len(val)
+    from transformers import AutoTokenizer
+    tokenizer = AutoTokenizer.from_pretrained(cfg.actor_rollout_ref.model.path, local_files_only=True)
+    template_kwargs = dict(cfg.data.get("apply_chat_template_kwargs", {}))
+    expected_inputs = [tokenizer.decode(tokenizer.apply_chat_template(list(prompt),
+        add_generation_prompt=True, **template_kwargs), skip_special_tokens=True) for prompt in val["prompt"]]
     metrics_path = run / "metrics.jsonl"
     metrics = {}
     for line in metrics_path.read_text().splitlines():
@@ -71,8 +85,15 @@ def collect(run):
         path = run / f"rollouts/{step}.jsonl"
         scanned = exporter.scan_rollout(path, step)
         assert scanned["complete"], scanned
-        for line in path.read_text().splitlines():
-            trajectory = json.loads(line)
+        trajectories = [json.loads(line) for line in path.read_text().splitlines()]
+        expected_rows = arguments["batch"] * (arguments["group"] + (arguments["method"] != "grpo"))
+        assert len(trajectories) == expected_rows, "incomplete training rollout population"
+        expected_groups = Counter({arguments["group"]: arguments["batch"]})
+        if arguments["method"] != "grpo":
+            expected_groups[1] += arguments["batch"]
+        assert Counter(Counter(r["uid"] for r in trajectories).values()) == expected_groups
+        for trajectory in trajectories:
+            assert trajectory["step"] == step
             assert len(trajectory["response_token_ids"]) == trajectory["response_length"]
             assert len(trajectory["prompt_token_ids"]) == trajectory["prompt_length"]
             assert all(trajectory[k] == 0 for k in ("judge_parse_failed", "judge_http_error", "judge_truncated"))
@@ -101,7 +122,7 @@ def collect(run):
         path = run / f"val_rollouts/{step}.jsonl"
         raw = [json.loads(line) for line in path.read_text().splitlines()]
         assert all(r["step"] == step for r in raw)
-        point = validation(raw, 4, problems, m[key])
+        point = validation(raw, 4, problems, m[key], expected_inputs)
         point.update(step=step, cumulative_decoding_flops=cumulative[step])
         curve.append(point)
         hashes[str(path)] = sha(path)

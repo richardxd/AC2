@@ -10,6 +10,8 @@ Record g16 environment facts, changes, verification and deviations from the pape
 
 ## Environment and changes
 
+Postcommit review of `6c56e5b` verified gateway reservations/cap, attempt isolation and all48 E7 source prompt IDs. It found two false accepts in the new curve collector: wrong validation problems with matching counts, and partial training populations. Corrected by reconstructing exact expected decoded prompts from the configured local tokenizer/data, enforcing64 GRPO or80 replay rows with the original UID multiplicities (16×4 plus16 scratch refills), and rejecting configuration drift between launches. Real R1 initial validation passes prompt binding; wrong-problem synthetic rows fail. Receipts: `runs/reviews/r-judge-attempt-review-lykw_80o/`, `runs/reviews/curves-review-wk2_94f6/`. Added offline65536 cap and output-boundary tests; no paid test calls.
+
 Supervisor storage constraint (2026-10-01): **project scratch total must remain below 45 GB**. Scratch is shared; check free bytes and project usage before each large build/download. Only hot caches and the active environment belong there. All checkpoints, rollouts, dumps, logs and extra snapshots belong under repository `runs/`. Supervisor measured 28 GB used (uv 14 GB, HF 12 GB), shared scratch 66 GB free at 99% usage.
 
 | Fact/change | Why / verification | Evidence / commit |
