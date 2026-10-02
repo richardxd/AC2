@@ -22,6 +22,7 @@ def main():
                "source_indices": indices, "samples_per_problem_per_model": 1,
                "response_budget": 16384, "models": ["Qwen/Qwen3-4B-Thinking-2507", "Qwen/Qwen3-1.7B"],
                "request_seed": "192 + canonical problem index, matched across models",
+               "sampling": {"temperature": .8, "top_p": .95, "top_k": 20},
                "reason": "E4 observed cost supports all60x1 per model; reserve2 USD for E7/E8 and launch preparation",
                "metrics": ["mean score (points/7)", "fraction with score > 0", "generated tokens/decoding wall second"],
                "gate": "4B if measured scaled projection <=10 days; otherwise 1.7B only if mean >=half 4B and nonzero>=0.20; insufficient evidence leaves choice provisional",

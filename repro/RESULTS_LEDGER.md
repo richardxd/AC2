@@ -93,30 +93,30 @@ Table 3 (p.26), source coverage only, not outcome quality:
 
 ## Paper configuration inventory
 
-Values are from Table 4 and App. C unless otherwise stated. Ours will link an executed resolved configuration, not merely planned settings.
+Values are from Table 4 and App. C unless otherwise stated. The populated cells below describe executed E8 calibration, not approved long R runs; [AC2 receipt](receipts/e8-ac2-replay-calibration.json) binds its resolved configuration and metrics.
 
 | Setting | Paper value | Ours / run / receipt | Scaling differences |
 |---|---|---|---|
 | Train / val problems | roughly 5,200 / 60 (§4) | 5,227 / 60; [canonical receipt](receipts/e3-canonical.json) | One explicit mirror correction |
-| Group, replay, refill, FIFO | 16; 192; 192; 256 | — | Candidate 8/32/32, not approved |
-| Audit | 1/4, rounded up | — | — |
-| Response / chunk / cut-grid / max prefix | 50,000 / 10,000 / 10,000 / 0.9 | — | Candidate 16k/4k/4k |
+| Group, replay, refill, FIFO | 16; 192; 192; 256 | E8:4;16;16;256 | Reduced group statistics and visitation |
+| Audit | 1/4, rounded up | E8 configured1/4; no ready routes yet | Actual branch coverage only in E7 fixture |
+| Response / chunk / cut-grid / max prefix | 50,000 / 10,000 / 10,000 / 0.9 | E8:16384/4096/4096/.9 | Shorter horizon and cut spacing |
 | Critic grid | 0, .1, …, 1; ties rounded down | — | — |
-| Critic FIFO / train pairs / min valid | 1,920 / up to 768 / ≥8 | — | Must coordinate with reduced g |
-| Actor LR / minibatch / updates | 2e-6 / 1536 continuations / 2 | — | — |
+| Critic FIFO / train pairs / min valid | 1,920 / up to 768 / ≥8 | E8:1920/up to64/4; actual step2 trains16 | Lower maximum; early FIFO unsaturated |
+| Actor LR / minibatch / updates | 2e-6 / 1536 continuations / 2 | E8:2e-6/32 continuations/2 | Same LR, smaller minibatch |
 | Critic LR initial / floor | 2√2e-6 / 5√2e-7 | — | — |
 | Critic LR controller | ratio √2, patience 2, factor .5 | — | — |
 | Critic optimizer | AdamW (.9,.999), eps 1e-8, weight decay 0 | — | — |
 | Critic clip / decoding / loss normalization | .2 / greedy ≤4 tokens / divide by 4 | — | — |
 | Readiness window / thresholds | 5 steps / global .20 / local .18 | — | — |
 | Reference bank | ≥6/7 reward; add once; gate starts step 42 in main run | — | Shipped launcher gate starts step 1 |
-| Actor clip / weight decay / dual clip | .3 / .01 / 3 | — | — |
-| Actor KL / entropy bonus / epochs | 0 / 0 / 1, no minibatch shuffle | — | — |
-| PPO low / base high clipping | .2 / .28 | — | — |
+| Actor clip / weight decay / dual clip | .3 / .01 / 3 | E8:.3/.01/3 | Same settings |
+| Actor KL / entropy bonus / epochs | 0 / 0 / 1, no minibatch shuffle | E8:0/0/1, shuffleFalse | Same settings |
+| PPO low / base high clipping | .2 / .28 | E8:.2/.28 | Same settings |
 | Adaptive entropy target / step / bounds / initial | .28 nats / .02 / [−.08,.08] / .06 | — | — |
-| Train temperature / top-p / top-k | .8 / 1 / unrestricted | — | — |
+| Train temperature / top-p / top-k | .8 / 1 / unrestricted | E8:.8/1/unrestricted | Same settings |
 | Eval n / interval / temperature / top-p / top-k / budget | 16 / 10 / .8 / .95 / 20 / 50,000 | — | Candidate 4 samples, 16k |
-| GRPO batch / group | 256 / 16 (4096 responses) | — | Different trained response count than AC2 |
+| GRPO batch / group | 256 / 16 (4096 responses) | E8:16/4 (64 trained responses) | Scaled GRPO and AC2 both train64; AC2 adds16 inflow |
 | LR sweep | 1e-6, 2e-6, 4e-6; selected 2e-6 (App. A.1) | — | No new selection without proposal |
 
 ## Engineering measurements, not paper performance results
@@ -129,3 +129,5 @@ Values are from Table 4 and App. C unless otherwise stated. Ours will link an ex
 Both use4B,7GPUs,16groups×4,16k response; AC2 adds16 inflow trajectories. Q was empty/skipped in cold AC2. These single-step measurements cannot establish scientific score improvement, runtime uncertainty, or mature readiness savings. E7 permissive readiness remains engineering coverage only.
 
 Populated E8 AC2 step2:840,875 generated tokens,1.1208923499528192e16 decode FLOPs,916.102s step/111.313s save,$0.130034916 for31 calls ([receipt](receipts/e8-ac2-replay-calibration.json)). It trained16 of the configured maximum64 Q records; the proposal must account for that capacity difference. Normal readiness remains closed; these are engineering measurements.
+
+E8 Prefix step1:1,244,762 generated tokens,1.5937332632027136e16 decode FLOPs,1010.848s step/75.812s save,$0.129121776 for21 calls ([receipt](receipts/e8-prefix-calibration.json)). This is an empty-buffer calibration; mature Prefix timing remains unmeasured.
