@@ -17,6 +17,7 @@ The research role requires correct proof labels, references available at the che
 - Rollout dumps do not identify the exact source replay entry. The original verifier tries candidate references to establish context assembly, while generation chooses the newest. This does not prove identical historical reference selection. Retain that limitation and record the actual selected reference for every probe group.
 - `build_probe_set.py` joins ready qids through the actual training parquet indices and scans only checkpoint-or-earlier rollouts. It can emit fewer requested groups, and zero selected usable attempts reaches an empty-list indexing failure. The wrapper must require the intended count before GPU work.
 - GPU generation defaults to65536 context and non-eager execution. Local bounded configuration must use the proposed response/chunk budgets and explicit eager execution. Judge stage output completeness and error flags require checking before analysis.
+- `probe_judge.py` sends continuation text alone. A source prefix may already contain the opening proof tag, so the complete attempt must be reconstructed for terminal grading. First-hand synthetic counterexample: `runs/probe-audit/partial-proof-counterexample.json`; the original proof extractor accepts prefix+continuation but returns no proof on the continuation alone. This demonstrates a possible false rejection, not its prevalence in a sampled probe.
 
 ## Next acceptance
 

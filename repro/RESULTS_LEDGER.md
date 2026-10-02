@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Inventory quantitative claims and settings from the local paper, with source, our measured value, producing run/config and scaling differences. An em dash means unmeasured, never zero. Paper values are claims, not independently reproduced findings. No experiment has run yet.
+Inventory quantitative claims and settings from the local paper, with source, our measured value, producing run/config and scaling differences. An em dash means unmeasured, never zero. Paper values are claims, not independently reproduced findings. Engineering smokes/calibrations have run; no long R experiment has launched.
 
 Source: local `paper/2609.39247.pdf`, arXiv v2 (1 Oct 2026), SHA256 `e89e2d289db589f0bcd7d576f9f2a82406d9f0188730028604993fff38690421`. First-hand rendered receipts: `runs/paper/page-NN.png`. Graph-only estimates below are deliberately approximate, not invented exact values.
 
@@ -66,7 +66,7 @@ Table 2 (p.24): group statistic uses groups with ≥2 critic-scored continuation
 
 | Claim | Paper value | Source | Ours / run / receipt | Scaling differences |
 |---|---|---|---|---|
-| Eq. 6 coefficients | A=8,044,544,000; B=589,824 | App. B p.25 | — | Must recompute for 1.7B |
+| Eq. 6 coefficients | A=8,044,544,000; B=589,824 | App. B p.25 | 4B matches; [E8 receipt](receipts/e8-grpo-calibration.json) | Architecture-derived, no mean-length approximation |
 | Architecture | 36 layers; hidden 2560; FFN 9728; query/KV heads 32/8; head dim 128; vocabulary 151936 | App. B | — | Verify actual model config |
 | Mean-cost underestimate | GRPO 4.01% (steps 161–180), AC2 5.51% | App. B | — | Use joint moments in our exporter |
 | GPU-hour regression | H=6.11+27.41(D/1e18), r=.874 | App. B, Fig. 19 | — | Not a g16 runtime predictor |
@@ -97,7 +97,7 @@ Values are from Table 4 and App. C unless otherwise stated. Ours will link an ex
 
 | Setting | Paper value | Ours / run / receipt | Scaling differences |
 |---|---|---|---|
-| Train / val problems | roughly 5,200 / 60 (§4) | — | E3 verification pending |
+| Train / val problems | roughly 5,200 / 60 (§4) | 5,227 / 60; [canonical receipt](receipts/e3-canonical.json) | One explicit mirror correction |
 | Group, replay, refill, FIFO | 16; 192; 192; 256 | — | Candidate 8/32/32, not approved |
 | Audit | 1/4, rounded up | — | — |
 | Response / chunk / cut-grid / max prefix | 50,000 / 10,000 / 10,000 / 0.9 | — | Candidate 16k/4k/4k |
@@ -118,3 +118,12 @@ Values are from Table 4 and App. C unless otherwise stated. Ours will link an ex
 | Eval n / interval / temperature / top-p / top-k / budget | 16 / 10 / .8 / .95 / 20 / 50,000 | — | Candidate 4 samples, 16k |
 | GRPO batch / group | 256 / 16 (4096 responses) | — | Different trained response count than AC2 |
 | LR sweep | 1e-6, 2e-6, 4e-6; selected 2e-6 (App. A.1) | — | No new selection without proposal |
+
+## Engineering measurements, not paper performance results
+
+| Fresh step | Generated tokens | Eq.6 decode FLOPs | Step / save seconds | Judge USD | Receipt |
+|---|---|---|---|---|---|
+| E8 GRPO | 926,086 | 1.1707487528091648e16 | 875.976 / 78.219 | 0.143165772 | [GRPO](receipts/e8-grpo-calibration.json) |
+| E8 cold AC2 | 1,225,030 | 1.562175243845632e16 | 1114.992 / 207.842 | 0.129811104 | [cold AC2](receipts/e8-ac2-cold-calibration.json) |
+
+Both use4B,7GPUs,16groups×4,16k response; AC2 adds16 inflow trajectories. Q was empty/skipped in cold AC2. These single-step measurements cannot establish scientific score improvement, runtime uncertainty, or mature readiness savings. E7 permissive readiness remains engineering coverage only.

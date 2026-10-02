@@ -23,7 +23,7 @@ class GateEvidenceTest(unittest.TestCase):
                 "revision": REVISIONS["Qwen/Qwen3-4B-Thinking-2507"],
                 "data_sha256": "fixture", "gpu_uuid": str(shard),
                 "configuration": {"engine_seed": 192, "request_seed": "192 + canonical problem index",
-                    "temperature": .8, "top_p": 1., "top_k": -1, "response_budget": 16384,
+                    "temperature": .8, "top_p": .95, "top_k": 20, "response_budget": 16384,
                     "max_num_seqs": 4, "tp": 1},
                 "rows": rows, "generated_tokens": len(rows) * 2,
                 "generation_wall_s": 10., "tokens_per_s": len(rows) / 5})

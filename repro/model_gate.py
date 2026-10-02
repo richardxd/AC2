@@ -56,7 +56,7 @@ def generate(args):
     started_unix = time.time()
     start = time.monotonic()
     outputs = llm.generate([TokensPrompt(prompt_token_ids=p) for p in prompts],
-                           [SamplingParams(n=1, temperature=.8, top_p=1., top_k=-1,
+                           [SamplingParams(n=1, temperature=.8, top_p=.95, top_k=20,
                                            max_tokens=16384, seed=192 + row["index"]) for row in rows])
     wall = time.monotonic() - start
     results = []
@@ -74,7 +74,7 @@ def generate(args):
         "generation_wall_s": wall, "generated_tokens": tokens, "tokens_per_s": tokens / wall,
         "timing_scope": "LLM.generate including prefill and queueing; excludes startup and judge",
         "configuration": {"engine_seed": 192, "request_seed": "192 + canonical problem index",
-                          "temperature": .8, "top_p": 1., "top_k": -1,
+                          "temperature": .8, "top_p": .95, "top_k": 20,
                           "response_budget": 16384, "max_num_seqs": 4, "tp": 1}, "rows": results})
     print(json.dumps({"generated_tokens": tokens, "generation_wall_s": wall, "tokens_per_s": tokens / wall}), flush=True)
 

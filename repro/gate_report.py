@@ -21,7 +21,7 @@ def summarize(directory):
     assert all(p["revision"] == REVISIONS[p["model"]] for p in parts)
     assert len({p["gpu_uuid"] for p in parts}) == 7
     expected_config = {"engine_seed": 192, "request_seed": "192 + canonical problem index",
-                       "temperature": .8, "top_p": 1., "top_k": -1,
+                       "temperature": .8, "top_p": .95, "top_k": 20,
                        "response_budget": 16384, "max_num_seqs": 4, "tp": 1}
     for shard, part in enumerate(parts):
         assert part["configuration"] == expected_config
