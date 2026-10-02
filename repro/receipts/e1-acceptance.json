@@ -1,0 +1,86 @@
+{
+  "torch": "2.11.0+cu129",
+  "vllm": "0.23.0+cu129",
+  "flash_attn": "2.8.1",
+  "verl": "/share/data/pals/richard1xur/ac2/src/verl/verl/__init__.py",
+  "device_count": 7,
+  "kernel_checks": [
+    {
+      "logical_gpu": 0,
+      "physical_gpu": 1,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 1,
+      "physical_gpu": 2,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 2,
+      "physical_gpu": 3,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 3,
+      "physical_gpu": 4,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 4,
+      "physical_gpu": 5,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 5,
+      "physical_gpu": 6,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    },
+    {
+      "logical_gpu": 6,
+      "physical_gpu": 7,
+      "name": "NVIDIA RTX 6000 Ada Generation",
+      "capability": [
+        8,
+        9
+      ],
+      "max_abs_error": 0.00048828125,
+      "finite_gradients": true
+    }
+  ]
+}

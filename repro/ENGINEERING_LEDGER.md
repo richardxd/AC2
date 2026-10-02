@@ -6,6 +6,8 @@ Record g16 environment facts, changes, verification and deviations from the pape
 
 ## Environment and changes
 
+Supervisor storage constraint (2026-10-01): **project scratch total must remain below 45 GB**. Scratch is shared; check free bytes and project usage before each large build/download. Only hot caches and the active environment belong there. All checkpoints, rollouts, dumps, logs and extra snapshots belong under repository `runs/`. Supervisor measured 28 GB used (uv 14 GB, HF 12 GB), shared scratch 66 GB free at 99% usage.
+
 | Fact/change | Why / verification | Evidence / commit |
 |---|---|---|
 | g16.ttic.edu; 8 RTX 6000 Ada GPUs, 49,140 MiB each; driver 580.95.05 | First-hand nvidia-smi. GPU0 occupied (16,629 MiB); use only physical 1–7 | `runs/e1/host.txt`; base `d90aa18` |
@@ -31,9 +33,17 @@ Record g16 environment facts, changes, verification and deviations from the pape
 
 No judge calls made yet. Spend by this reproduction: $0. Cap: $5. The kickoff's historical balance ($32.43) is not a current measurement.
 
+## E1 acceptance
+
+FA-only second build succeeded. `repro/verify_environment.py` verified torch 2.11.0+cu129, vllm package 0.23.0+cu129 (module 0.23.0), flash-attn 2.8.1 and vendored verl, with seven visible GPUs. Actual BF16 causal flash-attn forward/backward passed on each physical GPU 1–7, maximum absolute discrepancy versus Torch SDPA 0.00048828125, finite gradients. GPU0 was excluded. Receipt: `repro/receipts/e1-acceptance.json`; exact package freeze: `repro/receipts/e1-freeze.txt`.
+
+The sandbox process listing did not expose host compiler processes; an escalated read-only process listing confirmed the restarted build's uv/ninja/nvcc descendants were active. Absence in sandbox `ps` must not be interpreted as host-process absence. Post-build scratch usage: 26 GB, below 45 GB; shared available bytes 73,019,699,200.
+
 ## Commit and review receipts
 
 E2 commit `7d52571`: independent review by `review_e2` verified all 120 test-list entries against XML, all six diagnoses, experiment enumeration and shell syntax; clean within E2 scope. Paper/host facts not included in that review. Only push `origin repro-g16`.
+
+E3 commit `982a4c9`: independent review by `review_e3` verified all ten raw/derived hashes, the sole row-51 change, prompt/metadata preservation, all 60 references against archived official CSV and 5,225 unique nonempty train rubrics. Clean within E3 scope.
 
 ## E3 data preparation
 

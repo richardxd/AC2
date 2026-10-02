@@ -6,10 +6,10 @@ Track every fixed [ROADMAP](ROADMAP.md) acceptance check using first-hand receip
 
 | Task | Status | Acceptance result | Evidence |
 |---|---|---|---|
-| E1 pinned environment | in progress | Base install started; imports and flash-attn not yet verified | `runs/e1/host.txt`, `runs/e1/install-base.log`; [environment](env.sh) |
+| E1 pinned environment | done | torch 2.11.0+cu129, vllm 0.23.0+cu129, flash_attn 2.8.1, verl importable; 7 GPUs. Real attention forward/backward verified on GPUs 1–7 | [acceptance](receipts/e1-acceptance.json), `runs/e1/`, [environment](env.sh), [finding](../docs/findings/repro/pinned-environment.md) |
 | E2 CPU tests | done | 114 passed, 6 failed; complete pass/fail list recorded. One documented expected failure; five additional stale test assumptions, not suppressed | `runs/e2/pytest-02.log`, `runs/e2/results-02.xml`, [test list](receipts/e2-test-list.json), [finding](../docs/findings/repro/cpu-tests.md) |
 | E3 data | done | 5,227 train / 60 val rows; raw maps 5,284 rubrics / 59 val references. Derived canonical set has 60/60 references after one explicit mirror correction | [raw receipt](receipts/e3-raw.json), [canonical receipt](receipts/e3-canonical.json), `runs/e3/`, [finding](../docs/findings/repro/data-preparation.md) |
-| E4 judge | todo | 20 proofs, train and val prompts, parse rate, latency, tokens, USD and projections; cap $5 | Pending |
+| E4 judge | in progress | Gateway offline budget tests 3/3 passed; model API confirms V4.1-Flash, balance $32.43. Fixed 20 paired candidates prepared | `runs/e4/`, `repro/judge_gateway.py` |
 | E5 local adaptation | todo | Local Ray, g16 `.env`, GRPO and AC2 config composition | Pending |
 | E6 multi-GPU | todo | 1 then 7 GPUs, 2 steps, save/resume; world size, TP/DP, per-GPU load, continued step/loss | Pending |
 | E7 AC2 smoke | todo | Critic queries/readiness/chunks/audit/padding; q metrics, optimizer step, chunk bound | Pending |
