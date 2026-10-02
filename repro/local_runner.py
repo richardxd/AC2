@@ -58,13 +58,15 @@ def configure(args):
         "SP_PPO_MINI_BATCH": batch // 2, "SP_ROLLOUT_N": args.group,
         "SP_LR": "2e-6", "SP_ENTROPY_COEFF": 0,
         "SP_MAX_PROMPT_LEN": 2048, "SP_MAX_RESPONSE_LEN": args.response,
-        "SP_PPO_MAX_TOKEN_LEN": args.response + 2048,
+        # With dp7, a 16-sequence minibatch has 2/3 rows per rank. Allow two
+        # maximum-length sequences so the synchronized microbatch count is <=2.
+        "SP_PPO_MAX_TOKEN_LEN": (2 if args.gpus > 1 else 1) * (args.response + 2048),
         "SP_LOG_PROB_MAX_TOKEN_LEN": args.response + 2048,
         "SP_ACTOR_GPU_MEM_UTIL": .45, "SP_ACTOR_MAX_NUM_SEQS": 16,
         "SP_MAX_NUM_BATCHED_TOKENS": 4096,
         "SP_USE_FUSED_KERNELS": "False", "SP_DP_PAD": 1,
         "SP_TOTAL_STEPS": args.steps, "SP_SAVE_FREQ": args.save_freq,
-        "SP_TEST_FREQ": -1 if args.smoke else 10,
+        "SP_TEST_FREQ": -1 if args.smoke else args.val_freq,
         "SP_VAL_N": args.val_n, "SP_VAL_BEFORE_TRAIN": str(args.val_only),
         "SP_VAL_ONLY": str(args.val_only), "SP_MAX_CKPT_KEEP": 100000,
         "SP_KEEP_BEST_CKPT": 0, "SP_CKPT_KEEP_EVERY": 1,
@@ -86,7 +88,7 @@ def configure(args):
                     "SP_REPLAY_SEED_DIR": seed / "replay_seed_cold",
                     "SP_REPLAY_N": batch, "SP_SCRATCH_INFLOW_ONLY": 1,
                     "SP_REPLAY_BUCKETING": "global", "SP_REPLAY_ADMISSION": "ungated",
-                    "SP_REPLAY_ROTATION": "global_fifo", "SP_REPLAY_BOUND": 256,
+                    "SP_REPLAY_ROTATION": "global_fifo", "SP_REPLAY_BOUND": args.replay_bound,
                     "SP_REPLAY_GLOBAL_SAMPLING": "question", "SP_REPLAY_CUT_LOW": 0,
                     "SP_REPLAY_CUT_HIGH": .9, "SP_REPLAY_CUT_GRAIN": args.chunk,
                     "SP_REPLAY_POLICY_OVERRIDE": 0})
@@ -102,7 +104,7 @@ def configure(args):
                         "SP_Q_MAX_TOKEN_LEN": args.response + 3360,
                         "SP_Q_READY_THRESH_GLOBAL": .2, "SP_Q_READY_THRESH_PROBLEM": .18,
                         "SP_Q_READY_REQUIRE_BANK": 1, "SP_Q_REQUIRE_NONZERO": 1,
-                        "SP_Q_FIFO_CAP": 1920, "SP_Q_TRAIN_N": 32 if args.smoke else 768,
+                        "SP_Q_FIFO_CAP": 1920, "SP_Q_TRAIN_N": args.q_train_n if args.q_train_n is not None else (32 if args.smoke else 768),
                         "SP_Q_MIN_VALID": min(8, args.group), "SP_Q_GRAD_CLIP": .2,
                         "SP_Q_TRAIN_NOREF": 1, "SP_Q_PROMPT_VARIANT": "reward_horizon",
                         "SP_Q_REF_REQUIRE_PASS": 1, "SP_Q_AUDIT_DEN": 4,
@@ -111,6 +113,13 @@ def configure(args):
             env["SP_Q_ENABLE"] = 0
     else:
         env.update({"SP_REPLAY_ENABLE": 0, "SP_Q_ENABLE": 0, "SP_SCRATCH_INFLOW_ONLY": 0})
+    if args.ablation != "none":
+        assert args.method == "ac2"
+        if args.ablation == "correct-only":
+            env.update({"SP_REPLAY_ADMISSION": "judged_correct", "SP_PASS_POINTS_MIN": 6,
+                        "SP_Q_RNG_SEED": 826001})
+        elif args.ablation == "no-audit":
+            env.update({"SP_Q_AUDIT_DEN": 0, "SP_Q_AUDIT_CUT": 0, "SP_Q_RNG_SEED": 831001})
     if args.engineering_readiness:
         assert args.smoke and args.method == "ac2", "permissive readiness is engineering-only"
         env.update({"SP_Q_READY_THRESH_GLOBAL": 1.01, "SP_Q_READY_THRESH_PROBLEM": 1.01,
@@ -135,6 +144,10 @@ def main():
     p.add_argument("--model", default="Qwen/Qwen3-4B-Thinking-2507")
     p.add_argument("--data", default="runs/e3/canonical")
     p.add_argument("--val-n", type=int, default=4)
+    p.add_argument("--val-freq", type=int, default=10)
+    p.add_argument("--replay-bound", type=int, default=256)
+    p.add_argument("--q-train-n", type=int)
+    p.add_argument("--ablation", choices=["none", "correct-only", "no-audit"], default="none")
     p.add_argument("--val-only", action="store_true")
     p.add_argument("--engineering-readiness", action="store_true")
     p.add_argument("--smoke", action="store_true")

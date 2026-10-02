@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +20,8 @@ def main():
     spec.loader.exec_module(exporter)
     from omegaconf import OmegaConf
     cfg = OmegaConf.load(args.manifest / "config.yaml")
+    assert Path(cfg.trainer.default_local_dir).resolve() == args.run.resolve() / "checkpoints"
+    assert args.manifest.resolve().is_relative_to(args.run.resolve() / "launches")
     architecture = Path(cfg.actor_rollout_ref.model.path) / "config.json"
     model = json.loads(architecture.read_text())
     layers, width = model["num_hidden_layers"], model["hidden_size"]
@@ -29,11 +32,19 @@ def main():
     report = exporter.export_run(ROOT, args.run.name, override=args.run.resolve(), train_only=True)
     scanned = {row["step"]: row for row in report["train"]["per_step"]}
     metrics = [json.loads(line) for line in (args.manifest / "metrics_added.jsonl").read_text().splitlines()]
+    assert metrics and len({m["step"] for m in metrics}) == len(metrics)
+    selected = {m["step"] for m in metrics}
+    assert not selected.intersection(report["train"]["token_sum_mismatch_steps"]), "rollout/log token totals disagree"
+    assert not selected.intersection(report["train"]["missing_or_incomplete_steps"]), "missing trajectory data"
     measured = []
     for record in metrics:
         step, data = record["step"], record["data"]
         row = scanned[step]
         assert row["complete"], row
+        q_metrics = {k: v for k, v in data.items() if k.startswith("q/")}
+        nonfinite_q = [k for k, v in q_metrics.items() if isinstance(v, (float, int)) and not math.isfinite(v)]
+        for key in nonfinite_q:
+            q_metrics[key] = None
         measured.append({"step": step, "generated_tokens": row["generated_tokens_sum"],
                          "decode_forwards": row["decode_forwards_sum"],
                          "decode_context_sum": row["decode_context_sum"],
@@ -41,7 +52,7 @@ def main():
                          "timing_s": {k: v for k, v in data.items() if k.startswith("timing_s/")},
                          "end_to_end_rollout_tokens_per_s": row["generated_tokens_sum"] / data["timing_s/gen"],
                          "score_mean": data["critic/score/mean"], "actor_grad_norm": data["actor/grad_norm"],
-                         "q_metrics": {k: v for k, v in data.items() if k.startswith("q/")}})
+                         "q_metrics": q_metrics, "nonfinite_q_metrics": nonfinite_q})
     before = {r["id"]: r for r in json.loads((args.manifest / "judge_before.json").read_text())}
     after = {r["id"]: r for r in json.loads((args.manifest / "judge_after.json").read_text())}
     assert all(after[k] == v for k, v in before.items()), "overlapping judge activity changed earlier calls"
