@@ -12,6 +12,8 @@ Read exact policy trajectories with `export_paper_metrics.py` and Eq.6. Reject c
 
 Proposal projections will use measured components with explicit assumptions for200steps, checkpoint/validation frequency and R4/R5 costs. One or two steps cannot estimate mature readiness speedups or a runtime confidence interval. Use an unready/full-horizon planning envelope, and report both observed estimates and conservative resource bounds. Long-run judge cost may exceed the current$5 engineering cap; no long run or higher cap is authorized by this plan. Keep at least$2 reserved for remaining engineering until E9's matched60×1 grading is accounted for.
 
+R validation planning retains the ROADMAP starting point of60problems×4samples per event. E9's budget-authorized60×1 reduction applies to the gate; it does not by itself justify reducing the later scientific validation. Scale E9 observed validation cost/time by4 with an explicit linear extrapolation caveat. The earlier unused projection helper's1-sample placeholder was corrected before any real R proposal. R launch approval must cover these costs; engineering smoke subsets will be documented separately.
+
 Research role: reduced horizons, groups, Q batch and validation sampling must be disclosed; no performance conclusion from calibration. ML role: preserve all-rank state/gradient checks and fit every launch under30minutes without GPU0.
 
 ## Timeout amendment before populated AC2

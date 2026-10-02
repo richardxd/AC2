@@ -21,9 +21,9 @@ def main():
     rate = gate["tokens_per_gpu_generation_second"]
     assert rate > 0
     # Twenty periodic evaluations plus step zero; actual R launch must enable it.
-    steps, evaluations, val_samples, problems, saves = 200, 21, 1, 60, 10
-    val_tokens = gate["generated_tokens"]
-    val_s = val_tokens / (7 * rate) + problems * raw["e4"]["stats"]["val"]["mean_latency_s"] / 4
+    steps, evaluations, val_samples, problems, saves = 200, 21, 4, 60, 10
+    val_tokens = val_samples * gate["generated_tokens"]
+    val_s = val_tokens / (7 * rate) + problems * val_samples * raw["e4"]["stats"]["val"]["mean_latency_s"] / 4
     measured = {}
     cold, replay = raw["ac2_cold"], raw["ac2_replay"]
     assert Path(cold["run"]).resolve() == Path(replay["run"]).resolve(), "AC2 states must share a run"
@@ -78,7 +78,7 @@ def main():
             "steps": steps, "validation_events": evaluations, "validation_n": val_samples,
             "wall_days_observed_component_projection": seconds / 86400,
             "wall_days_2x_planning_allowance": 2 * seconds / 86400,
-            "judge_usd_observed_train_plus_e9_val": steps * source["judge_upper_usd_per_step"] + evaluations * gate["judge_charged_upper_usd"],
+            "judge_usd_observed_train_plus_e9_val": steps * source["judge_upper_usd_per_step"] + evaluations * val_samples * gate["judge_charged_upper_usd"],
             "judge_usd_every_trajectory_graded_at_e4_mean": steps * trajectories * train_cost + evaluations * problems * val_samples * val_cost,
             "decode_flops_no_readiness_speedup_projection": steps * source["decoding_flops_per_step"],
             "basis": "measured matching arm" if not name.startswith("R4") else "AC2 proxy; ablation-specific mature timing unmeasured",
@@ -97,7 +97,7 @@ def main():
         "validation_seconds_per_event_projection": val_s,
         "assumptions": [
             "4B, seven TP1 replicas,16groups x4,16k response,4k chunk,Q batch64;200steps; save/evaluate every20/10steps.",
-            "One validation sample/problem;21events include step zero. Exact initial-validation config must be enabled for R launches.",
+            "Four validation samples/problem per ROADMAP starting point;21events include step zero. Scale E9's60x1 observed cost/time by4 (linear planning assumption, not a measured240-rollout event). Initial validation must be enabled for fresh R launches.",
             "Generation throughput includes prefill and queueing; val runtime assumes balanced work on7GPUs plus serialized4-way judge service.",
             "Observed costs include missing-proof short circuits. All-graded E4 mean is a planning scenario, not a hard upper bound.",
             "One step/state cannot establish runtime variance, mature readiness savings or ablation effects.2x allowance is a stated margin, not a confidence interval.",
