@@ -23,6 +23,34 @@ def run(cmd, log, env=None):
         subprocess.run(cmd, stdout=f, stderr=subprocess.STDOUT, env=env, check=True)
 
 
+def validate_source(args):
+    from verl.trainer.ppo.sp_q_readiness import verify_manifest_shards
+    source_launches = sorted((args.run / "launches").glob("*/arguments.json"))
+    assert source_launches
+    source_args = [json.loads(path.read_text()) for path in source_launches]
+    assert all((ROOT / a["data"]).resolve() == args.data for a in source_args), "data must match source row-index order"
+    if not args.engineering_fixture:
+        assert all(not a["engineering_readiness"] for a in source_args), "fixture requires explicit label"
+        expected = {"method": "ac2", "response": 16384, "chunk": 4096, "ablation": "none",
+                    "model": "Qwen/Qwen3-4B-Thinking-2507", "gpus": 7, "tp": 1,
+                    "batch": 16, "group": 4, "q_train_n": 64, "replay_bound": 256}
+        assert all(all(a[k] == v for k, v in expected.items()) for a in source_args), "scientific source does not match R2 protocol"
+        canonical = json.loads((ROOT / "repro/receipts/e3-canonical.json").read_text())
+        assert digest(args.data / "train.parquet") == canonical["sha256"]["train.parquet"], "scientific train data changed"
+    seed = args.run / "cold/replay_seed_cold"
+    manifest = json.loads((seed / "replay_buffer_manifest.json").read_text())
+    assert manifest["entries"] == 0 and manifest["problems"] == 0, "tier1 reconstruction requires cold replay seed"
+    for path, sha in manifest["shards"].items():
+        assert digest(seed / path) == sha and not (seed / path).read_text().strip()
+    verify_manifest_shards(str(seed), manifest["shards"],
+                           sorted(str(p) for p in (seed / "replay_buffer").glob("shard_*.jsonl")), "probe cold replay")
+    bank = args.run / "cold"
+    bank_manifest = json.loads((bank / "reference_bank_manifest.json").read_text())
+    verify_manifest_shards(str(bank), bank_manifest["shards"],
+                           sorted(str(p) for p in (bank / "reference_bank").glob("shard_*.jsonl")), "probe bank")
+    return source_launches
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("stage", choices=STAGES + ["verify-resume"])
@@ -45,13 +73,7 @@ def main():
     assert os.environ["CUDA_VISIBLE_DEVICES"] == "1,2,3,4,5,6,7"
     args.out.mkdir(parents=True, exist_ok=True)
     checkpoint = args.run / f"checkpoints/global_step_{args.step}"
-    source_launches = sorted((args.run / "launches").glob("*/arguments.json"))
-    assert source_launches
-    source_args = [json.loads(path.read_text()) for path in source_launches]
-    if not args.engineering_fixture:
-        assert all(not a["engineering_readiness"] for a in source_args), "fixture requires explicit label"
-        assert all(a["method"] == "ac2" and a["response"] == 16384 and a["chunk"] == 4096
-                   for a in source_args), "scientific source does not match R2 protocol"
+    source_launches = validate_source(args)
     config = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items() if k != "stage"}
     config.update(response=16384, chunk=4096, samples=4, q_temperature=0,
                   policy_temperature=.8, top_p=1, top_k=-1, prefix_seed=192)
@@ -101,6 +123,13 @@ def main():
         outputs += sorted((checkpoint / "actor").glob("model_world_size_*_rank_*.pt"))
         outputs += [args.data / "train.parquet", args.run / "replay_buffer_deltas.jsonl",
                     args.run / "q_state_deltas.jsonl", args.out / "merge-verify.log", args.out / "verify.log"]
+        outputs += source_launches + [args.run / "cold/reference_bank_manifest.json"]
+        outputs += sorted((args.run / "cold/reference_bank").glob("shard_*.jsonl"))
+        outputs += [args.run / "cold/replay_seed_cold/replay_buffer_manifest.json"]
+        outputs += sorted((args.run / "cold/replay_seed_cold/replay_buffer").glob("shard_*.jsonl"))
+        outputs += [args.run / f"q_wave/{args.verify_step-1}.jsonl",
+                    args.run / f"rollouts/{args.verify_step}.jsonl"]
+        outputs += sorted({args.run / f"rollouts/{row['src_step']}.jsonl" for row in rows})
     elif args.stage in {"generate", "critic"}:
         folder = args.out / ("gen" if args.stage == "generate" else "q")
         folder.mkdir(exist_ok=False)

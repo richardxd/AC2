@@ -30,7 +30,15 @@ def main():
         assert result["returncode"] == 0 and not result["timed_out"] and not result.get("monitor_error"), result
         manifest = json.loads((launch / "launch.json").read_text())
         command = manifest["command"]
-        launched_run = (root / command[command.index("--run-dir") + 1]).resolve()
+        if "--run-dir" in command:
+            launched_run = (root / command[command.index("--run-dir") + 1]).resolve()
+        else:
+            assert len(command) == 4 and Path(command[1]).name == "r_launch.py"
+            assert (root / command[1]).resolve() == root / "repro/r_launch.py"
+            assert command[3] in {"smoke-cold", "smoke-resume"}
+            from r_launch import TASKS
+            assert command[2] in TASKS
+            launched_run = root / "runs/r-smokes" / command[2]
         assert launched_run == args.run.resolve(), (launched_run, args.run)
         gpus = [int(x) for x in manifest["gpus"]]
         assert len(gpus) == args.world_size and len(set(gpus)) == len(gpus) and 0 not in gpus
@@ -53,6 +61,9 @@ def main():
         phase_metrics = {}
         for match in re.finditer(r"\bstep:(\d+) - ([^\n\r]+)", log):
             step = int(match[1])
+            if step == 0:
+                assert "val-" in match[2] and "actor/grad_norm" not in match[2]
+                continue
             phase_metrics[step] = {}
             for key in ("actor/pg_loss", "actor/grad_norm"):
                 value = re.search(re.escape(key) + r":(?:np\.float\d+\()?([-+\d.eE]+)", match[2])
@@ -67,7 +78,8 @@ def main():
         completed = re.findall(r"RUN_COMPLETED metrics_added=([^\n\r]+)", log)
         if completed:
             added = [json.loads(line) for line in Path(completed[-1]).read_text().splitlines()]
-            phase_metrics = {r["step"]: {k:r["data"][k] for k in ("actor/pg_loss", "actor/grad_norm")} for r in added}
+            phase_metrics = {r["step"]: {k:r["data"][k] for k in ("actor/pg_loss", "actor/grad_norm")}
+                             for r in added if r["step"] > 0}
         loaded_step = None
         if prior_final_step is not None:
             loaded_step = prior_final_step
